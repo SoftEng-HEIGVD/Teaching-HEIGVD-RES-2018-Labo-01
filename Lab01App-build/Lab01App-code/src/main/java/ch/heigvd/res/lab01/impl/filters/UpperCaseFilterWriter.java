@@ -2,7 +2,6 @@ package ch.heigvd.res.lab01.impl.filters;
 
 import java.io.FilterWriter;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.io.Writer;
 
 /**
