@@ -16,7 +16,17 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
+    String newStr;  //Formatted text
+
+    //Get the substring asked from the text
+    newStr = str.substring(off, off + len);
+
+    //Transform the substring into upper cases
+    newStr = newStr.toUpperCase();
+
+    //Write the formatted text
+    super.out.write(newStr);
   }
 
   @Override
