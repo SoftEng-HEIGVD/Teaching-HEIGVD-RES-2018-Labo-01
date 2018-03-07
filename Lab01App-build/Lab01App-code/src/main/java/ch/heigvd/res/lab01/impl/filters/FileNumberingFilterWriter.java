@@ -17,25 +17,43 @@ import java.util.logging.Logger;
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
-  private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+    private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
-  public FileNumberingFilterWriter(Writer out) {
-    super(out);
-  }
+    public FileNumberingFilterWriter(Writer out) {
+        super(out);
+    }
 
-  @Override
-  public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    @Override
+    public void write(String str) throws IOException {
+        out.write(str.toUpperCase());
+    }
 
-  @Override
-  public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    @Override
+    public void write(String str, int off, int len) throws IOException {
+        str.substring(off, len);
+        out.write(str);
+    }
 
-  @Override
-  public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    @Override
+    public void write(char[] cbuf, int off, int len) throws IOException {
+        String str="";
+        for (int i=0;i<cbuf.length;++i) {
+         str=str+cbuf[i];
+        }
+        write(str,off,len);
+    }
+        public void write(char[] cbuf) throws IOException {
+        String str="";
+        for (int i=0;i<cbuf.length;++i) {
+         str=str+cbuf[i];
+        }
+        write(str);
+    }
+
+    @Override
+    public void write(int c) throws IOException {
+        String str=""+(char)c;
+        out.write(str);
+    }
 
 }
