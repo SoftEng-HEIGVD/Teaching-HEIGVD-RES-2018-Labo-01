@@ -1,5 +1,6 @@
 package ch.heigvd.res.lab01.impl;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /**
@@ -12,15 +13,36 @@ public class Utils {
 
   /**
    * This method looks for the next new line separators (\r, \n, \r\n) to extract
-   * the next line in the string passed in arguments. 
-   * 
+   * the next line in the string passed in arguments.
+   *
    * @param lines a string that may contain 0, 1 or more lines
    * @return an array with 2 elements; the first element is the next line with
    * the line separator, the second element is the remaining text. If the argument does not
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+  	String[] out = new String[2];
+  	boolean lineSeparator = false;
+  	String tmp = "";
+  	for(int i = 0; i < lines.length(); i++){
+  		tmp += lines.charAt(i);
+		if (lines.charAt(i) == '\n' || (lines.charAt(i) == '\r' && i < lines.length() - 1
+				&& lines.charAt(i + 1) != '\n' ) || lines.charAt(i) == '\r' && i == lines.length() - 1){
+			out[0] = tmp;
+			out[1] = lines.substring(i + 1, lines.length());
+			lineSeparator = true;
+			break;
+		}
+	}
+
+	if(!lineSeparator) {
+		out[0] = "";
+		out[1] = lines;
+	}
+
+  	return out;
+
+
   }
 
 }
