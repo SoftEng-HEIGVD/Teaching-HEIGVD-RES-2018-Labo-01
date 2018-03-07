@@ -31,7 +31,20 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
+      char[] newCbuf = new char[len];  //Formatted text
+
+      //Get the substring asked from the text
+      int pos = 0;  //Index position in the formatted text
+
+      for(int i = off; i < off + len; i++){
+          //Transform the substring into upper cases
+          newCbuf[pos] = Character.toUpperCase(cbuf[i]);
+          pos++;
+      }
+
+      //Write the formatted text
+      super.out.write(newCbuf);
   }
 
   @Override
