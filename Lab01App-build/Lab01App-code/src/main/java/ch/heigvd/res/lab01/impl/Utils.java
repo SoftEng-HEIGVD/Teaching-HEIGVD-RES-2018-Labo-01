@@ -23,22 +23,21 @@ public class Utils {
       
     String[] elements = new String[2];
     String[] newLineSeparators = {"\r", "\n", "\r\n"};
-    int lineIndex;
+    int indexLine;
   
-    if((lineIndex = lines.indexOf(newLineSeparators[2])) != -1) {
-       elements[0] = lines.substring(0, lineIndex + newLineSeparators[2].length());
-       elements[1] = lines.substring(lineIndex + newLineSeparators[2].length(), lines.length());
-    } else if((lineIndex = lines.indexOf(newLineSeparators[1])) != -1) {
-       elements[0] = lines.substring(0, lineIndex + newLineSeparators[1].length());
-       elements[1] = lines.substring(lineIndex + newLineSeparators[1].length(), lines.length());
-    } else if((lineIndex = lines.indexOf(newLineSeparators[0])) != -1) {
-       elements[0] = lines.substring(0, lineIndex + newLineSeparators[0].length());
-       elements[1] = lines.substring(lineIndex + newLineSeparators[0].length(), lines.length());
+    if((indexLine = lines.indexOf(newLineSeparators[2])) != -1) {
+       elements[0] = lines.substring(0, indexLine + newLineSeparators[2].length());
+       elements[1] = lines.substring(indexLine + newLineSeparators[2].length(), lines.length());
+    } else if((indexLine = lines.indexOf(newLineSeparators[1])) != -1) {
+       elements[0] = lines.substring(0, indexLine + newLineSeparators[1].length());
+       elements[1] = lines.substring(indexLine + newLineSeparators[1].length(), lines.length());
+    } else if((indexLine = lines.indexOf(newLineSeparators[0])) != -1) {
+       elements[0] = lines.substring(0, indexLine + newLineSeparators[0].length());
+       elements[1] = lines.substring(indexLine + newLineSeparators[0].length(), lines.length());
     } else {
        elements[0] = "";
        elements[1] = lines;
     }
-
     return elements;
   }
     
