@@ -21,7 +21,6 @@ public class Utils {
      */
     public static String[] getNextLine(String lines) {
         String[] tabString = new String[2];
-        String separator = "\n\r";
 
         int pos = 0;
         for(; pos < lines.length(); ++pos){

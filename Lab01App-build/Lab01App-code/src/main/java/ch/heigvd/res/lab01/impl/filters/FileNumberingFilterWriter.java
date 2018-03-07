@@ -19,6 +19,7 @@ import java.util.logging.Logger;
  */
 public class FileNumberingFilterWriter extends FilterWriter {
     final static char TABULATION = '\t';
+    int noLigne = 0;
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
@@ -28,10 +29,24 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        int nbLine = 1;
-        String[] tabStr = new String[2];
+        String consider = str.substring(off,off+len);
+        String[] tabStr = Utils.getNextLine(consider);
+        if(noLigne == 0){
+            super.write(Integer.toString(++noLigne) + TABULATION, 0, 2);
+        }
 
-        tabStr
+        while (tabStr[0].length() != 0){
+
+            super.write(tabStr[0]+ Integer.toString(++noLigne )+ TABULATION , 0, tabStr[0].length()+2 + (int)Math.log10((double)noLigne));
+            tabStr = Utils.getNextLine(tabStr[1]);
+        }
+
+        if(tabStr[1].length() != 0) {
+            super.write(tabStr[1], 0, tabStr[1].length());
+        }
+
+        //super.write(Integer.toString(++noLigne) + TABULATION, 0, 2);
+
     }
 
     @Override
@@ -42,9 +57,15 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(int c) throws IOException {
+        if(noLigne==0){
+            ++noLigne;
+            super.write(Integer.toString(noLigne));
+            super.write(TABULATION);
+        }
         super.write(c);
         if(c == '\n'){
-            super.write('1');
+            ++noLigne;
+            super.write(Integer.toString(noLigne));
             super.write(TABULATION);
         }
     }
