@@ -25,15 +25,20 @@ public class Utils {
       int i = 0;
       for(; i < lines.length(); ++i){
           if(lines.charAt(i) == '\r' || lines.charAt(i) == '\n'){
+              if(i+1 < lines.length() && lines.charAt(i) == '\r' && lines.charAt(i+1) == '\n'){
+                  ++i;
+              }
                break;
-          }     
+          }
+          
       }
       
       if(lines.length() != i){
           strings[0] = lines.substring(0, i+1);
           strings[1] = lines.substring(i+1);
       }else{
-          strings[1] = "";
+          strings[0] = "";
+          strings[1] = lines;
       }
 
       return strings;

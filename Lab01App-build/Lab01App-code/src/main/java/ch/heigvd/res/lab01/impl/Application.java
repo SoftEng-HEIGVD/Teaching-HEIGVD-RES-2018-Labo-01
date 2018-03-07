@@ -131,13 +131,17 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
       
-      String pathQuote = WORKSPACE_DIRECTORY;
+      String pathQuote = WORKSPACE_DIRECTORY + "/";
+      new File(pathQuote).mkdirs();
       List<String> quoteTag = quote.getTags();
       for(String tag : quoteTag){
-          pathQuote += "/" + tag + "/";
+          pathQuote +=  tag + "/";
+          new File(pathQuote).mkdir();
+          System.out.println("Mon chemin " + pathQuote);
       }
+      
       try{
-          new File(pathQuote).mkdirs();
+          //new File(pathQuote).mkdirs();
           FileWriter fw = new FileWriter(new File(pathQuote));
           fw.write(quote.getQuote());
           fw.close();

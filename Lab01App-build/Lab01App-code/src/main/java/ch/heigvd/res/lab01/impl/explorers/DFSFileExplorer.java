@@ -20,11 +20,8 @@ public class DFSFileExplorer implements IFileExplorer {
         for (File file : files) {
             if (file.isDirectory()) {
                 this.explore(file, vistor);
-            }else if(file.isFile()){
-                vistor.visit(file);
             }
         }
-        //throw new UnsupportedOperationException("The student has not implemented this method yet.");
     }
 
 }
