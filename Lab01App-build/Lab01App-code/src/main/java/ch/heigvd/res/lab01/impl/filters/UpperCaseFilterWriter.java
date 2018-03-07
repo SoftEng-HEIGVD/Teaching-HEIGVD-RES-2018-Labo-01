@@ -49,7 +49,14 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
+      int newC;  //Formatted character
+
+      //Transform the character into upper case
+      newC = Character.toUpperCase(c);
+
+      //Write the formatted character
+      super.out.write(newC);
   }
 
 }
