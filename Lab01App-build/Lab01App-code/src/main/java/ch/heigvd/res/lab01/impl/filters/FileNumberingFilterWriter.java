@@ -20,32 +20,48 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
-  private static int i = 1;
 
+  private int noLigne = 0;
+  
+  private String strC = "";
+  
   public FileNumberingFilterWriter(Writer out) {
     super(out);
   }
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-      /*String[] strings = Utils.getNextLine(str);
-      
-      while(strings[1] != ""){
-          str = (++i) + "\t" + strings[0];
-          strings = Utils.getNextLine(strings[0]);
-      }
-      
-      super.write(str,off,len);*/
-         
+     String subString = str.substring(off,off+len);
+     
+     String s = "";
+     if(subString.length() == 0) return;
+     
+     if(noLigne == 0)
+         s += Integer.toString(++noLigne) + "\t";
+     
+     String[] strings = Utils.getNextLine(subString);
+     
+     while(strings[0].length() != 0){
+         s += strings[0] + Integer.toString(++noLigne) + "\t";
+         strings = Utils.getNextLine(strings[1]);
+     }
+     
+     s += strings[1];
+     
+     super.write(s, 0, s.length());    
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
+      String str = cbuf.toString();
+      
+      write(str, off, len);
       
   }
 
   @Override
   public void write(int c) throws IOException {
+      
       
   }
 

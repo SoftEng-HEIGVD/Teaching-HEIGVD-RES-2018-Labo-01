@@ -100,7 +100,7 @@ public class Application implements IApplication {
         LOG.info("> " + tag);
       }
       
-      storeQuote(quote,"quote-" + quote.getValue().getId() + ".utf8");
+      storeQuote(quote,WORKSPACE_DIRECTORY);
     }
   }
   
@@ -131,19 +131,15 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
       
-      String pathQuote = WORKSPACE_DIRECTORY + "/";
-      new File(pathQuote).mkdirs();
       List<String> quoteTag = quote.getTags();
       for(String tag : quoteTag){
-          pathQuote +=  tag + "/";
-          new File(pathQuote).mkdir();
-          System.out.println("Mon chemin " + pathQuote);
+          filename += "/" +  tag ;
       }
       
       try{
-          //new File(pathQuote).mkdirs();
-          FileWriter fw = new FileWriter(new File(pathQuote));
-          fw.write(quote.getQuote());
+          new File(filename).mkdirs();
+          filename += "/quote-" + quote.getValue().getId() + ".utf8";
+          FileWriter fw = new FileWriter(filename);
           fw.close();
       }catch(IOException e){
           System.out.println(e.getMessage());
@@ -160,13 +156,18 @@ public class Application implements IApplication {
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
-        /*
-         * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-         * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-         * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-         */
-  
-          System.out.println(file);
+          try {
+              /*
+              There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
+              of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
+              be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
+              */
+              writer.write(file.getPath() + "\n");
+          } catch (IOException ex) {
+              Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        
+        
       }
     });
   }

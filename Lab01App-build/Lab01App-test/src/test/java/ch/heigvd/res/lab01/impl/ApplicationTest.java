@@ -114,7 +114,7 @@ public class ApplicationTest {
     app.printFileNames(writer);
     String output = writer.toString();
     StringBuilder sb = new StringBuilder();
-
+    
     sb.append(rootDirectory);
     sb.append("\n");
     sb.append(dirA);
@@ -135,6 +135,8 @@ public class ApplicationTest {
     sb.append("\n");
     sb.append(fileA2);
     sb.append("\n");
+
+
 
     // Bug fix in the original unit test by teacher
     String fileSeparator = File.separator;
