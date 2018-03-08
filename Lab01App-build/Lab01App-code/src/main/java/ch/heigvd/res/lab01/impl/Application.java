@@ -16,7 +16,7 @@ import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
-import java.io.*;
+import java.util.List;
 
 /**
  *
@@ -130,16 +130,27 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-      String path = WORKSPACE_DIRECTORY;
-         for (String tag : quote.getTags()) {
-             path = path + File.separator + tag;
-         }
-         path = path + File.separator + filename; // add filename
-         File files = new File(path); // we create file
-         files.getParentFile().mkdirs(); //we create parent repertory
-         Writer Writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF-8"));
-         Writer.write(quote.getQuote());
-         Writer.close();
+       //store the temporary workspace
+    String currentWorkspace = WORKSPACE_DIRECTORY;
+
+    //get the list of folder name
+    List<String> tags = quote.getTags();
+
+    //Be sure folder exists
+    for(String f : tags)
+      currentWorkspace += File.separator + f;
+
+    new File(currentWorkspace).mkdirs();
+
+    //create the file
+    File fileQuote = new File(currentWorkspace + File.separator + filename);
+    fileQuote.createNewFile();
+
+    //write the quote in it. And be sure the correct encoding is used
+    Writer w = new OutputStreamWriter(new FileOutputStream(fileQuote),"UTF-8");
+    w.write(quote.getQuote());
+    w.flush();
+    w.close();
   }
   
   /**
@@ -157,7 +168,7 @@ public class Application implements IApplication {
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
         try {
-            writer.write(file.getPath() + '\n');
+            writer.write(file.getPath() + "\n");
         } catch(IOException e) {
             e.printStackTrace();
         }
