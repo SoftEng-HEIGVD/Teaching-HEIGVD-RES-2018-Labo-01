@@ -1,6 +1,8 @@
 package ch.heigvd.res.lab01.impl;
 
 import ch.heigvd.res.lab01.impl.explorers.DFSFileExplorer;
+import ch.heigvd.res.lab01.impl.filters.FileNumberingFilterWriter;
+import ch.heigvd.res.lab01.impl.filters.UpperCaseFilterWriter;
 import ch.heigvd.res.lab01.impl.transformers.CompleteFileTransformer;
 import ch.heigvd.res.lab01.interfaces.IApplication;
 import ch.heigvd.res.lab01.interfaces.IFileExplorer;
@@ -13,6 +15,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
@@ -41,7 +45,7 @@ public class Application implements IApplication {
     System.setProperty("java.util.logging.SimpleFormatter.format", "%4$s: %5$s%6$s%n");
     
        
-    int numberOfQuotes = 0;
+    int numberOfQuotes = 20;
     try {
       numberOfQuotes = Integer.parseInt(args[0]);
     } catch (Exception e) {
@@ -92,6 +96,7 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
+      storeQuote(quote, "quote-"+ Integer.toString(i)+".utf8");
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -125,14 +130,27 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+      String path = WORKSPACE_DIRECTORY + "/";
+      List<String> tags = quote.getTags();
+      for(String tag: tags){
+          path += tag + "/";
+      }
+      path += filename;
+      File file = new File(path);
+      file.getParentFile().mkdirs();
+      file.createNewFile();
+
+      Writer writer = new OutputStreamWriter(new FileOutputStream(path), "utf-8");
+      writer.write(quote.getQuote());
+      writer.flush();
+      writer.close();
   }
   
   /**
    * This method uses a IFileExplorer to explore the file system and prints the name of each
    * encountered file and directory.
    */
-  void printFileNames(final Writer writer) {
+  void printFileNames(final Writer writer){
     IFileExplorer explorer = new DFSFileExplorer();
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
@@ -142,13 +160,18 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
+        try {
+          writer.write(file.getPath()+"\n");
+        } catch (Exception e){
+          e.printStackTrace();
+        }
       }
     });
   }
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    return "corentin.basler@heig-vd.ch";
   }
 
   @Override
