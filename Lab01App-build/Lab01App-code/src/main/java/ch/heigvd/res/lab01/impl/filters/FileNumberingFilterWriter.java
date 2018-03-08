@@ -23,7 +23,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   private int noLigne = 0;
   
-  private String strC = "";
+  private char ancien = 'a';
   
   public FileNumberingFilterWriter(Writer out) {
     super(out);
@@ -66,12 +66,19 @@ public class FileNumberingFilterWriter extends FilterWriter {
           super.write(Integer.toString(++noLigne));
           super.write('\t');
       }
+      
+      if(ancien == '\r' && c != '\n'){
+          super.write(Integer.toString(++noLigne));
+          super.write('\t');
+      }
       super.write(c);
       
       if(c == '\n'){
           super.write(Integer.toString(++noLigne));
           super.write('\t');
       }
+      
+      ancien = (char)c;
       
   }
 

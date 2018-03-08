@@ -140,6 +140,7 @@ public class Application implements IApplication {
           new File(filename).mkdirs();
           filename += "/quote-" + quote.getValue().getId() + ".utf8";
           FileWriter fw = new FileWriter(filename);
+          fw.write(quote.getQuote());
           fw.close();
       }catch(IOException e){
           System.out.println(e.getMessage());
