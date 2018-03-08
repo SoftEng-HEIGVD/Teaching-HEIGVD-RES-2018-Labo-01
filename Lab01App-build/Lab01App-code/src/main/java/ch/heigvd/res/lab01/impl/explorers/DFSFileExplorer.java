@@ -16,14 +16,16 @@ public class DFSFileExplorer implements IFileExplorer {
 
   @Override
   public void explore(File rootDirectory, IFileVisitor visitor) {
-    File[] folderContent = rootDirectory.listFiles();
-    for (File f : folderContent) {
-      if (f.isFile()) {
-        visitor.visit(f);
-      } else if (f.isDirectory()) {
-        explore(f, visitor);
-      }
-    }
+    visitor.visit(rootDirectory);
+    exploreUnderRootDirectory(rootDirectory, visitor);
   }
 
+  private void exploreUnderRootDirectory(File directory, IFileVisitor visitor) {
+    File[] folderContent = directory.listFiles();
+    for (File f : folderContent) {
+      visitor.visit(f);
+      if (f.isDirectory())
+        exploreUnderRootDirectory(f, visitor);
+    }
+  }
 }
