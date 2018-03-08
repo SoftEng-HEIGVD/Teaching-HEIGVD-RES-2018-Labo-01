@@ -14,28 +14,56 @@ import java.util.logging.Logger;
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
  * @author Olivier Liechti
+ *
+ * @modified by Lionel Nanchen
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
+  private int numberOfLines;
+  private char lastCharacter;
+  private boolean newLine;
+
   public FileNumberingFilterWriter(Writer out) {
     super(out);
+    numberOfLines = 0;
+    lastCharacter = '\0';
+    newLine = true;
   }
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    for(int i = off; i < (off + len); ++i) {
+      write(str.charAt(i));
+    }
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    String str = new String(cbuf);
+    write(str, off, len);
   }
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    if (newLine) {
+      out.write(numberOfLines++ + "\t");
+      newLine = false;
+    }
+
+    if (lastCharacter == '\r' && c != '\n') {
+      out.write(numberOfLines++ + "\t");
+    }
+
+    out.write(c);
+
+    if(c == '\n') {
+      out.write(numberOfLines++ + "\t");
+    }
+
+    lastCharacter = (char)c;
+
   }
 
 }
