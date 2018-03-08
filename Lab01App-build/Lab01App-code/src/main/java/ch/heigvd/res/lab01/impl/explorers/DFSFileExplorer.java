@@ -21,13 +21,16 @@ public class DFSFileExplorer implements IFileExplorer {
         vistor.visit(rootDirectory);
         if (child != null) {
             for (File f : child) {
-                if (f.isDirectory()) {
+                if(f.isDirectory()){
                     explore(f, vistor);
-                } else {
+                }
+            }
+            for(File f : child){
+                if(!f.isDirectory()){
                     vistor.visit(f);
                 }
             }
         }
     }
-
 }
+
