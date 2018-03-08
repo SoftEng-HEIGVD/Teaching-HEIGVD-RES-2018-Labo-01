@@ -32,10 +32,11 @@ public class FileNumberingFilterWriter extends FilterWriter {
   @Override
   public void write(String str, int off, int len) throws IOException {
      String subString = str.substring(off,off+len);
+     if(subString.length() == 0) {
+         return;
+     }
      
      String s = "";
-     if(subString.length() == 0) return;
-     
      if(noLigne == 0)
          s += Integer.toString(++noLigne) + "\t";
      
@@ -61,7 +62,16 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
+      if(noLigne == 0){
+          super.write(Integer.toString(++noLigne));
+          super.write('\t');
+      }
+      super.write(c);
       
+      if(c == '\n'){
+          super.write(Integer.toString(++noLigne));
+          super.write('\t');
+      }
       
   }
 
