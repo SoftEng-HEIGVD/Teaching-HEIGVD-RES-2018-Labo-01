@@ -19,7 +19,7 @@ import java.io.OutputStreamWriter;
 
 /**
  *
- * @author Olivier Liechti
+ * @author Olivier Liechti modify by : Olivier Kopp
  */
 public class Application implements IApplication {
 
@@ -31,7 +31,7 @@ public class Application implements IApplication {
 
    private static final Logger LOG = Logger.getLogger(Application.class.getName());
 
-   /*Number used to name quote file*/
+   /*Number used to create the name of the quote file*/
    private static int quoteNumber = 1;
 
    public static void main(String[] args) {
@@ -88,13 +88,13 @@ public class Application implements IApplication {
       QuoteClient client = new QuoteClient();
       for (int i = 0; i < numberOfQuotes; i++) {
          Quote quote = client.fetchQuote();
-         storeQuote(quote, "quote-" + String.valueOf(quoteNumber++) + ".utf8");
          /* There is a missing piece here!
        * As you can see, this method handles the first part of the lab. It uses the web service
        * client to fetch quotes. We have removed a single line from this method. It is a call to
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
           */
+         storeQuote(quote, "quote-" + String.valueOf(quoteNumber++) + ".utf8");
          LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
          for (String tag : quote.getTags()) {
             LOG.info("> " + tag);
@@ -130,38 +130,45 @@ public class Application implements IApplication {
     */
    void storeQuote(Quote quote, String filename) throws IOException {
       File workspace = new File("./workspace");
+      //check if directory 'workspace' exists
       if (!workspace.exists()) {
+         //if it doesn't exists create it and a subfolder 'quotes'
          try {
             workspace.mkdir();
             new File("./workspace/quotes").mkdir();
          } catch (SecurityException e) {
-
+            System.err.println("security exception : " + e.getMessage());
          }
-      } else {
+      } //if it exists, we do the same check with the subfolder 'quotes'
+      else {
          File quote2 = new File("./workspace/quotes");
          if (!quote2.exists()) {
             try {
                quote2.mkdir();
             } catch (SecurityException e) {
-
+               System.err.println("security exception : " + e.getMessage());
             }
          }
       }
+      //starting directory
       String currentDir = WORKSPACE_DIRECTORY + "/";
+      //for each tag we create a subfolder
       for (String s : quote.getTags()) {
          File newDir = new File(currentDir + s);
          if (!newDir.exists()) {
             try {
                newDir.mkdir();
             } catch (SecurityException e) {
-
+               System.err.println("security exception : " + e.getMessage());
             }
          }
          currentDir = currentDir + s + "/";
       }
+      //creation of the quote file in the last subfolder created
       currentDir += filename;
       File newQuote = new File(currentDir);
       newQuote.createNewFile();
+      //write the content of the quote in the new file
       OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(newQuote), "utf8");
       writer.write(quote.getQuote());
       writer.close();
@@ -176,17 +183,16 @@ public class Application implements IApplication {
       explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
          @Override
          public void visit(File file) {
-            try {
-               writer.write(file.getPath() + "\n");
-               System.out.println(file.getPath());
-            } catch (IOException e) {
-
-            }
             /*
          * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
              */
+            try {
+               writer.write(file.getPath() + "\n");
+            } catch (IOException e) {
+               System.err.println("IO error : " + e.getMessage());
+            }
          }
       });
    }

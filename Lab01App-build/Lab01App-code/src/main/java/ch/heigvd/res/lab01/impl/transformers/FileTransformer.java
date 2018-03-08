@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * The subclasses have to implement the decorateWithFilters method, which
  * instantiates a list of filters and decorates the output writer with them.
  *
- * @author Olivier Liechti
+ * @author Olivier Liechti modify by : Olivier Kopp
  */
 public abstract class FileTransformer implements IFileVisitor {
 
@@ -60,9 +60,11 @@ public abstract class FileTransformer implements IFileVisitor {
        * writer has been decorated by the concrete subclass!). You need to write a loop to read the
        * characters and write them to the writer.
           */
+         char[] buffer = new char[512];
          int c;
-         while ((c = reader.read()) != -1) {
-            writer.write(c);
+         //read and write block of 512 characters
+         while ((c = reader.read(buffer)) != -1) {
+            writer.write(buffer, 0, c);
          }
 
          reader.close();
