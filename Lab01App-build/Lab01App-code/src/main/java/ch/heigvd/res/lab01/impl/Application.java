@@ -83,6 +83,7 @@ public class Application implements IApplication {
   @Override
   public void fetchAndStoreQuotes(int numberOfQuotes) throws IOException {
     clearOutputDirectory();
+    createOutputDirectory();
     QuoteClient client = new QuoteClient();
     for (int i = 0; i < numberOfQuotes; i++) {
       Quote quote = client.fetchQuote();
@@ -98,6 +99,16 @@ public class Application implements IApplication {
       }
     }
   }
+
+  /**
+   * This method creates the WORKSPACE_DIRECTORY. It uses the
+   * apache commons-io library. You should call this method in the main method.
+   *
+   */
+  void createOutputDirectory() {
+    if (!(new File(WORKSPACE_DIRECTORY)).mkdirs())
+      LOG.info("Error during creation of working directory.");
+  }
   
   /**
    * This method deletes the WORKSPACE_DIRECTORY and its content. It uses the
@@ -106,7 +117,7 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void clearOutputDirectory() throws IOException {
-    FileUtils.deleteDirectory(new File(WORKSPACE_DIRECTORY));    
+    FileUtils.deleteDirectory(new File(WORKSPACE_DIRECTORY));
   }
 
   /**
@@ -148,7 +159,7 @@ public class Application implements IApplication {
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    return "julien.biefer@heig-vd.ch";
   }
 
   @Override
