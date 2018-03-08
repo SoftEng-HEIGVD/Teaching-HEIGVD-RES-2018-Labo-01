@@ -26,11 +26,27 @@ public class FileNumberingFilterWriter extends FilterWriter {
     super(out);
   }
 
+  /**
+   * use write(int c) on the concerned caracters of str
+   * 
+   * @param str string we want to write with this decorator
+   * @param off start index where we want to apply the transformation
+   * @param len numbers of caracters we want to apply the transformation
+   * @throws IOException possible IOException as we use write method
+   */
   @Override
   public void write(String str, int off, int len) throws IOException {
     write(str.toCharArray(), off, len);
   }
 
+  /**
+   * use write(int c) on the concerned caracters of cbuf
+   * 
+   * @param cbuf array of char we want to write with this decorator
+   * @param off start index where we want to apply the transformation
+   * @param len numbers of caracters we want to apply the transformation
+   * @throws IOException possible IOException as we use write method
+   */
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
     for (int i = off; i < len + off && i < cbuf.length; i++) {
@@ -38,23 +54,40 @@ public class FileNumberingFilterWriter extends FilterWriter {
      }
   }
 
+  /**
+   * write the c caracter but write "n\t" with n the number of lines yet writen 
+   * for each new line
+   * 
+   * @param c the next caracter we are writting
+   * @throws IOException possible IOException as we use write method
+   */
   @Override
   public void write(int c) throws IOException {
+     // it's the very first caracter we write, then it's a new line
      if(beginning) {
         printLineNumber();
         beginning = false;
      }
+     
+     // the line separator is \r only we write the new line number
      if(previous == '\r' && c != '\n') {
         printLineNumber();
      }
+     
+     //we write the current caracter
      super.write(c);
      
+     // the line separator is \n or \r\n then we write the new line number
      if(c == '\n') {
         printLineNumber();
      }
      previous = c;
   }
   
+  /**
+   * write the new line number with the format specified by the Junit tests
+   * @throws IOException possible IOException as we use write method
+   */
   private void printLineNumber() throws IOException {
      lineCounter++;
      String charNumber = String.valueOf(lineCounter);

@@ -43,6 +43,12 @@ public abstract class FileTransformer implements IFileVisitor {
    */
   public abstract Writer decorateWithFilters(Writer writer);
 
+  /**
+   * open a file apply decorators on the stream and write the result 
+   * on the a new file with same name + .out extension
+   * 
+   * @param file the file red and transformed
+   */
   @Override
   public void visit(File file) {
     if (!file.isFile()) {

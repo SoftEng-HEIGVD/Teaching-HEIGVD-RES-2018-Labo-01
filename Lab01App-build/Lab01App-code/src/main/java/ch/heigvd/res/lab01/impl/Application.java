@@ -23,7 +23,12 @@ import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
 /**
- *
+ * Entry of the program. 
+ * Step 1 : clear the output directory
+ * Step 2 : use the QuotesClient to fetch quotes; store each quote in a file
+ * Step 3 : use a file explorer to traverse the file system; print the name of each directory and file
+ * Step 4 : process the quote files, by applying 2 transformations to their content
+ * 
  * @author Olivier Liechti
  */
 public class Application implements IApplication {
@@ -84,6 +89,12 @@ public class Application implements IApplication {
     }
   }
 
+  /**
+   * get the quotes from the client and store them in the good directory in a file
+   * 
+   * @param numberOfQuotes number of quotes that we download
+   * @throws IOException if there is a writting exception
+   */
   @Override
   public void fetchAndStoreQuotes(int numberOfQuotes) throws IOException {
     clearOutputDirectory();
@@ -132,6 +143,8 @@ public class Application implements IApplication {
   void storeQuote(Quote quote, String filename) throws IOException {
      List<String> tags = quote.getTags();
      String fileSeparator = File.separator;
+     
+     //build the path to quote
      StringBuilder path = new StringBuilder(WORKSPACE_DIRECTORY + fileSeparator);
      for (String tag : tags) {
         path.append(fileSeparator + tag);
@@ -174,11 +187,21 @@ public class Application implements IApplication {
     });
   }
   
+  /**
+   * return the email of the student who implemented this labo
+   * 
+   * @return the email of the student who implemented this labo
+   */
   @Override
   public String getAuthorEmail() {
      return "jimmy.verdasca@heig-vd.ch";
   }
 
+  /**
+   * When this method is invoked, it traverses the file system under the
+   * WORKSPACE_DIRECTORY with the DFSFileExplorer. For each encountered file or directory, it
+   * apply the CompleteFileTransformer to the files encountered (lines number + uppercase)
+   */
   @Override
   public void processQuoteFiles() throws IOException {
     IFileExplorer explorer = new DFSFileExplorer();

@@ -11,6 +11,12 @@ import java.io.Writer;
  */
 public class NoOpFileTransformer extends FileTransformer {
 
+   /**
+    * decorator with no transformation return simply the Writer
+    * 
+    * @param writer writer that we "decorate"
+    * @return the Writer in parameter
+    */
   @Override
   public Writer decorateWithFilters(Writer writer) {
     /*
