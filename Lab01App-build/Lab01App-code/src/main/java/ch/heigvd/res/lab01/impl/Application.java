@@ -32,7 +32,7 @@ public class Application implements IApplication {
    private static final Logger LOG = Logger.getLogger(Application.class.getName());
 
    /*Number used to create the name of the quote file*/
-   private static int quoteNumber = 1;
+   private static int quoteNumber = 0;
 
    public static void main(String[] args) {
 
