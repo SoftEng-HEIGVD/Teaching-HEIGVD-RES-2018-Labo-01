@@ -154,7 +154,7 @@ public class Application implements IApplication {
         explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
             public void visit(File file) {
                 try{
-                    writer.write(file.getPath());
+                    writer.write(file.getPath() + System.lineSeparator());
                 } catch (IOException e) {
                     LOG.severe(e.getMessage());
                     System.exit(-1);

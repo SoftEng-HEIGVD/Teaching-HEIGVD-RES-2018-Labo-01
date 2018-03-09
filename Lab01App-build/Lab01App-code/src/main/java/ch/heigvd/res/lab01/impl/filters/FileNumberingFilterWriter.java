@@ -64,7 +64,8 @@ public class FileNumberingFilterWriter extends FilterWriter {
         //Man if only those OS could use the same damn line separator
         else if(c == '\n') {
 
-            out.write(c + tab());
+            out.write(c);
+            out.write(tab());
             returned = false;
         }
 

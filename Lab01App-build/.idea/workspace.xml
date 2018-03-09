@@ -14,24 +14,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FileNumberingFilterWriter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FileNumberingFilterWriter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+            <state relative-caret-position="270">
+              <caret line="63" column="69" lean-forward="true" selection-start-line="63" selection-start-column="69" selection-end-line="63" selection-end-column="69" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="173" column="30" lean-forward="false" selection-start-line="173" selection-start-column="30" selection-end-line="173" selection-end-column="30" />
+            <state relative-caret-position="139">
+              <caret line="151" column="46" lean-forward="true" selection-start-line="151" selection-start-column="46" selection-end-line="151" selection-end-column="46" />
               <folding>
-                <element signature="e#5344#5647#0" expanded="true" />
-                <element signature="e#5646#5647#0" expanded="true" />
+                <element signature="e#5344#5672#0" expanded="true" />
+                <element signature="e#5671#5672#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -136,8 +136,8 @@
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/NoOpFileTransformer.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java" />
         <option value="$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java" />
-        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java" />
+        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java" />
       </list>
     </option>
   </component>
@@ -511,8 +511,8 @@
         <state relative-caret-position="2484">
           <caret line="153" column="56" lean-forward="false" selection-start-line="153" selection-start-column="56" selection-end-line="153" selection-end-column="56" />
           <folding>
-            <element signature="e#5344#5647#0" expanded="true" />
-            <element signature="e#5646#5647#0" expanded="true" />
+            <element signature="e#5344#5672#0" expanded="true" />
+            <element signature="e#5671#5672#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -548,8 +548,8 @@
         <state relative-caret-position="2484">
           <caret line="153" column="56" lean-forward="true" selection-start-line="153" selection-start-column="56" selection-end-line="153" selection-end-column="56" />
           <folding>
-            <element signature="e#5344#5647#0" expanded="true" />
-            <element signature="e#5646#5647#0" expanded="true" />
+            <element signature="e#5344#5672#0" expanded="true" />
+            <element signature="e#5671#5672#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -751,14 +751,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/NoOpFileTransformer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -793,14 +785,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="173" column="30" lean-forward="false" selection-start-line="173" selection-start-column="30" selection-end-line="173" selection-end-column="30" />
-          <folding>
-            <element signature="e#5344#5647#0" expanded="true" />
-            <element signature="e#5646#5647#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="139">
+          <caret line="19" column="41" lean-forward="false" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="63" column="69" lean-forward="true" selection-start-line="63" selection-start-column="69" selection-end-line="63" selection-end-column="69" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -812,19 +809,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java">
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="19" column="41" lean-forward="false" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
+        <state relative-caret-position="254">
+          <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-          <folding />
+        <state relative-caret-position="139">
+          <caret line="151" column="46" lean-forward="true" selection-start-line="151" selection-start-column="46" selection-end-line="151" selection-end-column="46" />
+          <folding>
+            <element signature="e#5344#5672#0" expanded="true" />
+            <element signature="e#5671#5672#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
