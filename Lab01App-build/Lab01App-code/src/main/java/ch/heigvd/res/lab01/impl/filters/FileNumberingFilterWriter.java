@@ -54,19 +54,20 @@ public class FileNumberingFilterWriter extends FilterWriter {
             returned = false;
         }
 
-        //Line break
+        //Line break, compatible for all OS
         if(c == '\r') {
 
             out.write(c);
             returned = true;
         }
 
-        //Man if only those OS could use the same damn line separator
         else if(c == '\n') {
 
             out.write(c);
             out.write(tab());
-            returned = false;
+
+            if(returned)
+                returned = false;
         }
 
         //Nothing special or fancy, simply write the damn char
