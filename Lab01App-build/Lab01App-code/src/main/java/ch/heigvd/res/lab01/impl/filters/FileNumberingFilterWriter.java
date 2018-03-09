@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  *
  * @author Olivier Liechti
  * 
- * @author Doriane kaffo
+ * 
+ * @author Doriane Kaffo
  */
 public class FileNumberingFilterWriter extends FilterWriter {
   private int numberOfLine = 1;

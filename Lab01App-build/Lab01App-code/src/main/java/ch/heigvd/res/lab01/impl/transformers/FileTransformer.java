@@ -25,6 +25,7 @@ import java.util.logging.Logger;
  * 
  * @author Olivier Liechti
  * 
+ * 
  * @author  Doriane kaffo
  */
 public abstract class FileTransformer implements IFileVisitor {
