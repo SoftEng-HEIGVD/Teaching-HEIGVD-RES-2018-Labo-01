@@ -22,10 +22,11 @@ public class DFSFileExplorer implements IFileExplorer {
 
   private void exploreUnderRootDirectory(File directory, IFileVisitor visitor) {
     File[] folderContent = directory.listFiles();
-    for (File f : folderContent) {
-      visitor.visit(f);
-      if (f.isDirectory())
-        exploreUnderRootDirectory(f, visitor);
-    }
+    if (null != folderContent)
+        for (File f : folderContent) {
+          visitor.visit(f);
+          if (f.isDirectory())
+            exploreUnderRootDirectory(f, visitor);
+        }
   }
 }
