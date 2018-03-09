@@ -28,7 +28,9 @@ public class Utils {
     for(int i = 0; i < lines.length(); ++i) {
       char c = lines.charAt(i);
       line += c;
-      if ('\r' == c || '\n' == c || "\r\n".equals(c)) {
+      if ('\r' == c || '\n' == c) {
+        if (i < lines.length()-1 && '\r' == c && '\n' == lines.charAt(i+1))
+          line += lines.charAt(++i);
         splittedLines.add(line);
         line = "";
       }
