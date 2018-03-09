@@ -20,7 +20,27 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+      
+    /* source: https://www.regular-expressions.info/lookaround.html
+    Retain the spilt regex in the resulting part and the split regex end up in the left hand side
+    Using the positive lookbehind by prefixing "?<=" group on the pattern
+    */
+    String[] separators = {"(?<=\r\n)", "(?<=\n)", "(?<=\r)"};
+    
+    String[] tokens;
+     
+    for (String separator: separators){
+        
+        //Split 2 parts
+        tokens = lines.split(separator,2);
+        
+        //according to the specification , the tokens must be 2 parts
+        if(tokens.length == 2)
+            return tokens;
+    }
+    
+    tokens = new String[]{"", lines};
+    return tokens;
+    }
 
 }
