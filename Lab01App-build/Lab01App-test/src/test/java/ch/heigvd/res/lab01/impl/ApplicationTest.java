@@ -145,7 +145,12 @@ public class ApplicationTest {
     Matcher m = p.matcher(output);
     String outputWithUnixSeparator = m.replaceAll("/");
 
+
     String reference = sb.toString();
+
+    System.out.println(output);
+    System.out.println(reference);
+
     boolean applicationReturnsValidPlatformSpecificFilePaths = (reference.equals(output));
     boolean applicationReturnsValidUnixFilePaths = (reference.equals(outputWithUnixSeparator));
     boolean applicationReturnsValidFilePaths = (applicationReturnsValidPlatformSpecificFilePaths || applicationReturnsValidUnixFilePaths);
