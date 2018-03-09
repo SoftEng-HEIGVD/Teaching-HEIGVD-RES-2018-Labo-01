@@ -3,7 +3,6 @@ package ch.heigvd.res.lab01.impl.explorers;
 import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import java.io.File;
-import java.util.LinkedList;
 
 /**
  * This implementation of the IFileExplorer interface performs a depth-first
@@ -28,34 +27,20 @@ public class DFSFileExplorer implements IFileExplorer {
      */ 
     if(rootDirectory.listFiles() == null)
         return;
-   
-    /**
-     * 3. if current directory has sub-directories/files, we store them into a list for later exploration
-     */
-    LinkedList<File> currentDirectoryFiles = new LinkedList<>();
     
     /**
-     * 4. explore the current directory :
+     * 3. explore the current directory (recursively):
+     *    explore subdirectories of the current directory
      *    visit files 
-     *    add subdirectories to the list for later exploration
      */
     for (File f : rootDirectory.listFiles())
     {
         if(f.isDirectory()){
-            // currentDirectoryFiles.add(f);
             explore(f, vistor);
         }
         else {
             vistor.visit(f);
         }
     }
-    
-    /**
-     * 5. explore subdirectories of the current directory
-     */
-    /*for (File subDirectory : currentDirectoryFiles)
-    {
-        explore(subDirectory, vistor);
-    }*/
   }
 }
