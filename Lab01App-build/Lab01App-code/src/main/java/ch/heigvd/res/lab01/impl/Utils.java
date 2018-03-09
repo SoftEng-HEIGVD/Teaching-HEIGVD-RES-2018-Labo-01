@@ -21,27 +21,22 @@ public class Utils {
     * empty string.
     */
    public static String[] getNextLine(String lines) {
-      String firstElement = "";
-      String secondElement = lines;
-      for (int i = 0; i < lines.length(); i++) {
-         firstElement += lines.charAt(i);
-         if (lines.charAt(i) == '\r') {
-            if (i + 1 < lines.length() && lines.charAt(i + 1) == '\n') {
-               firstElement += lines.charAt(i + 1);
-               secondElement = lines.substring(i + 2);
-            } else {
-               secondElement = lines.substring(i + 1);
-            }
-            break;
-         } else if (lines.charAt(i) == '\n') {
-            secondElement = lines.substring(i + 1);
-            break;
-         }
+      String[] stringArray = {"", ""};
+      //for windows
+      if (lines.contains("\r\n")) {
+         stringArray = lines.split("\r\n", 2);
+         stringArray[0] += "\r\n";
+      } //for MACOSX
+      else if (lines.contains("\r")) {
+         stringArray = lines.split("\r", 2);
+         stringArray[0] += "\r";
+      } //for UNIX
+      else if (lines.contains("\n")) {
+         stringArray = lines.split("\n", 2);
+         stringArray[0] += "\n";
+      } else {
+         stringArray[1] = lines;
       }
-      if (secondElement.equals(lines)) {
-         firstElement = "";
-      }
-      String[] stringArray = {firstElement, secondElement};
       return stringArray;
    }
 

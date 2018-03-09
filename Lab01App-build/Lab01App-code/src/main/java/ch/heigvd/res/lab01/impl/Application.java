@@ -151,10 +151,10 @@ public class Application implements IApplication {
          }
       }
       //starting directory
-      String currentDir = WORKSPACE_DIRECTORY + "/";
+      StringBuilder currentDir = new StringBuilder(WORKSPACE_DIRECTORY + "/");
       //for each tag we create a subfolder
-      for (String s : quote.getTags()) {
-         File newDir = new File(currentDir + s);
+      for (String tag : quote.getTags()) {
+         File newDir = new File(currentDir + tag);
          if (!newDir.exists()) {
             try {
                newDir.mkdir();
@@ -162,11 +162,11 @@ public class Application implements IApplication {
                System.err.println("security exception : " + e.getMessage());
             }
          }
-         currentDir = currentDir + s + "/";
+         currentDir.append(tag).append("/");
       }
       //creation of the quote file in the last subfolder created
-      currentDir += filename;
-      File newQuote = new File(currentDir);
+      currentDir.append(filename);
+      File newQuote = new File(currentDir.toString());
       newQuote.createNewFile();
       //write the content of the quote in the new file
       OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(newQuote), "utf8");

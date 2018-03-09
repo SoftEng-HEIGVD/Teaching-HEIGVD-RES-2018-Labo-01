@@ -72,49 +72,49 @@ public class FileNumberingFilterWriter extends FilterWriter {
     */
    @Override
    public void write(String str) throws IOException {
-      String stringToWrite = "";
+      StringBuilder stringToWrite = new StringBuilder();
       //we write the first line number if its the first time that this method is call
       if (lineNumber == 1) {
-         stringToWrite += String.valueOf(lineNumber++) + "\t";
+         stringToWrite.append(String.valueOf(lineNumber++)).append("\t");
       }
       for (int i = 0; i < str.length(); i++) {
          //if we need to check the first character
          if (checkNewLine) {
             //if we find a \n, we write \r\n, set the flag to false and write the line number
             if (str.charAt(i) == '\n') {
-               stringToWrite += "\r" + str.charAt(i);
-               stringToWrite += String.valueOf(lineNumber++) + "\t";
+               stringToWrite.append("\r").append(str.charAt(i));
+               stringToWrite.append(String.valueOf(lineNumber++)).append("\t");
                checkNewLine = false;
             } //if we find another \r we write the previous \r, the line number but we keep the flag to true
             else if (str.charAt(i) == '\r') {
-               stringToWrite += str.charAt(i);
-               stringToWrite += String.valueOf(lineNumber++) + "\t";
+               stringToWrite.append(str.charAt(i));
+               stringToWrite.append(String.valueOf(lineNumber++)).append("\t");
             } //if we find another character, we append the \r, the line number, and the character to the final string
             //and we set the flag to false
             else {
-               stringToWrite += "\r";
-               stringToWrite += String.valueOf(lineNumber++) + "\t";
-               stringToWrite += str.charAt(i);
+               stringToWrite.append("\r");
+               stringToWrite.append(String.valueOf(lineNumber++)).append("\t");
+               stringToWrite.append(str.charAt(i));
                checkNewLine = false;
             }
          } //if we don't need to check the first character
          else {
             //if we find a \n, we aooend it and the line number to the final string
             if (str.charAt(i) == '\n') {
-               stringToWrite += str.charAt(i);
-               stringToWrite += String.valueOf(lineNumber++) + "\t";
+               stringToWrite.append(str.charAt(i));
+               stringToWrite.append(String.valueOf(lineNumber++)).append("\t");
             } //if we find a \r, we set the flag to true
             else if (str.charAt(i) == '\r') {
                checkNewLine = true;
             } //else, we append the character to the final string
             else {
-               stringToWrite += str.charAt(i);
+               stringToWrite.append(str.charAt(i));
             }
 
          }
       }
 
-      this.out.write(stringToWrite);
+      this.out.write(stringToWrite.toString());
    }
 
 }

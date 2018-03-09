@@ -15,10 +15,10 @@ public class UpperCaseFilterWriter extends FilterWriter {
    }
 
    /**
-    * simply call the write(String) methode with a substring Does nothing if off
-    * + len is greater than the String length
+    * write the substring from off to off + len only if off + len is lesser than
+    * the string length
     *
-    * @param str
+    * @param str input string
     * @param off start of the substring
     * @param len length of the substring
     * @throws IOException
@@ -29,7 +29,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
          return;
       }
       String stringToWrite = str.substring(off, off + len);
-      write(stringToWrite);
+      out.write(stringToWrite.toUpperCase());
    }
 
    /**
@@ -51,8 +51,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
    }
 
    /**
-    * call the write(String) method with a String that contain the unicaode
-    * value of the parameter
+    * write the unicode value of the parameter
     *
     * @param c
     * @throws IOException
@@ -63,19 +62,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
       c &= 0x0000ffff;
       String stringToWrite = "";
       stringToWrite += (char) c;
-      write(stringToWrite);
+      out.write(stringToWrite.toUpperCase());
    }
 
-   /**
-    * apply an uppercase filter to a string and write it to the current writer
-    * output
-    *
-    * @param str input string
-    * @throws IOException
-    */
-   @Override
-   public void write(String str) throws IOException {
-      String stringToWrite = str.toUpperCase();
-      this.out.write(stringToWrite);
-   }
 }
