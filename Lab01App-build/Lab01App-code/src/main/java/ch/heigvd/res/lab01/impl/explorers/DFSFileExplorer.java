@@ -22,7 +22,7 @@ public class DFSFileExplorer implements IFileExplorer {
 
   private void exploreUnderRootDirectory(File directory, IFileVisitor visitor) {
     File[] folderContent = directory.listFiles();
-    if (null != folderContent)
+    if (null != folderContent)  // listFiles can return null if the directory does not exists
         for (File f : folderContent) {
           visitor.visit(f);
           if (f.isDirectory())
