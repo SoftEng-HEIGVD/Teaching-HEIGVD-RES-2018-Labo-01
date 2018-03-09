@@ -23,6 +23,8 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
+    if (!(lines.contains("\n") || lines.contains("\r")))
+      return new String[]{"", lines};
     List<String> splittedLines = new ArrayList<>();
     String line = "";
     for(int i = 0; i < lines.length(); ++i) {
