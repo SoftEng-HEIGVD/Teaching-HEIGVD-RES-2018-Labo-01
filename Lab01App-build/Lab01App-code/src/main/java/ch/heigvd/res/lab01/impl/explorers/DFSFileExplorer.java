@@ -12,7 +12,7 @@ import java.io.File;
  *
  * @author Olivier Liechti
  *
- * @author Doriane kaffo
+ * @author Doriane  Kaffo
  *
  */
 public class DFSFileExplorer implements IFileExplorer {
