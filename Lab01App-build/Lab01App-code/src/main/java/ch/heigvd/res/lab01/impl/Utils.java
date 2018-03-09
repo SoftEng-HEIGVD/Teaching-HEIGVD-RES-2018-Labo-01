@@ -1,5 +1,8 @@
 package ch.heigvd.res.lab01.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 /**
@@ -20,7 +23,19 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    List<String> splittedLines = new ArrayList<>();
+    String line = "";
+    for(int i = 0; i < lines.length(); ++i) {
+      char c = lines.charAt(i);
+      line += c;
+      if ('\r' == c || '\n' == c || "\r\n".equals(c)) {
+        splittedLines.add(line);
+        line = "";
+      }
+    }
+    if (1 == splittedLines.size())
+      splittedLines.add("");
+    return splittedLines.toArray(new String[0]);
   }
 
 }
