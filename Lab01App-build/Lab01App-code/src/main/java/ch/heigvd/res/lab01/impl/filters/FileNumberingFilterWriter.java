@@ -18,6 +18,10 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+  private int line = 1;
+  private static final char TAB ='\t';
+  private static final char RET_M ='\r';
+  private static final char RET_U ='\n';
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
@@ -25,17 +29,45 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    String res = str.substring(0,off);
+    char cur;
+    char next;
+    if(line == 1){
+      res += line++;
+      res += TAB;
+    }
+    for (int i = off; i < off + len; ++i){
+      cur = str.charAt(i);
+      if(i + 1 < str.length()){
+        next = str.charAt(i+1);
+      }
+      else {
+        next = '\0';
+      }
+      res += cur;
+      if(cur == RET_U || cur == RET_M){
+        if(cur == RET_M && next == RET_U){
+          res += next;
+          ++i;
+        }
+        res += line++;
+        res += TAB;
+      }
+    }
+    res += str.substring(off+len, str.length());
+    super.write(res,off,len + res.length() - str.length());
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    write(cbuf.toString(),off,len);
   }
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    String s = "";
+    s += c;
+    write(s,0,0);
   }
 
 }
