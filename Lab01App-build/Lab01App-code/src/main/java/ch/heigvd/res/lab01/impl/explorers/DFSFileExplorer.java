@@ -11,31 +11,24 @@ import java.io.File;
  * all files in the directory and then moves into the subdirectories.
  *
  * @author Olivier Liechti
- * 
+ *
  * @author Doriane kaffo
- * 
+ *
  */
 public class DFSFileExplorer implements IFileExplorer {
 
     @Override
     public void explore(File rootDirectory, IFileVisitor vistor) {
-        // First directory
-        vistor.visit(rootDirectory);
-
-        // If root isn't a directory, we do nothing
-        if (rootDirectory.listFiles() == null) {
+        if (rootDirectory == null) {
             return;
         }
-
-        //Explore all the directory before explore the file
-        for (File file : rootDirectory.listFiles()) {
-            if (file.isDirectory())// if isn't a file
-            {
-                explore(file, vistor);
-            } 
-            {
-                vistor.visit(file);
-            }
+        vistor.visit(rootDirectory);
+        File[] list = rootDirectory.listFiles();
+        if (list == null) {
+            return;
+        }
+        for (File file : list) {
+            explore(file, vistor);
         }
     }
 }
