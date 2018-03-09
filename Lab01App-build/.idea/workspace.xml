@@ -17,8 +17,8 @@
       <file leaf-file-name="ApplicationTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="950">
-              <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+            <state relative-caret-position="850">
+              <caret line="91" column="4" lean-forward="false" selection-start-line="91" selection-start-column="4" selection-end-line="91" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -27,14 +27,14 @@
       <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2901">
-              <caret line="133" column="34" lean-forward="false" selection-start-line="133" selection-start-column="34" selection-end-line="133" selection-end-column="34" />
+            <state relative-caret-position="1230">
+              <caret line="175" column="5" lean-forward="false" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5464#5919#0" expanded="true" />
-                <element signature="e#5918#5919#0" expanded="true" />
-                <element signature="e#5972#5973#0" expanded="true" />
-                <element signature="e#6018#6019#0" expanded="true" />
+                <element signature="e#5725#6613#0" expanded="true" />
+                <element signature="e#6612#6613#0" expanded="true" />
+                <element signature="e#6666#6667#0" expanded="true" />
+                <element signature="e#6712#6713#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,18 +66,8 @@
       <file leaf-file-name="FileNumberingFilterWriterTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriterTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
+            <state relative-caret-position="472">
               <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DFSFileExplorer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -90,6 +80,7 @@
       <find>olivi</find>
       <find>filename</find>
       <find>quotes-n</find>
+      <find>work</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -104,6 +95,7 @@
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java" />
+        <option value="$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java" />
       </list>
     </option>
   </component>
@@ -525,35 +517,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ApplicationTest - 2018.03.09 at 15h 48m 48s.xml">
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 31m 12s.xml">
       <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ApplicationTest - 2018.03.09 at 15h 51m 27s.xml">
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 35m 48s.xml">
       <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ApplicationTest - 2018.03.09 at 16h 06m 43s.xml">
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 36m 58s.xml">
       <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ApplicationTest - 2018.03.09 at 16h 07m 35s.xml">
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 37m 41s.xml">
       <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ApplicationTest - 2018.03.09 at 16h 08m 12s.xml">
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 41m 14s.xml">
       <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ApplicationTest - 2018.03.09 at 16h 08m 52s.xml">
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 41m 57s.xml">
       <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FileNumberingFilterWriterTest - 2018.03.09 at 10h 17m 31s.xml">
-      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 42m 18s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FileNumberingFilterWriterTest - 2018.03.09 at 12h 05m 06s.xml">
-      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 42m 58s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FileNumberingFilterWriterTest - 2018.03.09 at 12h 15m 26s.xml">
-      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 48m 34s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UpperCaseFilterWriterTest - 2018.03.09 at 09h 56m 21s.xml">
-      <configuration name="UpperCaseFilterWriterTest" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.09 at 17h 52m 48s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -645,10 +637,10 @@
           <caret line="94" column="42" lean-forward="true" selection-start-line="94" selection-start-column="42" selection-end-line="94" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5464#5919#0" expanded="true" />
-            <element signature="e#5918#5919#0" expanded="true" />
-            <element signature="e#5972#5973#0" expanded="true" />
-            <element signature="e#6018#6019#0" expanded="true" />
+            <element signature="e#5725#6613#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
+            <element signature="e#6666#6667#0" expanded="true" />
+            <element signature="e#6712#6713#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -715,30 +707,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="950">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -758,16 +726,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="14" selection-end-line="28" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriterTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="91" column="4" lean-forward="false" selection-start-line="91" selection-start-column="4" selection-end-line="91" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2901">
-          <caret line="133" column="34" lean-forward="false" selection-start-line="133" selection-start-column="34" selection-end-line="133" selection-end-column="34" />
+        <state relative-caret-position="1230">
+          <caret line="175" column="5" lean-forward="false" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5464#5919#0" expanded="true" />
-            <element signature="e#5918#5919#0" expanded="true" />
-            <element signature="e#5972#5973#0" expanded="true" />
-            <element signature="e#6018#6019#0" expanded="true" />
+            <element signature="e#5725#6613#0" expanded="true" />
+            <element signature="e#6612#6613#0" expanded="true" />
+            <element signature="e#6666#6667#0" expanded="true" />
+            <element signature="e#6712#6713#0" expanded="true" />
           </folding>
         </state>
       </provider>
