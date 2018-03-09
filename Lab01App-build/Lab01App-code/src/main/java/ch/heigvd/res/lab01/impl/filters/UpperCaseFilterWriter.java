@@ -9,19 +9,22 @@ import java.io.Writer;
  * @author Olivier Liechti
  */
 public class UpperCaseFilterWriter extends FilterWriter {
-  
+
   public UpperCaseFilterWriter(Writer wrappedWriter) {
     super(wrappedWriter);
   }
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    String str2 = str.substring(off, off + len).toUpperCase();
+    super.write(str2);
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    for (int i = off; i < len + off; i++) {
+      super.write(Character.toUpperCase(cbuf[i]));
+    }
   }
 
   @Override
