@@ -28,81 +28,64 @@ public class FileNumberingFilterWriter extends FilterWriter {
         super(out);
     }
 
-      /**
-   * Write the string
-   * @param str String to be written
-   * @param off Offset from which to start writing characters
-   * @param len Number of characters to write
-   * @throws IOException 
-   */
+    /**
+     * Write the string
+     *
+     * @param str String to be written
+     * @param off Offset from which to start writing characters
+     * @param len Number of characters to write
+     * @throws IOException
+     */
     @Override
     public void write(String str, int off, int len) throws IOException {
-        
-        //Portion of the string to write
-        String subString = str.substring(off, off + len);
-        
-        //if the lenght of the subString is equals to  we stop
-        if (subString.length() == 0) {
-            return;
-        }
-
-        String writeString = "";
-        //If it's the first line
-        if (numLine == 0) {
-            writeString += Integer.toString(++numLine) + "\t";
-        }
-
-        String[] strings = Utils.getNextLine(subString);
-
-        
-        //scan  each line of my string
-        while (strings[0].length() != 0) {
-            writeString += strings[0] + Integer.toString(++numLine) + "\t";
-            strings = Utils.getNextLine(strings[1]);
-        }
-
-        writeString += strings[1];
-
-        //Write the string
-        super.write(writeString, 0, writeString.length());
+        write(str.toCharArray(), off, len);
     }
 
-      /**
-   * Write the char buffer
-   * @param cbuf The char buffer
-   * @param off Offset from which to start writing characters
-   * @param len Number of characters to write
-   * @throws IOException 
-   */
+    /**
+     * Write the char buffer
+     *
+     * @param cbuf The char buffer
+     * @param off Offset from which to start writing characters
+     * @param len Number of characters to write
+     * @throws IOException
+     */
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        String str = cbuf.toString();
-
-        write(str, off, len);
+        for (int i = off; i < cbuf.length && i < len + off; ++i) {
+            write(cbuf[i]);
+        }
 
     }
 
-      /**
-   * write the char c 
-   * @param c Integer define a char to write
-   * @throws IOException 
-   */
+    /**
+     * write the char c
+     *
+     * @param c Integer define a char to write
+     * @throws IOException
+     */
     @Override
     public void write(int c) throws IOException {
+        String toWrite = "";
+
+        //If it's the first char we write then we write the line and the tab
         if (numLine == 0) {
-            super.write(Integer.toString(++numLine));
-            super.write('\t');
+            toWrite = Integer.toString(++numLine) + "\t";
+            super.write(toWrite, 0, toWrite.length());
         }
 
+        //if the char is a \r only we write the line + the tab
         if (previous == '\r' && c != '\n') {
-            super.write(Integer.toString(++numLine));
-            super.write('\t');
+            toWrite = Integer.toString(++numLine) + "\t";
+            super.write(toWrite, 0, toWrite.length());
         }
+        
+        //write the current char
         super.write(c);
 
+        //if the char is \n or \r\n then we write the line + the tab
         if (c == '\n') {
-            super.write(Integer.toString(++numLine));
-            super.write('\t');
+            toWrite = Integer.toString(++numLine) + "\t";
+            super.write(toWrite, 0, toWrite.length());
         }
 
         previous = c;
