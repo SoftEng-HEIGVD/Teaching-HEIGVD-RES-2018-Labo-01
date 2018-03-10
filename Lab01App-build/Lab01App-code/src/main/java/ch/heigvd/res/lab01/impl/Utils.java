@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Olivier Liechti
+ * @author Dejvid Muaremi
  */
 public class Utils {
 
@@ -24,6 +25,8 @@ public class Utils {
   public static String[] getNextLine(String lines) {
     String[] getNextLine = new String[2];
     getNextLine[0] = "";
+    // Find the carriage return and split the lines in two depending on the system.
+    // Has to start by the Windows carriage return or there will be errors.
     if(lines.contains(WINDOWS)){
       getNextLine = lines.split(WINDOWS,2);
       getNextLine[0] += WINDOWS;
