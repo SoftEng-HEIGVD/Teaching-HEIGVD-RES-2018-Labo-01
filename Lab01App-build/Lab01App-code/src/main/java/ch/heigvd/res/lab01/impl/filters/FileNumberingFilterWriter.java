@@ -21,26 +21,69 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+    private boolean nextIsNewLine;
+    private int nextLineNumber;
 
     public FileNumberingFilterWriter(Writer out) {
         super(out);
+        nextLineNumber = 0;
+        nextIsNewLine = true;
     }
 
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        String[] twoLines = Utils.getNextLine(str);
+
+        String sub = str.substring(off, off + len);
+        String beginning = str.substring(0,off);
+        String end = str.substring(off + len, str.length());
+
+        String decorated = beginning + decorate(sub, "") + end;
+        len += decorated.length() - str.length();
+
+        super.write(decorated, off, len);
 
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        throw new UnsupportedOperationException("The student has not implemented this method yet.");
+        String str = String.valueOf(cbuf);
+
+        String sub = decorate(str.substring(off, off + len), "");
+        String beginning = str.substring(0,off);
+        String end = str.substring(off + len, str.length());
+
+
+
+        super.write((beginning + sub + end).toCharArray(), off, len);
     }
 
     @Override
     public void write(int c) throws IOException {
-        throw new UnsupportedOperationException("The student has not implemented this method yet.");
+        // no sens in adding numbers to a single char
+        super.write(c);
     }
 
+
+    public String decorate(String i, String o){
+
+        // is it done yet ?
+        if(i.equals("")){
+            return o;
+        }
+
+        // split it
+        String[] split = Utils.getNextLine(i);
+
+        // si pas de return, pas de nouvelle ligne
+        if(split[0].equals("")){
+            return o + ((nextIsNewLine) ? (++nextLineNumber + "\t") : "" ) + split[1];
+        }
+        // si return, il y a need de continuer
+        else {
+            o = o + ((nextIsNewLine) ? (++nextLineNumber + "\t") : "" ) + split[0];
+            nextIsNewLine = true;
+             return decorate(split[1], o);
+        }
+    }
 }
