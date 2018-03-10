@@ -21,6 +21,7 @@ import org.apache.commons.io.FileUtils;
 
 /**
  * @author Olivier Liechti
+ * @author Dejvid Muaremi
  */
 public class Application implements IApplication {
   
@@ -82,19 +83,22 @@ public class Application implements IApplication {
     }
   }
   
+  /***
+   * It uses the web service client to fetch quotes then call a method to store the content of the quote in a text file
+   * and generate the directories based on the tags.
+   * @param numberOfQuotes the number of quotes you want
+   * @throws IOException when it can't write.
+   */
   @Override
   public void fetchAndStoreQuotes(int numberOfQuotes) throws IOException {
     clearOutputDirectory();
     QuoteClient client = new QuoteClient();
     for (int i = 0; i < numberOfQuotes; i++) {
       Quote quote = client.fetchQuote();
-      /* There is a missing piece here!
-       * As you can see, this method handles the first part of the lab. It uses the web service
-       * client to fetch quotes. We have removed a single line from this method. It is a call to
-       * one method provided by this class, which is responsible for storing the content of the
-       * quote in a text file (and for generating the directories based on the tags).
-       */
-      storeQuote(quote, "quote-" + i + ".utf8");
+      
+      // Call the method to store the content of the quote.
+      storeQuote(quote, "quote-" + String.valueOf(i) + ".utf8");
+      
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -131,24 +135,33 @@ public class Application implements IApplication {
     // A stringBuilder is faster than a string when we append in a loop.
     // https://stackoverflow.com/questions/1532461/stringbuilder-vs-string-concatenation-in-tostring-in-java
     StringBuilder sbPath = new StringBuilder(WORKSPACE_DIRECTORY);
+    String path;
+    File dir;
+    String file;
+    File quoteFile;
     
+    // Get the path from the tags.
     for (String tag : quote.getTags()) {
       sbPath.append(File.separator + tag);
     }
+    path = sbPath.toString();
     
-    String path = sbPath.toString();
-    File dir = new File(sbPath.toString());
+    // Create the directories and subdirectories.
+    dir = new File(sbPath.toString());
     if (!dir.mkdirs()) {
-       throw new RuntimeException("Impossible to write on disk");
+      LOG.log(Level.SEVERE, "Impossible to write on disk");
+      //throw new RuntimeException("Impossible to write on disk");
     }
     
-    
-    String file = path + File.separator + filename;
-    File quoteFile = new File(file);
+    // Get the path to and create the quote file
+    file = path + File.separator + filename;
+    quoteFile = new File(file);
     if (!quoteFile.createNewFile()) {
-       throw new RuntimeException("Impossible to write on disk");
+      LOG.log(Level.SEVERE, "Impossible to write on disk");
+      //throw new RuntimeException("Impossible to write on disk");
     }
     
+    // Write the content of the quote in the file.
     Writer writer = new OutputStreamWriter(new FileOutputStream(file));
     writer.write(quote.getQuote());
     writer.flush();
@@ -162,17 +175,18 @@ public class Application implements IApplication {
   void printFileNames(final Writer writer) {
     IFileExplorer explorer = new DFSFileExplorer();
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
+      /***
+       * we use an anonymous class here. We provide the implementation of the the IFileVisitor interface inline.
+       *
+       * @param file the current file or directory visited by the IFileExplorer instance
+       */
       @Override
       public void visit(File file) {
-        /*
-         * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-         * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-         * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-         */
         try {
+          // Write the filename, including the path, to the writer passed in argument
           writer.write(file.getPath() + '\n');
         } catch (IOException e) {
-          LOG.log(Level.SEVERE, "Could not fetch quotes. {0}", e.getMessage());
+          LOG.log(Level.SEVERE, "Could not fetch the quotes. {0}", e.getMessage());
           e.printStackTrace();
         }
         
@@ -180,6 +194,10 @@ public class Application implements IApplication {
     });
   }
   
+  /***
+   * Get the author email in a String.
+   * @return a String that contains the author email.
+   */
   @Override
   public String getAuthorEmail() {
     return "dejvid.muaremi@heig-vd.ch";
