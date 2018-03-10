@@ -97,6 +97,8 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
+      storeQuote(quote, WORKSPACE_DIRECTORY);
+      
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -131,20 +133,22 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
      List<String> listTags = quote.getTags();
-     String path = "./quote/"; // root folder for quotes
-     
+     String path = filename + "/"; // root folder for quotes
+         
      // Create the sub-folders
      for (int i = 0; i < listTags.size(); ++i) {
          path = path + listTags.get(i) + "/"; // add the sub-folders as a path
      }
-     new File(path).mkdirs();
 
+     new File(path).mkdirs();
+     
      // Create the file and add the content ot it
-     path = path + filename + "quote-" + counter + ".utf8";
-     OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(path), "UTF_8");  
+     ++counter;
+     path = path + "quote-" + counter + ".utf8";
+
+     OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(path));  
      writer.write(quote.getQuote());
      writer.close();
-     // throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
   
   /**
@@ -161,6 +165,12 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
+         try {
+            writer.write(file.getPath() + "\n");
+         } catch (IOException e) {
+            e.printStackTrace();
+         }
+        
       }
     });
   }
