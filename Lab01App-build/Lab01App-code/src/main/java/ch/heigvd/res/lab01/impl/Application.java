@@ -131,16 +131,25 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
       
+      //List of tags
       List<String> quoteTag = quote.getTags();
       for(String tag : quoteTag){
           filename += "/" +  tag ;
       }
       
       try{
+          //Create all directory
           new File(filename).mkdirs();
+          
           filename += "/quote-" + quote.getValue().getId() + ".utf8";
+          
+          //Create the FileWriter
           FileWriter fw = new FileWriter(filename);
+          
+          //Write the quote in the fileWriter
           fw.write(quote.getQuote());
+          
+          fw.flush();
           fw.close();
       }catch(IOException e){
           System.out.println(e.getMessage());

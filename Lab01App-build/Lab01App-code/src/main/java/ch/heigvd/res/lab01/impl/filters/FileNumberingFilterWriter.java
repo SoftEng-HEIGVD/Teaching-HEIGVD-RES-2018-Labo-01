@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
 
-
 /**
  * This class transforms the streams of character sent to the decorated writer.
  * When filter encounters a line separator, it sends it to the decorated writer.
@@ -19,67 +18,95 @@ import java.util.logging.Logger;
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
-  private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+    private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
-  private int noLigne = 0;
-  
-  private char ancien = 'a';
-  
-  public FileNumberingFilterWriter(Writer out) {
-    super(out);
-  }
+    private int numLine = 0;
 
-  @Override
-  public void write(String str, int off, int len) throws IOException {
-     String subString = str.substring(off,off+len);
-     if(subString.length() == 0) {
-         return;
-     }
-     
-     String s = "";
-     if(noLigne == 0)
-         s += Integer.toString(++noLigne) + "\t";
-     
-     String[] strings = Utils.getNextLine(subString);
-     
-     while(strings[0].length() != 0){
-         s += strings[0] + Integer.toString(++noLigne) + "\t";
-         strings = Utils.getNextLine(strings[1]);
-     }
-     
-     s += strings[1];
-     
-     super.write(s, 0, s.length());    
-  }
+    private int previous = ' ';
 
-  @Override
-  public void write(char[] cbuf, int off, int len) throws IOException {
-      String str = cbuf.toString();
-      
-      write(str, off, len);
-      
-  }
+    public FileNumberingFilterWriter(Writer out) {
+        super(out);
+    }
 
-  @Override
-  public void write(int c) throws IOException {
-      if(noLigne == 0){
-          super.write(Integer.toString(++noLigne));
-          super.write('\t');
-      }
-      
-      if(ancien == '\r' && c != '\n'){
-          super.write(Integer.toString(++noLigne));
-          super.write('\t');
-      }
-      super.write(c);
-      
-      if(c == '\n'){
-          super.write(Integer.toString(++noLigne));
-          super.write('\t');
-      }
-      
-      ancien = (char)c;
-      
-  }
+      /**
+   * Write the string
+   * @param str String to be written
+   * @param off Offset from which to start writing characters
+   * @param len Number of characters to write
+   * @throws IOException 
+   */
+    @Override
+    public void write(String str, int off, int len) throws IOException {
+        
+        //Portion of the string to write
+        String subString = str.substring(off, off + len);
+        
+        //if the lenght of the subString is equals to  we stop
+        if (subString.length() == 0) {
+            return;
+        }
+
+        String writeString = "";
+        //If it's the first line
+        if (numLine == 0) {
+            writeString += Integer.toString(++numLine) + "\t";
+        }
+
+        String[] strings = Utils.getNextLine(subString);
+
+        
+        //scan  each line of my string
+        while (strings[0].length() != 0) {
+            writeString += strings[0] + Integer.toString(++numLine) + "\t";
+            strings = Utils.getNextLine(strings[1]);
+        }
+
+        writeString += strings[1];
+
+        //Write the string
+        super.write(writeString, 0, writeString.length());
+    }
+
+      /**
+   * Write the char buffer
+   * @param cbuf The char buffer
+   * @param off Offset from which to start writing characters
+   * @param len Number of characters to write
+   * @throws IOException 
+   */
+    @Override
+    public void write(char[] cbuf, int off, int len) throws IOException {
+        String str = cbuf.toString();
+
+        write(str, off, len);
+
+    }
+
+      /**
+   * write the char c 
+   * @param c Integer define a char to write
+   * @throws IOException 
+   */
+    @Override
+    public void write(int c) throws IOException {
+        if (numLine == 0) {
+            super.write(Integer.toString(++numLine));
+            super.write('\t');
+        }
+
+        if (previous == '\r' && c != '\n') {
+            super.write(Integer.toString(++numLine));
+            super.write('\t');
+        }
+        super.write(c);
+
+        if (c == '\n') {
+            super.write(Integer.toString(++numLine));
+            super.write('\t');
+        }
+
+        previous = c;
+
+    }
 
 }
