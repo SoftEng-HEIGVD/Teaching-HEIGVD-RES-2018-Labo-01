@@ -130,16 +130,15 @@ public class Application implements IApplication {
       List<String> listDirPath = quote.getTags();
       if(!listDirPath.isEmpty()){
           StringBuilder dirPath = new StringBuilder(WORKSPACE_DIRECTORY);
-         // StringBuilder dirPath = new StringBuilder("/quotes");
           for(String dir : listDirPath) {
               dirPath.append("/");
               dirPath.append(dir);
           }
-          //System.out.println(dirPath);
           File  directories = new File(dirPath.toString());
           directories.mkdirs();
           File fileQuote = new File(dirPath + "/" + filename);
           fileQuote.createNewFile();
+          Writer 
       }
   }
 
@@ -157,25 +156,19 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
-
-              File[] list = file.listFiles();
-
-              if (list == null) return;
-
-              for ( File f : list ) {
-                  if ( f.isDirectory() ) {
-                      System.out.println( "Dir:" + f.getAbsoluteFile() );
-                      visit(f);
-                  }
-                  else {
-                      System.out.println( "File:" + f.getAbsoluteFile() );
-                  }
-              }
-
+        try {
+            writer.write(file.getPath());
+        } catch (IOException e){
+            // faire quelque chose !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        }
       }
     });
   }
 
+    /**
+     *
+     * @return email address of the student
+     */
   @Override
   public String getAuthorEmail() {
     return "guillaume.blanco@heig-vd.ch";
@@ -188,3 +181,4 @@ public class Application implements IApplication {
   }
 
 }
+
