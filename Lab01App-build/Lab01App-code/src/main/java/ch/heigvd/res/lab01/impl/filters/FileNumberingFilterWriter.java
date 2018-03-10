@@ -67,12 +67,25 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    // convert to string and call string function
+    String arrayStr = String.valueOf(cbuf);
+    this.write(arrayStr, off, len);
   }
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    // if first line we need to add an additional number at the beginning
+    if(firstLine) {
+      firstLine = false;
+      this.out.write(lineNbr++ + "\t");
+    }
+
+    this.out.write(c);
+
+    // if end of line add new line number
+    if(c == '\n'){
+      this.out.write(lineNbr++ + "\t");
+    }
   }
 
 }
