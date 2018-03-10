@@ -128,19 +128,20 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
       List<String> listDirPath = quote.getTags();
-      if(!listDirPath.isEmpty()){
-          StringBuilder dirPath = new StringBuilder(WORKSPACE_DIRECTORY);
-          for(String dir : listDirPath) {
-              dirPath.append("/");
-              dirPath.append(dir);
-          }
-          File  directories = new File(dirPath.toString());
-          directories.mkdirs();
-          File fileQuote = new File(dirPath + "/" + filename);
-          fileQuote.createNewFile();
-          Write
+      StringBuilder dirPath = new StringBuilder(WORKSPACE_DIRECTORY);
+      for(String dir : listDirPath) {
+          dirPath.append("/");
+          dirPath.append(dir);
       }
-  }
+      File  directories = new File(dirPath.toString());
+      directories.mkdirs();
+      File fileQuote = new File(dirPath + "/" + filename);
+      FileOutputStream FOSQuote = new FileOutputStream(fileQuote);
+      Writer writer = new OutputStreamWriter(FOSQuote);
+      writer.write(quote.getQuote());
+      writer.flush();
+      writer.close();
+      }
 
   /**
    * This method uses a IFileExplorer to explore the file system and prints the name of each
