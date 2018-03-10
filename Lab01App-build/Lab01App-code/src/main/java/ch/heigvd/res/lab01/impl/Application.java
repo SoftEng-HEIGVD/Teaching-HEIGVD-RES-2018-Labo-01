@@ -27,7 +27,7 @@ public class Application implements IApplication {
    */
   public static String WORKSPACE_DIRECTORY = "./workspace/quotes";
   
-  private static final Logger LOG = Logger.getLogger(Application.class.getName());
+  private static final Logger LOG = Logger.getLogger(Application.class.getName());      // TODO: use LOG to notify errors
   
   public static void main(String[] args) {
     
@@ -146,8 +146,6 @@ public class Application implements IApplication {
       path.append("/");
     }
 
-    // creating the directroy tree
-
 
     // create the file and write the text
     try{
@@ -179,7 +177,11 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
-
+        try {
+          writer.write(file.getPath() + "\n");
+        } catch (java.io.IOException e) {
+          System.out.println("error on getting the file path");
+        }
       }
     });
   }
