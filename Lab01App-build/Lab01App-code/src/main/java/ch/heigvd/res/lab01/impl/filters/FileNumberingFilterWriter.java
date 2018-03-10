@@ -2,6 +2,7 @@ package ch.heigvd.res.lab01.impl.filters;
 
 import ch.heigvd.res.lab01.impl.Utils;
 
+import javax.rmi.CORBA.Util;
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -21,28 +22,73 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
+    private int  totalLines;
+    private char previousChar;
+
     public FileNumberingFilterWriter(Writer out) {
         super(out);
+        totalLines   = 0;
+        previousChar = 0;
     }
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        String[] strCut = Utils.getNextLine(str);
+        char[] cbuf = str.toCharArray();
 
-        for(int i = 1; !strCut[0].equals(""); i++) {
-            
+        write(cbuf, off, len);
+
+        /*String[] strCut = Utils.getNextLine(str);
+        int i = 1;
+        for (; !strCut[0].equals(""); i++) {
+            StringBuilder line = new StringBuilder();
+
+            line.append(i).append('\t').append(strCut[0]);
+            out.write(line.toString());
+
+            strCut = Utils.getNextLine(strCut[1]);
         }
 
+        StringBuilder lastLine = new StringBuilder();
+        lastLine.append(i).append('\t');
+        out.write(lastLine.toString());*/
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
+        if(off + len > cbuf.length)
+            throw new IllegalArgumentException("invalid size of substring");
 
+        for(int i = off; i < off + len; i++) {
+            write(cbuf[i]);
+        }
     }
 
     @Override
     public void write(int c) throws IOException {
 
+        // beginning of file
+        if(totalLines == 0) {
+            writeNewLine();
+        }
+
+        // if '\r'
+        else if((char)c != '\n' && previousChar == '\r') {
+            writeNewLine();
+        }
+
+        out.write((char)c);
+
+        // if '\n' or '\r\n'
+        if((char)c == '\n') {
+            writeNewLine();
+        }
+
+        previousChar = (char)c;
+    }
+
+    private void writeNewLine() throws IOException {
+        StringBuilder newLine = new StringBuilder();
+        out.write(newLine.append(++totalLines).append('\t').toString());
     }
 
 }
