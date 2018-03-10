@@ -97,7 +97,7 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
-      storeQuote(quote, WORKSPACE_DIRECTORY);
+      storeQuote(quote, "quote-" + quote.getValue().getId() + ".utf8");
       
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
@@ -133,18 +133,16 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
      List<String> listTags = quote.getTags();
-     String path = filename + "/"; // root folder for quotes
+     String path = WORKSPACE_DIRECTORY;
          
      // Create the sub-folders
      for (int i = 0; i < listTags.size(); ++i) {
-         path = path + listTags.get(i) + "/"; // add the sub-folders as a path
+         path = path + "/" +listTags.get(i); // add the sub-folders as a path
      }
-
      new File(path).mkdirs();
      
      // Create the file and add the content ot it
-     ++counter;
-     path = path + "quote-" + counter + ".utf8";
+     path = path + "/" + filename;
 
      OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(path));  
      writer.write(quote.getQuote());
