@@ -75,9 +75,6 @@ public class FileNumberingFilterWriter extends FilterWriter {
         out.write(input);
         lastChar = input;
      }
-
-
-      // throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
 
 }
