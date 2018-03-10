@@ -138,7 +138,7 @@ public class Application implements IApplication {
           directories.mkdirs();
           File fileQuote = new File(dirPath + "/" + filename);
           fileQuote.createNewFile();
-          Writer 
+          Writer =;
       }
   }
 
