@@ -38,7 +38,26 @@ public class FileNumberingFilterWriter extends FilterWriter {
       numberedStr.append(lineNbr++).append("\t");
     }
 
-    numberedStr.append(str).append(lineNbr++).append("\t");
+    // getting the first line splited
+    String[] splitedStr = Utils.getNextLine(str);
+
+    // if string is an unique line
+    if(splitedStr[1].equals("")){
+      numberedStr.append(splitedStr[0]);
+      numberedStr.append(lineNbr++).append("\t");
+      this.out.write(numberedStr.toString(), 0, numberedStr.length());
+      return;
+    }
+
+    // threat all lines but the last one
+    while(!splitedStr[0].equals("")){
+      numberedStr.append(splitedStr[0]);
+      numberedStr.append(lineNbr++).append("\t");
+      splitedStr = Utils.getNextLine(splitedStr[1]);
+    }
+
+    // appending the last line to the numbered sting
+    numberedStr.append(splitedStr[1]);
 
     this.out.write(numberedStr.toString(), 0, numberedStr.length());
   }
