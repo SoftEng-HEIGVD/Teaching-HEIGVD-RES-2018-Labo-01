@@ -30,19 +30,19 @@ public class FileNumberingFilterWriter extends FilterWriter {
   @Override
   public void write(String str, int off, int len) throws IOException {
       char[] arrayStr = str.toCharArray();
-      write(arrayStr, off, len);
+      write(arrayStr, off, len); // Do the logical implementation in once
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
       for (int i = off; i < off + len; ++i) {
-         write(cbuf[i]);
+         write(cbuf[i]); // Do the logical implementation in once
       }
   }
 
   @Override
   public void write(int c) throws IOException {
-     char input = (char) c;
+     char input = (char) c; // Cast for once
     
      // Check if it's the first line
      if (beginLine) {
@@ -76,5 +76,4 @@ public class FileNumberingFilterWriter extends FilterWriter {
         lastChar = input;
      }
   }
-
 }

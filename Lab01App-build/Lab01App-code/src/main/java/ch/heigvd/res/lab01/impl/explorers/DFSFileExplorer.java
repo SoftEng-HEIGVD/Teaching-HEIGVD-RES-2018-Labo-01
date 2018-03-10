@@ -25,7 +25,7 @@ public class DFSFileExplorer implements IFileExplorer {
      
      // Check the return of method listFiles()
      if (listFiles != null) {
-        // Brows all the files/directories
+        // Brows all the files/directories and explores them by recursing
         for (int i = 0; i < listFiles.length; ++i) {
            if (listFiles[i].isDirectory()) {
               explore(listFiles[i], vistor);

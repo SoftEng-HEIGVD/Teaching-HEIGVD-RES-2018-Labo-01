@@ -39,7 +39,7 @@ public class Utils {
         output[0] = output[0] + "\r\n";
      
      } else
-         output[1] = lines;               // add remaing text
+         output[1] = lines;               // add remaining text
      
      return output;
   }
