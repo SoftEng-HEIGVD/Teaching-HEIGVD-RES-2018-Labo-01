@@ -18,42 +18,64 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+    private int counter;
+    private boolean first = false;
+    private boolean isInt=false;
 
     public FileNumberingFilterWriter(Writer out) {
         super(out);
+        counter = 1;
+        first = true;
+        
     }
 
     @Override
     public void write(String str) throws IOException {
-        out.write(str.toUpperCase());
+        if(str.contains("\r\n")&&(!isInt))
+            isInt=true;
+        for (int i = 0; i < str.length(); ++i) {
+
+            if (first) {
+                out.write(counter++ + "\t" + str.charAt(i));
+                first = false;
+            } else if (str.charAt(i) == '\n') {
+                out.write("\n" + counter++ + "\t");
+            }else if ((str.charAt(i)=='\r')&&(!isInt)){
+                out.write("\r" + counter++ + "\t");
+            } else {
+                out.write(str.charAt(i));
+            }
+        }
     }
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        str.substring(off, len);
-        out.write(str);
+        String interString = str.substring(off, off + len);
+        write(interString);
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        String str="";
-        for (int i=0;i<cbuf.length;++i) {
-         str=str+cbuf[i];
+        String str = "";
+        for (int i = 0; i <= cbuf.length; ++i) {
+            str = str + cbuf[i];
         }
-        write(str,off,len);
+        write(str, off, len);
     }
-        public void write(char[] cbuf) throws IOException {
-        String str="";
-        for (int i=0;i<cbuf.length;++i) {
-         str=str+cbuf[i];
+
+    public void write(char[] cbuf) throws IOException {
+        String str = "";
+        for (int i = 0; i <= cbuf.length; ++i) {
+            str = str + cbuf[i];
         }
         write(str);
     }
 
     @Override
     public void write(int c) throws IOException {
-        String str=""+(char)c;
-        out.write(str);
+        isInt=true;
+        String str = "" + (char) c;
+        write(str);
     }
 
 }

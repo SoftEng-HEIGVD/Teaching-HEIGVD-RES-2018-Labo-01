@@ -21,8 +21,8 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        str.substring(off, len);
-        out.write(str);
+        String interString =str.substring(off, off+len);
+        write(interString);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
     @Override
     public void write(int c) throws IOException {
         String str = "" + (char) c;
-        out.write(str);
+        write(str);
     }
 
 }
