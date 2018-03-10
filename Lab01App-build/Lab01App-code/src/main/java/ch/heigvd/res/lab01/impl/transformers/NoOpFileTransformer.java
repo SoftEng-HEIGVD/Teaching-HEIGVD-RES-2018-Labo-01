@@ -10,10 +10,8 @@ import java.io.Writer;
  * @author Olivier Liechti
  */
 public class NoOpFileTransformer extends FileTransformer {
-
   @Override
   public Writer decorateWithFilters(Writer writer) {
     return writer;
   }
-
 }
