@@ -128,18 +128,18 @@ public class Application implements IApplication {
   void storeQuote(Quote quote, String filename) throws IOException {
     // A stringBuilder is faster than a string when we append in a loop.
     // https://stackoverflow.com/questions/1532461/stringbuilder-vs-string-concatenation-in-tostring-in-java
-    StringBuilder sbPpath = new StringBuilder();
-    sbPpath.append(WORKSPACE_DIRECTORY);
+    StringBuilder sbPath = new StringBuilder(WORKSPACE_DIRECTORY);
 
     for (String tag:quote.getTags() ) {
-      sbPpath.append(File.pathSeparator + tag);
+      sbPath.append(File.separator + tag);
     }
-    String path = sbPpath.toString();
-    File dir = new File(path);
-    if(dir.mkdir()){
+
+    String path = sbPath.toString();
+    File dir = new File(sbPath.toString());
+    if(dir.mkdirs()){
       // Handle the error...
     }
-    String file = path + File.pathSeparator + filename;
+    String file = path + File.separator + filename;
     File quoteFile = new File(file);
     if(quoteFile.createNewFile()){
       // Handle the error...
@@ -149,7 +149,6 @@ public class Application implements IApplication {
     writer.write(quote.getQuote());
     writer.flush();
     writer.close();
-
   }
   
   /**
