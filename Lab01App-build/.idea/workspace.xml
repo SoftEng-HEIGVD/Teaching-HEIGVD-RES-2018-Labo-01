@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FileNumberingFilterWriter.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FileNumberingFilterWriter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="91" column="38" lean-forward="false" selection-start-line="91" selection-start-column="38" selection-end-line="91" selection-end-column="38" />
+            <state relative-caret-position="-612">
+              <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;class#FileNumberingFilterWriter#0" expanded="false" />
@@ -27,32 +27,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="50" column="28" lean-forward="false" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UtilsTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/UtilsTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="42" column="6" lean-forward="true" selection-start-line="42" selection-start-column="6" selection-end-line="42" selection-end-column="6" />
-              <folding>
-                <element signature="docComment;class#UtilsTest#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FileNumberingFilterWriterTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriterTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
+            <state relative-caret-position="170">
               <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding />
             </state>
@@ -70,8 +48,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java" />
-        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java" />
+        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java" />
       </list>
     </option>
   </component>
@@ -264,6 +242,17 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="heigvd" type="462c0819:PsiDirectoryNode" />
               <item name="impl" type="462c0819:PsiDirectoryNode" />
+              <item name="filters" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Lab01App-build" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Lab01App-build" type="462c0819:PsiDirectoryNode" />
+              <item name="Lab01App-test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="heigvd" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
               <item name="transformers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -291,7 +280,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UtilsTest">
+  <component name="RunManager" selected="JUnit.FileNumberingFilterWriterTest">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -312,26 +301,6 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
-    </configuration>
-    <configuration name="All in Lab01App-tests (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="Lab01App-tests" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
     </configuration>
     <configuration name="All in Lab01App-tests (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
@@ -382,6 +351,31 @@
       <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="FileNumberingFilterWriterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ch.heigvd.res.lab01.impl.filters.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Lab01App-tests" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ch.heigvd.res.lab01.impl.filters" />
+      <option name="MAIN_CLASS_NAME" value="ch.heigvd.res.lab01.impl.filters.FileNumberingFilterWriterTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
@@ -479,19 +473,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (2)" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (3)" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (4)" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (5)" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.UtilsTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (3)" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (4)" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (5)" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.UtilsTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.FileNumberingFilterWriterTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.UtilsTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (5)" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (4)" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (3)" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (2)" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.FileNumberingFilterWriterTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.UtilsTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (5)" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (4)" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (3)" />
       </list>
     </recent_temporary>
   </component>
@@ -512,44 +506,44 @@
       <workItem from="1520425495140" duration="3290000" />
       <workItem from="1520431082317" duration="7679000" />
       <workItem from="1520588677320" duration="461000" />
-      <workItem from="1520708260625" duration="7996000" />
+      <workItem from="1520708260625" duration="14805000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 00m 53s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.10 at 23h 41m 06s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 01m 18s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.10 at 23h 45m 42s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 03m 02s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.10 at 23h 46m 05s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 04m 57s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.10 at 23h 49m 52s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 05m 02s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.10 at 23h 51m 37s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 05m 14s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.10 at 23h 53m 18s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 07m 26s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.11 at 00h 00m 18s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 08m 14s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.11 at 00h 01m 30s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 08m 44s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.11 at 00h 03m 51s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="UtilsTest - 2018.03.10 at 22h 09m 09s.xml">
-      <configuration name="UtilsTest" configurationId="JUnit" />
+    <history-entry file="FileNumberingFilterWriterTest - 2018.03.11 at 00h 04m 28s.xml">
+      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25813000" />
+    <option name="totallyTimeSpent" value="32622000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -572,7 +566,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295325" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -601,7 +595,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="27" />
+      <option name="time" value="37" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -867,28 +861,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="91" column="38" lean-forward="false" selection-start-line="91" selection-start-column="38" selection-end-line="91" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;class#FileNumberingFilterWriter#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state relative-caret-position="432">
+          <caret line="39" column="38" lean-forward="true" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/UtilsTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
+        <state relative-caret-position="432">
           <caret line="42" column="6" lean-forward="true" selection-start-line="42" selection-start-column="6" selection-end-line="42" selection-end-column="6" />
           <folding>
             <element signature="docComment;class#UtilsTest#0" expanded="false" />
@@ -896,11 +879,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java">
+    <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriterTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="50" column="28" lean-forward="false" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+        <state relative-caret-position="170">
+          <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <caret line="20" column="38" lean-forward="false" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#FileNumberingFilterWriter#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

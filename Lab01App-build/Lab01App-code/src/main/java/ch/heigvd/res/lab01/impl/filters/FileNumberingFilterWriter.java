@@ -1,5 +1,7 @@
 package ch.heigvd.res.lab01.impl.filters;
 
+import ch.heigvd.res.lab01.impl.Utils;
+
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -20,14 +22,12 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
     private static int nbrLine;
-    private static boolean numberIsWritten;
     private static boolean isNewLine;
 
     public FileNumberingFilterWriter(Writer out) {
 
         super(out);
         nbrLine = 1;
-        numberIsWritten = false;
         isNewLine = true;
     }
 
@@ -35,46 +35,34 @@ public class FileNumberingFilterWriter extends FilterWriter {
     public void write(String str, int off, int len) throws IOException {
 
         // Get the substring asked from the text
-        String newStr = str.substring(off, off + len);
+        String[] lines = Utils.getNextLine(str.substring(off, off + len));
+        String lineWithSeparator = lines[0];
+        String remainingLines = lines[1];
 
-        //Set the number of the line if not written
-        if(isNewLine == true && numberIsWritten == false){
-            newStr = nbrLine +  "\t" +newStr;
-            numberIsWritten = false;
+        //Formatted text
+        String newStr = (isNewLine ? nbrLine + "\t" : "") + lineWithSeparator;
+
+        //The next line has to be written without number of line
+        if(lineWithSeparator.isEmpty()){
             isNewLine = false;
         }
 
-        //Find the separator
-        String[] separators = {"\r\n", "\n", "\r"};     //Possible separators
-        int positionSeparator = -1;                     //Position of the separator found
-        String separator = "";                          //Separator found
-        int indexFrom = 0;                              //Index after which the separator search is made
+        while(!lineWithSeparator.isEmpty() && !lineWithSeparator.equals("\r")){
 
-        for (String s : separators) {
+            //Get the next lines
+            lines = Utils.getNextLine(remainingLines);
+            lineWithSeparator = lines[0];
+            remainingLines = lines[1];
 
-            int position = newStr.indexOf(s, indexFrom);
+            //Write the line
+            newStr += ++nbrLine + "\t" + lineWithSeparator;
 
-            if(position != -1){
-                positionSeparator = position;
-                separator = s;
-                break;
-            }
+            //False if the next line has to be written without number of line
+            isNewLine = !remainingLines.isEmpty();
         }
 
-        while(positionSeparator != -1){
-            nbrLine++;
-
-            indexFrom = positionSeparator + separator.length();
-
-            String firstPart = newStr.substring(0, indexFrom);
-            String secondPart = newStr.substring(indexFrom, newStr.length());
-
-            numberIsWritten = secondPart.isEmpty();
-            newStr = firstPart + nbrLine + "\t" +secondPart;
-
-            positionSeparator = newStr.indexOf(separator, indexFrom);
-            isNewLine = true;
-        }
+        //Write the remaining text
+        newStr += remainingLines;
 
         //Write the formatted text
         super.out.write(newStr);
@@ -82,12 +70,12 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        throw new UnsupportedOperationException("The student has not implemented this method yet.");
+        write(String.valueOf(cbuf), off, len);
     }
 
     @Override
     public void write(int c) throws IOException {
-        throw new UnsupportedOperationException("The student has not implemented this method yet.");
+        String str = String.valueOf((char) c);
+        write(str, 0, str.length());
     }
-
 }
