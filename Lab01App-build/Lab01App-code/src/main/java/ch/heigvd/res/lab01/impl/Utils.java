@@ -22,11 +22,9 @@ public class Utils {
    */
   public static String[] getNextLine(String lines) {
   //  throw new UnsupportedOperationException("The student has not implemented this method yet.");
-
-    String[] output = new String[2];
-    int size = 0;
-    int index = lines.indexOf("\r\n");
-    size = 2;
+    int size        = 2;
+    String[] output = new String[size];
+    int index       = lines.indexOf("\r\n");
 
     if (index < 0) {
       size = 1;
@@ -35,12 +33,12 @@ public class Utils {
         index = lines.indexOf('\r');
       }
     }
-
+    //put the 2 element in the array
     if (index >= 0) {
-      output[0] = lines.substring(0, index + size);
+      output[0] = lines.substring(0, index + size); //put the next line with separator
       output[1] = lines.substring(index + size);
     } else if(index < 0){
-      output[0] = "";
+      output[0] = ""; //empty string if the argument doesn't contain line separator
       output[1] = lines;
     }
 

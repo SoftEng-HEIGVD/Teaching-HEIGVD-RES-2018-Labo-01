@@ -17,6 +17,7 @@ import org.apache.commons.io.FileUtils;
 /**
  *
  * @author Olivier Liechti
+ * @author Christophe Joyet
  */
 public class Application implements IApplication {
 
@@ -90,10 +91,6 @@ public class Application implements IApplication {
        * quote in a text file (and for generating the directories based on the tags).
        */
       this.storeQuote(quote, "quote-" + (i+1) + ".utf8");
-      LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
-      for (String tag : quote.getTags()) {
-        LOG.info("> " + tag);
-      }
     }
   }
   
@@ -127,6 +124,7 @@ public class Application implements IApplication {
 
       String path = WORKSPACE_DIRECTORY;
 
+      //create the path
       for (String tag : quote.getTags()) {
           path += File.separator + tag;
       }
@@ -144,25 +142,23 @@ public class Application implements IApplication {
    * This method uses a IFileExplorer to explore the file system and prints the name of each
    * encountered file and directory.
    */
-  void printFileNames(final Writer writer) {
-    IFileExplorer explorer = new DFSFileExplorer();
-    explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
-      @Override
-      public void visit(File file) throws IOException {
-        /*
-         * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-         * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-         * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-         */
-        try {
-            writer.write(file.getPath() + '\n');
-                  }
-               catch (IOException e) {
+    /**
+     * This method uses a IFileExplorer to explore the file system and prints the name of each
+     * encountered file and directory.
+     */
+    void printFileNames(final Writer writer) throws IOException {
+        IFileExplorer explorer = new DFSFileExplorer();
+        explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
+            @Override
+            public void visit(File file) {
+                try {
+                    writer.write(file.getPath() + '\n');
+                } catch(IOException e) {
                     e.printStackTrace();
-                 }
-      }
-    });
-  }
+                }
+            }
+        });
+    }
   
   @Override
   public String getAuthorEmail() {

@@ -48,10 +48,11 @@ public class FileNumberingFilterWriter extends FilterWriter {
     @Override
     public void write(int c) throws IOException {
         // throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
         if (nLine == 0) {
             out.write(++nLine + "\t");
         }
-
+        //if it's not the ending character
         if (c != '\n') {
             if (back) {
                 nLine++;
