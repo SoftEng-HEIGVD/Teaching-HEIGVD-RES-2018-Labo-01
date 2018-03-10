@@ -1,5 +1,7 @@
 package ch.heigvd.res.lab01.impl.filters;
 
+import ch.heigvd.res.lab01.impl.Utils;
+
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -19,13 +21,26 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
+  private int lineNbr = 1;
+  private boolean firstLine = true;
+
   public FileNumberingFilterWriter(Writer out) {
     super(out);
   }
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    StringBuilder numberedStr = new StringBuilder();
+
+    // if first line we need to add an additional number at the beginning
+    if(firstLine) {
+      firstLine = false;
+      numberedStr.append(lineNbr++).append("\t");
+    }
+
+    numberedStr.append(str).append(lineNbr++).append("\t");
+
+    this.out.write(numberedStr.toString(), 0, numberedStr.length());
   }
 
   @Override
