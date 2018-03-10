@@ -50,6 +50,6 @@ public class Utils {
       result[1] += splitted[i] + separator;
     }
     
-    return result; 
+    return result;
   }
 }
