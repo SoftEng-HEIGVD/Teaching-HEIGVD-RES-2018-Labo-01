@@ -97,7 +97,7 @@ public class Application implements IApplication {
        */
       //Provide to second argument the filename according to the specification "quote" + number + ".utf8"
       StringBuilder filename = new StringBuilder();
-      filename.append("quote-").append(1+i).append(".utf8");
+      filename.append("quote-").append(quote.getValue().getId()).append(".utf8");
       storeQuote(quote, filename.toString());
         
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
