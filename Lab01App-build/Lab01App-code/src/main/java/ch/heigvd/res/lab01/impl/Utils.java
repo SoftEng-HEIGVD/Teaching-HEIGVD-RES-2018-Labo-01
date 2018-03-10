@@ -21,31 +21,34 @@ public class Utils {
      */
     public static String[] getNextLine(String lines) {
 
-        String[] separators = {"\r\n", "\n", "\r"};     //Possible separators
-        int positionSeparator = -1;                     //Position of the separator found
-        String separator = "";                          //Separator found
-        int indexFrom = 0;                              //Index after which the separator search is made
+        String[] separators = {"\r\n", "\n", "\r"};         //Possible separators
+        int[] positionSeparators = new int[]{-1, -1, -1};   //Position of each separator
+        int indexFrom = 0;                                  //Index after which the separator search is made
+        int positionSeparator = lines.length();             //Position of the separator found (worst case for initialisation)
+        String separator = "";                              //Separator found
 
         //Find the first separator in the text
-        for (String s : separators) {
+        for (int i = 0; i < separators.length; i++) {
+            positionSeparators[i] = lines.indexOf(separators[i], indexFrom);
 
-            positionSeparator = lines.indexOf(s, indexFrom);
-
-            if(positionSeparator != -1){
-                separator = s;
-                break;
+            if(positionSeparators[i] < positionSeparator && positionSeparators[i] != -1){
+                positionSeparator = positionSeparators[i];
+                separator = separators[i];
             }
         }
 
         //Get the two parts of the text
         String firstPart = "";
         String secondPart = "";
-        indexFrom = positionSeparator + separator.length();
 
-        if(indexFrom != -1) {
+        //Separator has been found
+        if(positionSeparator != lines.length()) {
+            indexFrom = positionSeparator + separator.length();
+
             firstPart = lines.substring(0, indexFrom);
             secondPart = lines.substring(indexFrom, lines.length());
         }
+        //No separator found
         else{
             secondPart = lines;
         }
