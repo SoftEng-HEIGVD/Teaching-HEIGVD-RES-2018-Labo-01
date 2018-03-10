@@ -48,19 +48,22 @@ public class FileNumberingFilterWriter extends FilterWriter {
         if(counter == 1)
             out.write(tab());
 
-        //Line break was made by previous iteration, write line number and tab
-        if(returned && c != '\n') {
-            out.write(tab());
-            returned = false;
-        }
-
-        //Line break, compatible for all OS
+        //Line break WINDOWS AND OSX
         if(c == '\r') {
 
             out.write(c);
             returned = true;
         }
 
+        //Line break OSX completion
+        else if(returned && c != '\n') {
+
+            out.write(tab());
+            out.write(c);
+            returned = false;
+        }
+
+        //Line break Linux, and windows completion
         else if(c == '\n') {
 
             out.write(c);
@@ -70,7 +73,6 @@ public class FileNumberingFilterWriter extends FilterWriter {
                 returned = false;
         }
 
-        //Nothing special or fancy, simply write the damn char
         else
             out.write(c);
     }
