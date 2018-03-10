@@ -8,6 +8,10 @@ import java.util.logging.Logger;
  */
 public class Utils {
 
+  private static String LINUX = "\n";
+  private static String WINDOWS = "\r\n";
+  private static String OSX = "\r";
+
   private static final Logger LOG = Logger.getLogger(Utils.class.getName());
 
   /**
@@ -21,13 +25,13 @@ public class Utils {
    */
   public static String[] getNextLine(String lines) {
     String arr[] = {"",lines};
-    int index = lines.indexOf("\r\n");
+    int index = lines.indexOf(WINDOWS);
     // Does the caract \r\n exist
     if(index == -1){
-      index = lines.indexOf("\r");
+      index = lines.indexOf(OSX);
       // Does the caract \r exist
       if(index == -1) {
-        index = lines.indexOf("\n");
+        index = lines.indexOf(LINUX);
         // Does the caract \n exist
         if(index == -1){
           return arr;
@@ -43,7 +47,6 @@ public class Utils {
     }
 
     return arr;
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
 
 }

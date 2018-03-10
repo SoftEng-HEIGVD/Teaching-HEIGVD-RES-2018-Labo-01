@@ -72,7 +72,7 @@ public class Application implements IApplication {
        * Step 4 : process the quote files, by applying 2 transformations to their content
        *          (convert to uppercase and add line numbers)
        */
-      app.processQuoteFiles();
+     // app.processQuoteFiles();
       
     } catch (IOException ex) {
       LOG.log(Level.SEVERE, "Could not fetch quotes. {0}", ex.getMessage());
@@ -158,7 +158,11 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
-        LOG.info(file.getName());
+        try {
+          writer.write(file.getPath() + "\n");
+        } catch (IOException e){
+          LOG.severe("Error: visit");
+        }
       }
     });
   }
