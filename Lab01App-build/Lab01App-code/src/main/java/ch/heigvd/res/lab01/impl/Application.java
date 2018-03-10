@@ -13,13 +13,16 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
+import java.util.List;
 
 /**
  *
  * @author Olivier Liechti
+ * @author Labinot Rashiti
  */
 public class Application implements IApplication {
 
@@ -30,6 +33,8 @@ public class Application implements IApplication {
   public static String WORKSPACE_DIRECTORY = "./workspace/quotes";
   
   private static final Logger LOG = Logger.getLogger(Application.class.getName());
+  
+  private int counter = 0;
   
   public static void main(String[] args) {
     
@@ -125,7 +130,21 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+     List<String> listTags = quote.getTags();
+     String path = "./quote/"; // root folder for quotes
+     
+     // Create the sub-folders
+     for (int i = 0; i < listTags.size(); ++i) {
+         path = path + listTags.get(i) + "/"; // add the sub-folders as a path
+     }
+     new File(path).mkdirs();
+
+     // Create the file and add the content ot it
+     path = path + filename + "quote-" + counter + ".utf8";
+     OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(path), "UTF_8");  
+     writer.write(quote.getQuote());
+     writer.close();
+     // throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
   
   /**
@@ -148,7 +167,8 @@ public class Application implements IApplication {
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+      return "labinot.rashiti@heig-vd.ch";
+      // throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
 
   @Override
