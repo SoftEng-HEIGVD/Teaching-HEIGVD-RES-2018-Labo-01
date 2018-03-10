@@ -87,6 +87,7 @@ public class Application implements IApplication {
             Quote quote = client.fetchQuote();
             StringBuilder quoteName = new StringBuilder("quote-");
             quoteName.append(i).append(".utf8");
+            // we store the quote with the appropriate name (quote-n.utf8)
             storeQuote(quote, quoteName.toString());
             /* There is a missing piece here!
              * As you can see, this method handles the first part of the lab. It uses the web service
@@ -139,6 +140,8 @@ public class Application implements IApplication {
 
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(currentLocation.toString()), "UTF-8");
         writer.write(quote.getQuote());
+        // Without this line, we have an error while deleting the files
+        writer.close();
     }
 
     /**
