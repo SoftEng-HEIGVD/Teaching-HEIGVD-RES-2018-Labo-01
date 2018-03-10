@@ -29,7 +29,7 @@ public class DFSFileExplorer implements IFileExplorer {
             //visits subdirectories
             if(file.isDirectory())
                 explore(file, visitor);
-            
+
             //visits file
             else
                 visitor.visit(file);
