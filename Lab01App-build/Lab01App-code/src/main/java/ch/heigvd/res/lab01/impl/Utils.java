@@ -33,7 +33,7 @@ public class Utils {
 
     // if there is no line break
     else
-      return new String[]{"", lines}; 
+      return new String[]{"", lines};
   }
 
 }
