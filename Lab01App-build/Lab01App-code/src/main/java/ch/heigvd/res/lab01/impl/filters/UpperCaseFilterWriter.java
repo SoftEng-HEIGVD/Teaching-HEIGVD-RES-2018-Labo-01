@@ -13,19 +13,25 @@ public class UpperCaseFilterWriter extends FilterWriter {
         super(wrappedWriter);
     }
 
+    /*
+    of the following methods, only the last one is really implemented; the other two are just calling it to do the filter
+     */
+
+    // change the argument from string to char[] and call the write method taking a char[] in argument of this class
     @Override
     public void write(String str, int off, int len) throws IOException {
-        super.write(str.toUpperCase(), off, len);
+        write(str.toCharArray(), off, len);
     }
 
+    // change the argument from char[] to int and call the write (int c) method of this class
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        for (int i = off; i < off + len; ++i) {
-            cbuf[i] = Character.toUpperCase(cbuf[i]);
+        for (int i = 0; i < len; ++i) {
+            write(cbuf[off + i]);
         }
-        super.write(cbuf, off, len);
     }
 
+    // method used by the other two. Put the int received as argument to uppercase and call FilterWriter.write(int c) on it.
     @Override
     public void write(int c) throws IOException {
         super.write(Character.toUpperCase(c));

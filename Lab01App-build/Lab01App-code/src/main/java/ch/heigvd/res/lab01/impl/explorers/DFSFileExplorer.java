@@ -20,14 +20,20 @@ public class DFSFileExplorer implements IFileExplorer {
     public void explore(File rootDirectory, IFileVisitor vistor) {
 
         vistor.visit(rootDirectory);
-        if(!rootDirectory.isDirectory()){
+
+        // If the rootDirectory is not a directory, exit the function. Required to pass the noFileTest.
+        if (!rootDirectory.isDirectory()) {
             return;
         }
+
+        // get the content of the rootDirectory and sort it
         File[] listOfContent = rootDirectory.listFiles();
         Arrays.sort(listOfContent);
 
+        // iterate over the list, if the current element is a file, apply the vistor.visit method to it
+        // otherwise, it's a directory so call the explore method over it
         for (File f : listOfContent) {
-            if(f.isFile()){
+            if (f.isFile()) {
                 vistor.visit(f);
             }
 
@@ -36,5 +42,4 @@ public class DFSFileExplorer implements IFileExplorer {
             }
         }
     }
-
 }

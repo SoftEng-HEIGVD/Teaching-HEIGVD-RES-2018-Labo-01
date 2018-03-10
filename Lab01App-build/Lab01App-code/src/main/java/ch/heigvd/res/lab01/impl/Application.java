@@ -128,16 +128,19 @@ public class Application implements IApplication {
      * @throws IOException
      */
     void storeQuote(Quote quote, String filename) throws IOException {
+        // get the list of tags for the current quote
         List<String> tags = quote.getTags();
         StringBuilder currentLocation = new StringBuilder(WORKSPACE_DIRECTORY);
 
         for (String tag : tags) {
+            // build the path for the quote storage
             currentLocation.append("/").append(tag);
         }
         File dir = new File(currentLocation.toString());
         dir.mkdirs();
         currentLocation.append("/").append(filename);
 
+        // write the quote in the correct directory (quotes/tags/filename)
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(currentLocation.toString()), "UTF-8");
         writer.write(quote.getQuote());
         // Without this line, we have an error while deleting the files
@@ -149,7 +152,7 @@ public class Application implements IApplication {
      * encountered file and directory.
      */
     void printFileNames(final Writer writer) {
-        IFileExplorer explorer = new DFSFileExplorer();
+        final IFileExplorer explorer = new DFSFileExplorer();
         explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
             @Override
             public void visit(File file) {
@@ -158,7 +161,7 @@ public class Application implements IApplication {
                     sBuilder.append("\n");
                     writer.write(sBuilder.toString());
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.exit(-1);
                 }
                 /*
                  * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
