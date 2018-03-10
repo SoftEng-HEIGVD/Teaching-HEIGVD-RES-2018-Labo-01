@@ -18,27 +18,38 @@ public class DFSFileExplorer implements IFileExplorer {
     @Override
     public void explore(File rootDirectory, IFileVisitor visitor) {
 
-        // no file exception here
-        File[] files = rootDirectory.listFiles();
+        // say HI
+        visitor.visit(rootDirectory);
 
+        // is there something else to explore in here ?
+        if(rootDirectory.isDirectory()) {
 
-        try {
-            //first we say hi to all files in the root directory
-            for (File file : files) {
-                if (file.isFile()) {
-                    visitor.visit(file);
-                }
+            // woups I shoulden't be here
+            if(!rootDirectory.canRead()){
+                throw new RuntimeException("Access denies to this directory: " + rootDirectory );
             }
 
-            // then we recurse on the subfolders
-            for (File file : files) {
-                if (!file.isFile()) {
-                    visitor.visit(file);
-                    explore(file, visitor);
+            // access granted get me all you got
+            File[] files = rootDirectory.listFiles();
+
+
+            try {
+                //first we say hi to all files in the root directory
+                for (File file : files) {
+                    if (file.isFile()) {
+                        explore(file, visitor);
+                    }
                 }
+
+                // then we recurse on the subfolders
+                for (File file : files) {
+                    if (!file.isFile()) {
+                        explore(file, visitor);
+                    }
+                }
+            } catch (NullPointerException npe) {
+                // empty folder
             }
-        } catch (NullPointerException npe){
-            // empty folder
         }
     }
 }

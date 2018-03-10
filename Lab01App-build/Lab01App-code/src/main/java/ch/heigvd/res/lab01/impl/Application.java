@@ -30,10 +30,23 @@ public class Application implements IApplication {
      * to where the Java application is invoked.
      */
     public static String WORKSPACE_DIRECTORY = "./workspace/quotes";
+    //public static String WORKSPACE_DIRECTORY = ".\\workspace\\quotes";
+    //public static String WORKSPACE_DIRECTORY = "." + File.pathSeparatorChar + "workspace" + File.pathSeparatorChar + "quotes";
 
     private static final Logger LOG = Logger.getLogger(Application.class.getName());
 
     public static void main(String[] args) {
+
+        /*
+        DEBUG AND TEST PART
+         */
+        /*
+        String s = "Hello \rWorld\nWelcome\r\nNOoob!";
+
+        for (String ss : Utils.getNextLine(s)){
+            System.out.println(">>" + ss);
+        }
+        /*
 
         /*
          * I prefer to have LOG output on a single line, it's easier to read. Being able
@@ -136,7 +149,7 @@ public class Application implements IApplication {
         // We are gonna follow the path of the tags first !
         String path = WORKSPACE_DIRECTORY;
         for (String tag : tags) {
-            path += "/" + "tag";
+            path = path + File.pathSeparatorChar + "tag";
         }
 
         // got the path now make dir happen !
@@ -148,7 +161,7 @@ public class Application implements IApplication {
         }
 
         // all folders are made, now let's make the quote itself !
-        File quoteFile = new File(path + "/" + filename);
+        File quoteFile = new File(path + File.pathSeparatorChar + filename);
         if (!quoteFile.exists()) {
             throw new IOException("Failed to create the quote file.");
         } else {
@@ -177,9 +190,9 @@ public class Application implements IApplication {
                  * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
                  */
                 try {
-                    writer.write(file.getPath() + "/" + file.getName());
+                    writer.write(file.getPath() + File.pathSeparatorChar + file.getName());
                 } catch (IOException ioe){
-                    LOG.log(Level.SEVERE, "Unreadable file but no exception here !");
+                    throw new RuntimeException("Access denies to this file or directory: " + file.getPath() + File.pathSeparatorChar + file.getName() );
                 }
             }
         });
