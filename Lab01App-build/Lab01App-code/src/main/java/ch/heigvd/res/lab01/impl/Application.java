@@ -9,7 +9,6 @@ import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +17,7 @@ import org.apache.commons.io.FileUtils;
 /**
  *
  * @author Olivier Liechti
+ * @author updated by Joel Schar
  */
 public class Application implements IApplication {
 
@@ -124,41 +124,41 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
-    List<String> tags = quote.getTags();
+    List<String> tagList = quote.getTags();
     String quoteText = quote.getQuote();
-    File dir;
 
     // creating the file directory path
     StringBuilder path = new StringBuilder(WORKSPACE_DIRECTORY);
-    dir = new File(path.toString());
-    if(!dir.exists()){
-      dir.mkdirs();
-    }
+    File dir = new File(path.toString());
 
+    // create the workspace_directory
+    if(!dir.mkdirs())
+      LOG.log(Level.SEVERE,"directory {0} coun't be created",dir.getName());
+
+    // creating subdirectories for heach tag
     path.append("/");
-    for(String tag: tags){
+    for(String tag: tagList){
       path.append(tag);
       dir = new File(path.toString());
-      if(!dir.exists()){
-        dir.mkdirs();
-      }
+
+      if(!dir.mkdirs())
+        LOG.log(Level.SEVERE,"directory {0} coun't be created",dir.getName());
+
       path.append("/");
     }
 
 
     // create the file and write the text
     try{
-      BufferedWriter writer = null;
       File file = new File(path.toString(), filename);
+      BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+      LOG.info(writer.toString());
 
-      writer = new BufferedWriter(new FileWriter(file));
       writer.write(quoteText);
-
       writer.close();
 
-    }catch(Exception e){
-      System.out.println("Could not create file");
+    }catch(IOException e){
+      LOG.log(Level.SEVERE,"file {0} coun't be created",e.getMessage());
     }
 
   }
@@ -179,8 +179,10 @@ public class Application implements IApplication {
          */
         try {
           writer.write(file.getPath() + "\n");
-        } catch (java.io.IOException e) {
-          System.out.println("error on getting the file path");
+          LOG.info(writer.toString());
+
+        } catch (IOException e) {
+          LOG.log(Level.SEVERE,"coun't find {0}",e.getMessage());
         }
       }
     });

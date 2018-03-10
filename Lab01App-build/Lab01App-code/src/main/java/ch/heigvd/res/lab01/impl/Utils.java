@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Olivier Liechti
+ * @author updated by Joel Schar
  */
 public class Utils {
 
@@ -20,9 +21,8 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
-    // split lines in two keeping separator
 
+    // split lines in two peaces at first line break, keeping separator
     // check if windows line break
     if(lines.contains("\r\n"))
       return lines.split("(?<=\r?\n)", 2);

@@ -8,6 +8,7 @@ import java.util.Arrays;
 /**
  *
  * @author Olivier Liechti
+ * @author updated by Joel Schar
  */
 public class UpperCaseFilterWriter extends FilterWriter {
   
@@ -17,6 +18,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
+    // copy string to substring for encapsulation
     String subStr = str.substring(off, off + len);
     this.out.write(subStr.toUpperCase(), 0, subStr.length());
   }
@@ -26,7 +28,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
     // array copy for encapsulation
     char[] cbufCopy = Arrays.copyOf(cbuf, cbuf.length);
 
-    // convert characters of array to upper casse
+    // convert characters of array to uppercase
     for(int i = off; i < off + len; ++i)
       cbufCopy[i] = Character.toUpperCase(cbufCopy[i]);
     this.out.write(cbufCopy, off, len);

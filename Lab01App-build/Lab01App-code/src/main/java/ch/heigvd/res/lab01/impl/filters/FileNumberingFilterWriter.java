@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
  * @author Olivier Liechti
+ * @author updated by Joel Schar
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
@@ -35,7 +36,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
     // substring if part of string asked
     String subStr = str.substring(off, off + len);
 
-    // if first line we need to add an additional number at the beginning
+    // if first line, we need to add an additional number at the beginning
     if(firstLine) {
       firstLine = false;
       numberedStr.append(lineNbr++).append("\t");
@@ -67,7 +68,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    // go throw array, and call
+    // convert array to string and call string function on it
     String arrayStr = String.valueOf(cbuf);
     this.write(arrayStr, off, len);
   }
