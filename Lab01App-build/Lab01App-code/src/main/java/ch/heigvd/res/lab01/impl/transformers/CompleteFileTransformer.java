@@ -1,6 +1,7 @@
 package ch.heigvd.res.lab01.impl.transformers;
 
-import ch.heigvd.res.lab01.impl.filters.*;
+import ch.heigvd.res.lab01.impl.filters.FileNumberingFilterWriter;
+import ch.heigvd.res.lab01.impl.filters.UpperCaseFilterWriter;
 
 import java.io.Writer;
 
@@ -11,7 +12,7 @@ import java.io.Writer;
  * generate an output file with 1) uppercase letters and 2) line numbers at the
  * beginning of each line.
  * 
- * @author Olivier Liechti
+ * @author Olivier Liechti, modified by Lionel Nanchen
  */
 public class CompleteFileTransformer extends FileTransformer {
 
@@ -26,5 +27,4 @@ public class CompleteFileTransformer extends FileTransformer {
     writer = new FileNumberingFilterWriter(new UpperCaseFilterWriter(writer));
     return writer; 
   }
-
 }

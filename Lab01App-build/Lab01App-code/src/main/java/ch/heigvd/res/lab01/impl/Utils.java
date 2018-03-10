@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Olivier Liechti
+ * @author Olivier Liechti, modified by Lionel Nanchen
  */
 public class Utils {
 
@@ -22,9 +22,8 @@ public class Utils {
   public static String[] getNextLine(String lines) {
 
     String[] output = new String[2];
-    int size = 0;
     int index = lines.indexOf("\r\n");
-    size = 2;
+    int size = 2;
 
     if (index < 0) {
       size = 1;
