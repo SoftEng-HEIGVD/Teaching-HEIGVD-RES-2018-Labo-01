@@ -19,6 +19,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
   private int line = 1;
+  private int previous = 0;
   private static final char TAB ='\t';
   private static final char RET_M ='\r';
   private static final char RET_U ='\n';
@@ -29,6 +30,8 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
+    write(str.toCharArray(),off,len);
+    /*
     String res = str.substring(0,off);
     char cur;
     char next;
@@ -56,18 +59,34 @@ public class FileNumberingFilterWriter extends FilterWriter {
     }
     res += str.substring(off+len, str.length());
     super.write(res,off,len + res.length() - str.length());
+    */
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    write(cbuf.toString(),off,len);
+    for(int i = off; i < off + len; ++i) {
+      write(cbuf[i]);
+    }
   }
 
   @Override
   public void write(int c) throws IOException {
-    String s = "";
-    s += c;
-    write(s,0,0);
-  }
+    if(line == 1){
+      newLineWriter();
+    }
+    if(previous == RET_M && c != RET_U){
+      newLineWriter();
+    }
+    super.write(c);
 
+    if(c == RET_U){
+      newLineWriter();
+    }
+    previous = c;
+  }
+  public void newLineWriter() throws IOException{
+    super.write(String.valueOf(line), 0, String.valueOf(line).length());
+    super.write(TAB);
+    line++;
+  }
 }
