@@ -20,24 +20,32 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    String separator;
+    String[] separators = {"\r\n", "\n", "\r"};
+    int[] sepFound = new int[separators.length];
     
     String[] splitted;
     String[] result = {"", ""};
     
-    // With this conditional block, we look for a possible separator.
-    // If there isn't one, we return the array {"", lines}.
-    if (lines.contains("\r\n")) {
-      separator = "\r\n";
-    } else if (lines.contains("\r")) {
-      separator = "\r";
-    } else if (lines.contains("\n")) {
-      separator = "\n";
-    } else {
-      result[1] = lines;
+    String separator = "";
+    int indexFirstSeparator = lines.length();
+  
+    // We look for all three separators and we keep the first found in "separator".
+    for (int i = 0; i < separators.length; ++i) {
+      sepFound[i] = lines.indexOf(separators[i]);
       
+      if (indexFirstSeparator > sepFound[i] && sepFound[i] != -1) {
+        indexFirstSeparator = sepFound[i];
+        separator = separators[i];
+      }
+    }
+    
+    if (separator == "") {
+      result[1] = lines;
+  
       return result;
     }
+    
+    
     
     // If there was a separator, we split the String with it.
     splitted = lines.split(separator);
