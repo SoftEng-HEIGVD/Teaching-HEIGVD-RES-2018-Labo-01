@@ -28,7 +28,12 @@ public class Utils {
       return lines.split("(?<=\r\n)", 2);
 
     // line beak for unix or mac
-    return lines.split("(?<=\r)|(?<=\n)", 2);
+    else if(lines.contains("\r")|lines.contains("\n"))
+      return lines.split("(?<=\r)|(?<=\n)", 2);
+
+    // if there is no line break
+    else
+      return new String[]{"", lines}; 
   }
 
 }
