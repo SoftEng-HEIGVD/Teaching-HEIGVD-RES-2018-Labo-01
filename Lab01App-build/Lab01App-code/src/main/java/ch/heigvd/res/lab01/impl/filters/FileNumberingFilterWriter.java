@@ -17,25 +17,54 @@ import java.util.logging.Logger;
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
-  private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+    private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
-  public FileNumberingFilterWriter(Writer out) {
-    super(out);
-  }
+    private boolean begin = true;
+    private Integer lineNumber = 1;
+    private boolean lineSeparator = false;
 
-  @Override
-  public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    public FileNumberingFilterWriter(Writer out) {
+        super(out);
+    }
 
-  @Override
-  public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    @Override
+    public void write(String str, int off, int len) throws IOException {
 
-  @Override
-  public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+        for (int i = off; i < off + len; ++i) {
+            this.write(str.charAt(i));
+        }
+        //throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    }
+
+    @Override
+    public void write(char[] cbuf, int off, int len) throws IOException {
+        for (int i = off; i < off + len; ++i) {
+            this.write(cbuf[i]);
+        }
+        //throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    }
+
+    @Override
+    public void write(int c) throws IOException {
+        String beginLine = "";
+        if (begin) {
+            beginLine = Integer.toString(lineNumber) + "\t" + (char)c;
+            begin = false;
+        } else if(c == (int)'\r'){
+            beginLine += (char)c;
+            lineSeparator = true;
+        } else if(c == (int)'\n') {
+            ++lineNumber;
+            beginLine = (char)c + Integer.toString(lineNumber) + "\t";
+            lineSeparator = false;
+        } else if(lineSeparator){
+            ++lineNumber;
+            beginLine = Integer.toString(lineNumber) + "\t" + (char)c;
+            lineSeparator = false;
+        }else{
+            beginLine += (char)c;
+        }
+        super.write(beginLine, 0, beginLine.length());
+    }
 
 }
