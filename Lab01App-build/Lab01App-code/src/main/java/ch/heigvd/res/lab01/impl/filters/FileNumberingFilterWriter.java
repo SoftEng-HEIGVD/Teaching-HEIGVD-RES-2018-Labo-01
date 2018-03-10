@@ -1,5 +1,7 @@
 package ch.heigvd.res.lab01.impl.filters;
 
+import ch.heigvd.res.lab01.impl.Utils;
+
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -16,16 +18,32 @@ import java.util.logging.Logger;
  * @author Olivier Liechti
  */
 public class FileNumberingFilterWriter extends FilterWriter {
+  private static int lineNumber = 1;
+  private String output;
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
+    
+    output = lineNumber++ + "\t";
   }
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    String[] fLineAndRemaining = {"", str.substring(off, off+len)};
+    
+    if (output.length() > 2) {
+      output = "";
+    }
+    
+    do {
+      fLineAndRemaining = Utils.getNextLine(fLineAndRemaining[1]);
+      output += fLineAndRemaining[0] + lineNumber++ + "\t";
+      
+    } while (!fLineAndRemaining[1].isEmpty());
+    
+    out.write(output);
   }
 
   @Override
