@@ -24,14 +24,20 @@ public class Utils {
 
         int pos = 0;
         for(; pos < lines.length(); ++pos){
+            // we look for the first new line separator
             if(lines.charAt(pos) == '\n' || lines.charAt(pos) == '\r') {
+                // if the line separator encountered id '\r' we have to check if the next char is '\n'
+                // if it is, we simply include the char in the line by incrementing the position.
                 if(pos+1 < lines.length() && lines.charAt(pos) == '\r' && lines.charAt(pos+1) == '\n') {
                     pos++;
                 }
+
+                //we found the position of the line separator, so we leave the loop
                 break;
             }
         }
 
+        // filling the array with the first line in the first cell and the rest of the text in the second
         if(pos != lines.length()){
             tabString[0] = lines.substring(0, pos+1);
             tabString[1] = lines.substring(pos+1);

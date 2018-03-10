@@ -18,10 +18,14 @@ public class DFSFileExplorer implements IFileExplorer {
 
     @Override
     public void explore(File rootDirectory, IFileVisitor visitor) {
+        // we apply the visit method for EVERY element in the file system tree
         visitor.visit(rootDirectory);
 
+        // we stop the recursion if rootDirectory doesn't exist nor if it is a file
         if(!rootDirectory.exists() || rootDirectory.isFile()) return;
 
+        // rootDirectory is a directory, so we go deeper in the recursion
+        // with every element in this directory
         File[] listFile = rootDirectory.listFiles();
         for( File file : listFile){
             explore(file, visitor);

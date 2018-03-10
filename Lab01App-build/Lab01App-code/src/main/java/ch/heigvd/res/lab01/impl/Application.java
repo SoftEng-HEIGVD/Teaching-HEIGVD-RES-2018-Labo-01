@@ -138,9 +138,18 @@ public class Application implements IApplication {
             path += tag + '/';
         }
         new File(path).mkdirs();
+        /*if(! new File(path).mkdirs()){
+            System.out.println("Failed to create directories");
+            throw new IOException("Failed to create directories");
+        }*/
 
         try {
             File quoteFile = new File(path + filename);
+            quoteFile.createNewFile();
+            /*if(!quoteFile.createNewFile()){
+                System.out.println("Failed to create file");
+                throw new IOException("Failed to create file");
+            }*/
             PrintWriter fw = new PrintWriter(quoteFile.getPath());
             fw.write(quote.getQuote());
             fw.close();
@@ -165,7 +174,11 @@ public class Application implements IApplication {
              * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
              * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
              */
-            System.out.println(file);
+                try {
+                    writer.write(file.getPath()+'\n');
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

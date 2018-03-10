@@ -5,6 +5,7 @@ import ch.heigvd.res.lab01.impl.Utils;
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.BufferOverflowException;
 import java.util.logging.Logger;
 
 /**
@@ -19,7 +20,8 @@ import java.util.logging.Logger;
  */
 public class FileNumberingFilterWriter extends FilterWriter {
     final static char TABULATION = '\t';
-    int noLigne = 0;
+    private int noLigne = 0; // count the lines displayed
+    private int previous = 0; // we store the previous displayed char
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
@@ -29,45 +31,55 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        String consider = str.substring(off,off+len);
-        String[] tabStr = Utils.getNextLine(consider);
-        if(noLigne == 0){
-            super.write(Integer.toString(++noLigne) + TABULATION, 0, 2);
+        // we first check if the offset and the length doesn't exceed the length of the string
+        if(off + len > str.length()) throw new BufferOverflowException();
+
+        // we process the string char by char
+        for(int i = off ; i < off + len ; ++i){
+            int c = str.charAt(i);
+            write(c);
         }
-
-        while (tabStr[0].length() != 0){
-
-            super.write(tabStr[0]+ Integer.toString(++noLigne )+ TABULATION , 0, tabStr[0].length()+2 + (int)Math.log10((double)noLigne));
-            tabStr = Utils.getNextLine(tabStr[1]);
-        }
-
-        if(tabStr[1].length() != 0) {
-            super.write(tabStr[1], 0, tabStr[1].length());
-        }
-
-        //super.write(Integer.toString(++noLigne) + TABULATION, 0, 2);
-
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        String str = cbuf.toString();
-        write(str, off, len);
+        // we first check if the offset and the length doesn't exceed the length of the string
+        if(off + len > cbuf.length) throw new BufferOverflowException();
+
+        // we process the "string" char by char
+        for(char c : cbuf){
+            write(c);
+        }
     }
 
     @Override
     public void write(int c) throws IOException {
-        if(noLigne==0){
-            ++noLigne;
-            super.write(Integer.toString(noLigne));
-            super.write(TABULATION);
+
+        // if we haven't displayed anything yet, we number the first line
+        if(noLigne == 0){
+            numberNewLine();
         }
+
+        // case if the \r was written alone
+        if(previous == '\r' && c != '\n'){
+            previous = 0;
+            numberNewLine();
+        }
+
+        // display the actual char and store it as "previous char"
         super.write(c);
+        previous = c;
+
+
         if(c == '\n'){
-            ++noLigne;
-            super.write(Integer.toString(noLigne));
-            super.write(TABULATION);
+            numberNewLine();
         }
+    }
+
+    private void numberNewLine() throws IOException{
+        ++noLigne;
+        super.write(Integer.toString(noLigne));
+        super.write(TABULATION);
     }
 
 }
