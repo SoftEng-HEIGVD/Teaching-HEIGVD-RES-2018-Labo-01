@@ -27,7 +27,7 @@ public class Application implements IApplication {
    */
   public static String WORKSPACE_DIRECTORY = "./workspace/quotes";
   
-  private static final Logger LOG = Logger.getLogger(Application.class.getName());      // TODO: use LOG to notify errors
+  private static final Logger LOG = Logger.getLogger(Application.class.getName());
   
   public static void main(String[] args) {
     

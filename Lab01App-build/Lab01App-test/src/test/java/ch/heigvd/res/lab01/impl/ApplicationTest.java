@@ -34,7 +34,7 @@ public class ApplicationTest {
   public static void invokeApplication() throws IOException {
     IApplication application = new Application();
     application.fetchAndStoreQuotes(NUMBER_OF_QUOTES);
-    application.processQuoteFiles();                    //todo uncomment
+    application.processQuoteFiles();
   }
 
   @Test
