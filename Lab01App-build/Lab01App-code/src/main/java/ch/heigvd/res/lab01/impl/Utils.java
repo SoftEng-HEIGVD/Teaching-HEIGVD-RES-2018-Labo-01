@@ -25,7 +25,7 @@ public class Utils {
 
     // check if windows line break
     if(lines.contains("\r\n"))
-      return lines.split("(?<=\r\n)", 2);
+      return lines.split("(?<=\r?\n)", 2);
 
     // line beak for unix or mac
     else if(lines.contains("\r")|lines.contains("\n"))

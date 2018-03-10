@@ -67,7 +67,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    // convert to string and call string function
+    // go throw array, and call
     String arrayStr = String.valueOf(cbuf);
     this.write(arrayStr, off, len);
   }
