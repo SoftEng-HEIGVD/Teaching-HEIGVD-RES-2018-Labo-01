@@ -89,12 +89,7 @@ public class Application implements IApplication {
             quoteName.append(i).append(".utf8");
             // we store the quote with the appropriate name (quote-n.utf8)
             storeQuote(quote, quoteName.toString());
-            /* There is a missing piece here!
-             * As you can see, this method handles the first part of the lab. It uses the web service
-             * client to fetch quotes. We have removed a single line from this method. It is a call to
-             * one method provided by this class, which is responsible for storing the content of the
-             * quote in a text file (and for generating the directories based on the tags).
-             */
+
             LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
             for (String tag : quote.getTags()) {
                 LOG.info("> " + tag);
@@ -138,6 +133,7 @@ public class Application implements IApplication {
         }
         File dir = new File(currentLocation.toString());
         dir.mkdirs();
+
         currentLocation.append("/").append(filename);
 
         // write the quote in the correct directory (quotes/tags/filename)
@@ -163,11 +159,6 @@ public class Application implements IApplication {
                 } catch (IOException e) {
                     System.exit(-1);
                 }
-                /*
-                 * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-                 * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-                 * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-                 */
             }
         });
     }

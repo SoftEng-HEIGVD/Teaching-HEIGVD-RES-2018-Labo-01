@@ -14,12 +14,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2601">
-              <caret line="171" column="11" lean-forward="true" selection-start-line="171" selection-start-column="11" selection-end-line="171" selection-end-column="11" />
-              <folding />
+            <state relative-caret-position="1020">
+              <caret line="88" column="48" lean-forward="true" selection-start-line="88" selection-start-column="48" selection-end-line="88" selection-end-column="48" />
+              <folding>
+                <element signature="e#5802#6208#0" expanded="true" />
+                <element signature="e#6207#6208#0" expanded="true" />
+                <element signature="e#6267#6268#0" expanded="true" />
+                <element signature="e#6319#6320#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NoOpFileTransformer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/NoOpFileTransformer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="52" lean-forward="false" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+              <folding>
+                <element signature="e#462#463#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -27,8 +44,8 @@
       <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+            <state relative-caret-position="442">
+              <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -37,8 +54,8 @@
       <file leaf-file-name="DFSFileExplorer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="579">
-              <caret line="43" column="5" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+            <state relative-caret-position="425">
+              <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -47,8 +64,8 @@
       <file leaf-file-name="FileNumberingFilterWriter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+            <state relative-caret-position="1241">
+              <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -57,7 +74,7 @@
       <file leaf-file-name="UpperCaseFilterWriter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
+            <state relative-caret-position="243">
               <caret line="33" column="124" lean-forward="false" selection-start-line="33" selection-start-column="124" selection-end-line="33" selection-end-column="124" />
               <folding />
             </state>
@@ -67,8 +84,8 @@
       <file leaf-file-name="CompleteFileTransformer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/CompleteFileTransformer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-114">
-              <caret line="0" column="46" lean-forward="false" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
+            <state relative-caret-position="272">
+              <caret line="18" column="54" lean-forward="false" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -77,8 +94,8 @@
       <file leaf-file-name="FileTransformer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state relative-caret-position="188">
+              <caret line="54" column="49" lean-forward="false" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -87,11 +104,9 @@
       <file leaf-file-name="DFSFileExplorerTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
+            <state relative-caret-position="578">
               <caret line="46" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-              <folding>
-                <element signature="e#1456#1457#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,15 +121,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/CompleteFileTransformer.java" />
-        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/NoOpFileTransformer.java" />
         <option value="$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorerTest.java" />
-        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorer.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java" />
+        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/CompleteFileTransformer.java" />
+        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java" />
+        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/NoOpFileTransformer.java" />
       </list>
     </option>
   </component>
@@ -145,7 +160,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -333,8 +347,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -568,9 +583,9 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.DFSFileExplorerTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.UpperCaseFilterWriterTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.ApplicationTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ApplicationTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.DFSFileExplorerTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.UpperCaseFilterWriterTest" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.FileNumberingFilterWriterTest" />
       </list>
     </recent_temporary>
@@ -590,44 +605,47 @@
       <updated>1520423416356</updated>
       <workItem from="1520423419356" duration="215000" />
       <workItem from="1520579122190" duration="7634000" />
-      <workItem from="1520675319873" duration="11707000" />
+      <workItem from="1520675319873" duration="12838000" />
+      <workItem from="1520693274198" duration="603000" />
+      <workItem from="1520695119649" duration="727000" />
+      <workItem from="1520700876735" duration="418000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 14h 25m 14s.xml">
+    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 15h 57m 52s.xml">
       <configuration name="All in Lab01App-tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 14h 25m 29s.xml">
+    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 16h 20m 06s.xml">
       <configuration name="All in Lab01App-tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 14h 25m 39s.xml">
+    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 16h 20m 30s.xml">
       <configuration name="All in Lab01App-tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 14h 25m 50s.xml">
+    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 17h 55m 13s.xml">
       <configuration name="All in Lab01App-tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 14h 26m 02s.xml">
+    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 18h 01m 31s.xml">
       <configuration name="All in Lab01App-tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 14h 26m 20s.xml">
-      <configuration name="All in Lab01App-tests" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.10 at 15h 56m 29s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 14h 26m 36s.xml">
-      <configuration name="All in Lab01App-tests" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.10 at 15h 57m 39s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 14h 29m 40s.xml">
-      <configuration name="All in Lab01App-tests" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.10 at 16h 19m 18s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_Lab01App-tests - 2018.03.10 at 14h 41m 52s.xml">
-      <configuration name="All in Lab01App-tests" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.10 at 16h 20m 02s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="DFSFileExplorerTest - 2018.03.10 at 14h 25m 00s.xml">
       <configuration name="DFSFileExplorerTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19556000" />
+    <option name="totallyTimeSpent" value="22435000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -642,7 +660,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5025" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32896462" sideWeight="0.4925" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32896462" sideWeight="0.4925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -658,7 +676,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" x="92" y="92" width="1416" height="676" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="92" y="92" width="1416" height="676" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -705,14 +723,193 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="33" column="124" lean-forward="false" selection-start-line="33" selection-start-column="124" selection-end-line="33" selection-end-column="124" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/CompleteFileTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="46" lean-forward="false" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="54" column="49" lean-forward="false" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#5802#6208#0" expanded="true" />
+            <element signature="e#6207#6208#0" expanded="true" />
+            <element signature="e#6267#6268#0" expanded="true" />
+            <element signature="e#6319#6320#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="43" column="5" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="33" column="124" lean-forward="false" selection-start-line="33" selection-start-column="124" selection-end-line="33" selection-end-column="124" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/CompleteFileTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="46" lean-forward="false" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#5802#6208#0" expanded="true" />
+            <element signature="e#6207#6208#0" expanded="true" />
+            <element signature="e#6267#6268#0" expanded="true" />
+            <element signature="e#6319#6320#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="5" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="124" lean-forward="false" selection-start-line="33" selection-start-column="124" selection-end-line="33" selection-end-column="124" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/CompleteFileTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="46" lean-forward="false" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1989">
           <caret line="132" column="33" lean-forward="false" selection-start-line="132" selection-start-column="33" selection-end-line="132" selection-end-column="33" />
           <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#7134#7135#0" expanded="false" />
-            <element signature="e#7186#7187#0" expanded="false" />
+            <element signature="e#5802#6208#0" expanded="true" />
+            <element signature="e#6207#6208#0" expanded="true" />
+            <element signature="e#6267#6268#0" expanded="true" />
+            <element signature="e#6319#6320#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -847,14 +1044,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/NoOpFileTransformer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -875,39 +1064,44 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="568">
           <caret line="99" column="16" lean-forward="false" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
+        <state relative-caret-position="578">
           <caret line="46" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
-          <folding>
-            <element signature="e#1456#1457#0" expanded="true" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/interfaces/IApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="43" column="14" lean-forward="false" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+        <state relative-caret-position="188">
+          <caret line="54" column="49" lean-forward="false" selection-start-line="54" selection-start-column="49" selection-end-line="54" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/CompleteFileTransformer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-114">
-          <caret line="0" column="46" lean-forward="false" selection-start-line="0" selection-start-column="46" selection-end-line="0" selection-end-column="46" />
+        <state relative-caret-position="272">
+          <caret line="18" column="54" lean-forward="false" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/UpperCaseFilterWriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
+        <state relative-caret-position="243">
           <caret line="33" column="124" lean-forward="false" selection-start-line="33" selection-start-column="124" selection-end-line="33" selection-end-column="124" />
           <folding />
         </state>
@@ -915,33 +1109,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="76" column="0" lean-forward="true" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
+        <state relative-caret-position="1241">
+          <caret line="76" column="0" lean-forward="false" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="579">
-          <caret line="43" column="5" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        <state relative-caret-position="425">
+          <caret line="34" column="30" lean-forward="true" selection-start-line="34" selection-start-column="30" selection-end-line="34" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        <state relative-caret-position="442">
+          <caret line="26" column="27" lean-forward="false" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2601">
-          <caret line="171" column="11" lean-forward="true" selection-start-line="171" selection-start-column="11" selection-end-line="171" selection-end-column="11" />
-          <folding />
+        <state relative-caret-position="1020">
+          <caret line="88" column="48" lean-forward="true" selection-start-line="88" selection-start-column="48" selection-end-line="88" selection-end-column="48" />
+          <folding>
+            <element signature="e#5802#6208#0" expanded="true" />
+            <element signature="e#6207#6208#0" expanded="true" />
+            <element signature="e#6267#6268#0" expanded="true" />
+            <element signature="e#6319#6320#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/NoOpFileTransformer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="52" lean-forward="false" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
+          <folding>
+            <element signature="e#462#463#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
