@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
     private int nbLines;
     private boolean firstLine;
-    private boolean windowsDetected;
     private boolean backslashRDetected;
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
@@ -27,49 +26,20 @@ public class FileNumberingFilterWriter extends FilterWriter {
         super(out);
         nbLines = 1;
         firstLine = true;
-        windowsDetected = false;
         backslashRDetected = false;
-    }
-
-    private void _write(char[] cbuf, int off, int len) throws IOException{
-        int max = cbuf.length;
-        if(len != 0){
-            max = off + len;
-        }
-        if(nbLines == 1 && firstLine) {
-            firstLine = false;
-            this.out.write(nbLines + "\t");
-        }
-        for (int i = off; i < max; i++) {
-            if (cbuf[i] == '\n' && cbuf[i - 1] != '\r') {
-                nbLines++;
-                this.out.write("\n" + nbLines + "\t");
-            } else if(cbuf[i] == '\r' && (i == (cbuf.length - 1) || cbuf[i+1] != '\n')){
-                nbLines++;
-                this.out.write("\r" + nbLines + "\t");
-            } else if (cbuf[i] == '\r' && (i != (cbuf.length - 1) && cbuf[i + 1] == '\n')){
-                windowsDetected = true;
-                nbLines++;
-                this.out.write("\r\n" + nbLines + "\t");
-            } else {
-                if(!windowsDetected){
-                    this.out.write(cbuf[i]);
-                } else {
-                    windowsDetected = false;
-                }
-            }
-        }
     }
 
     @Override
     public void write(String str, int off, int len) throws IOException {
         char[] cbuf = str.toCharArray();
-        _write(cbuf, off, len);
+        this.write(cbuf,off,len);
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        _write(cbuf, off, len);
+        for(int i = off; i < off + len; i++){
+            this.write(cbuf[i]);
+        }
     }
 
     @Override
