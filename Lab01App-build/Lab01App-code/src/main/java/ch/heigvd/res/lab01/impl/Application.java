@@ -97,7 +97,7 @@ public class Application implements IApplication {
        */
       //Provide to second argument the filename according to the specification "quote" + number + ".utf8"
       StringBuilder filename = new StringBuilder();
-      filename.append("quote-").append(i+1).append(".utf8");
+      filename.append("quote-").append(1+i).append(".utf8");
       storeQuote(quote, filename.toString());
         
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
@@ -171,7 +171,7 @@ public class Application implements IApplication {
           writer.write(file.getPath() + '\n');
         }
         catch (IOException e) {
-          LOG.log(Level.SEVERE, "Error printing File name ! ",e);
+          LOG.log(Level.SEVERE, "Could not write on this file.",e);
           e.printStackTrace();
           }
       }
