@@ -21,7 +21,14 @@ public class Utils {
    */
   public static String[] getNextLine(String lines) {
     //throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    // split lines in two keeping separator
 
+    // check if windows line break
+    if(lines.contains("\r\n"))
+      return lines.split("(?<=\r\n)", 2);
+
+    // line beak for unix or mac
+    return lines.split("(?<=\r)|(?<=\n)", 2);
   }
 
 }
