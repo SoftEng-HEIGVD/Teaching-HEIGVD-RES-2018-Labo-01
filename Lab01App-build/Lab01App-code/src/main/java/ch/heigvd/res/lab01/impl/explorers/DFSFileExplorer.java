@@ -3,7 +3,7 @@ package ch.heigvd.res.lab01.impl.explorers;
 import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import java.io.File;
-
+import java.util.LinkedList;
 /**
  * This implementation of the IFileExplorer interface performs a depth-first
  * exploration of the file system and invokes the visitor for every encountered
@@ -16,7 +16,22 @@ public class DFSFileExplorer implements IFileExplorer {
 
   @Override
   public void explore(File rootDirectory, IFileVisitor vistor) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    vistor.visit(rootDirectory);
+    if(rootDirectory.listFiles() != null){
+        //list to store nodes when is'n a leaf
+         LinkedList<File> subNodes = new LinkedList<File>();
+         for (File node : rootDirectory.listFiles()) {
+            if (node.isDirectory()) {
+               subNodes.add(node);
+            } else {
+               vistor.visit(node);
+            }
+         }
+         /* explores all subdirectories nodes recursively*/
+         for (File subNode : subNodes) {
+         explore(subNode, vistor);
+        }
+    }
   }
 
 }
