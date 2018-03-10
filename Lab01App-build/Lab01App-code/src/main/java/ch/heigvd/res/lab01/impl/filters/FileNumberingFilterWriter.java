@@ -32,6 +32,9 @@ public class FileNumberingFilterWriter extends FilterWriter {
   public void write(String str, int off, int len) throws IOException {
     StringBuilder numberedStr = new StringBuilder();
 
+    // substring if part of string asked
+    String subStr = str.substring(off, off + len);
+
     // if first line we need to add an additional number at the beginning
     if(firstLine) {
       firstLine = false;
@@ -39,7 +42,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
     }
 
     // getting the first line splited
-    String[] splitedStr = Utils.getNextLine(str);
+    String[] splitedStr = Utils.getNextLine(subStr);
 
     // if string is an unique line
     if(splitedStr[1].equals("")){
