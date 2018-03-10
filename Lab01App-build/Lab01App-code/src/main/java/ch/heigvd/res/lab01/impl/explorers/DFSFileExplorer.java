@@ -18,10 +18,18 @@ import java.util.Arrays;
 public class DFSFileExplorer implements IFileExplorer {
 
     @Override
-    public void explore(File rootDirectory, IFileVisitor vistor) throws IOException {
-        vistor.visit(rootDirectory);
+    public void explore(File rootDirectory, IFileVisitor vistor)  {
+        try {
+            vistor.visit(rootDirectory);
+        } catch (IOException ioe) {
+
+        }
         if (rootDirectory.listFiles() != null)
-            dfs(rootDirectory, vistor);
+            try {
+                dfs(rootDirectory, vistor);
+            } catch (IOException ioe) {
+                throw new RuntimeException();
+            }
     }
 
     /*
