@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import oracle.jrockit.jfr.VMJFR;
@@ -136,8 +137,9 @@ public class Application implements IApplication {
     
     //Create the path and Initilize with the workspace_directory
     StringBuilder path =  new StringBuilder(WORKSPACE_DIRECTORY);
+    List<String> listTag = quote.getTags();
     
-    for(String tag: quote.getTags()){
+    for(String tag: listTag){
         //File separator is OS dependant
         path.append(File.separator).append(tag);
     }
@@ -146,8 +148,10 @@ public class Application implements IApplication {
     File dir = new File(path.toString());
     boolean status2 = dir.mkdirs();
     
-    //store the quote in the file
+    //build and store the quote in the file
     path.append(File.separator).append(filename);
+    new File(path.toString()).createNewFile();
+            
     try (BufferedWriter fileWrite = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path.toString()), "UTF-8"))) {
       fileWrite.write(quote.getQuote());
     }

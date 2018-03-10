@@ -59,6 +59,12 @@ public abstract class FileTransformer implements IFileVisitor {
        * characters and write them to the writer.
        */
       
+        int character = reader.read();
+        while (character != -1) {
+            writer.write(character);
+            character = reader.read();
+            }
+      
       reader.close();
       writer.flush();
       writer.close();
@@ -66,5 +72,9 @@ public abstract class FileTransformer implements IFileVisitor {
       LOG.log(Level.SEVERE, null, ex);
     }
   }
+
+    private void While(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
