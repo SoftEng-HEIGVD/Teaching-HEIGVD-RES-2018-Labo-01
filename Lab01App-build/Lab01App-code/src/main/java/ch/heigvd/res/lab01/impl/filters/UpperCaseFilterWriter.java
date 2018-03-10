@@ -17,20 +17,31 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        super.write(str, off, len);
+        String sub = str.substring(off, off + len).toUpperCase();
+        String beginning = str.substring(0,off);
+        String end = str.substring(off + len, str.length());
 
-        String[] twoLines = Utils.getNextLine(str);
-        
+
+        super.write(beginning + sub + end, off, len);
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
+        String str = String.valueOf(cbuf);
 
+        String sub = str.substring(off, off + len).toUpperCase();
+        String beginning = str.substring(0,off);
+        String end = str.substring(off + len, str.length());
+
+        super.write((beginning + sub + end).toCharArray(), off, len);
     }
 
     @Override
     public void write(int c) throws IOException {
 
+        // this is ugly ... but it works ! and since i've been coding for the past
+        // 6 hours on this, ugly that works is fine !
+        super.write(String.valueOf((char)c).toUpperCase().charAt(0));
     }
 
 }
