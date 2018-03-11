@@ -35,7 +35,7 @@ public class Application implements IApplication {
   
   private static final Logger LOG = Logger.getLogger(Application.class.getName());
   
-  private int counter = 0;
+  private int counter = 0; // used to number the quotes
   
   public static void main(String[] args) {
     
@@ -134,12 +134,12 @@ public class Application implements IApplication {
   void storeQuote(Quote quote, String filename) throws IOException {
      StringBuilder pathDirectory = new StringBuilder(filename + "/");
      for(String tag : quote.getTags())
-        pathDirectory.append(tag + "/");
+        pathDirectory.append(tag).append("/");
      
      new File(pathDirectory.toString()).mkdirs();
      
      counter++; // file numbering
-     pathDirectory.append("quote-" + counter + ".utf8");
+     pathDirectory.append("quote-").append(counter).append(".utf8");
      File file = new File(pathDirectory.toString());
      
       // writes in the file
@@ -160,8 +160,8 @@ public class Application implements IApplication {
       public void visit(File file) {
          try {
             writer.write(file.getPath() + "\n");
-         } catch (IOException io) {
-             io.printStackTrace();
+         } catch (IOException ioex) {
+             ioex.printStackTrace();
          }
         /*
          * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation

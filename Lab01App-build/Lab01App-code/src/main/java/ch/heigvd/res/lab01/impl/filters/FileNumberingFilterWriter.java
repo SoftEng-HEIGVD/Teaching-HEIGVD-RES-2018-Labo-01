@@ -14,6 +14,7 @@ import java.util.logging.Logger;
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
  * @author Olivier Liechti
+ * @contributor Nair Alic
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
@@ -28,22 +29,24 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
+     // here we call the char[] function
      this.write(str.toCharArray(), off, len);
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    for(int i = 0; i < len; i++){
+    // here we call the int function for each charachter
+     for(int i = 0; i < len; i++){
        this.write(cbuf[i + off]);
     }
   }
 
   @Override
   public void write(int c) throws IOException {
-    if(lineNumber == 1) {
+    if(lineNumber == 1) { // if it's the first line
        newLine();
     }
-     
+    
     if(flag && c != '\n'){
        newLine();
     }
@@ -58,7 +61,8 @@ public class FileNumberingFilterWriter extends FilterWriter {
     }
   }
   
-  public void newLine() throws IOException {
+  //function used to write the line number and tab before line
+  public void newLine() throws IOException { 
      out.write(lineNumber++ + "\t");
      flag = false;
   }
