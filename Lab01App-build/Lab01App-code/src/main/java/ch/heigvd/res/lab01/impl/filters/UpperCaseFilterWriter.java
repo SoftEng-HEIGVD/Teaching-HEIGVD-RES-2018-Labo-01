@@ -9,54 +9,36 @@ import java.io.Writer;
  * @author Olivier Liechti
  */
 public class UpperCaseFilterWriter extends FilterWriter {
-  
-  public UpperCaseFilterWriter(Writer wrappedWriter) {
-    super(wrappedWriter);
-  }
 
-  @Override
-  public void write(String str, int off, int len) throws IOException {
+    public UpperCaseFilterWriter(Writer wrappedWriter) {
+        super(wrappedWriter);
+    }
 
-    String newStr;  //Formatted text
+    @Override
+    public void write(String str, int off, int len) throws IOException {
 
-    //Get the substring asked from the text
-    newStr = str.substring(off, off + len);
+        //Get the substring asked from the text
+        String newStr = str.substring(off, off + len);
 
-    //Transform the substring into upper cases
-    newStr = newStr.toUpperCase();
+        //Transform the substring into upper cases
+        newStr = newStr.toUpperCase();
 
-    //Write the formatted text
-    super.out.write(newStr);
-  }
+        //Write the formatted text
+        super.out.write(newStr);
+    }
 
-  @Override
-  public void write(char[] cbuf, int off, int len) throws IOException {
+    @Override
+    public void write(char[] cbuf, int off, int len) throws IOException {
 
-      char[] newCbuf = new char[len];  //Formatted text
+        //Transform the characters array into upper case
+        write(String.valueOf(cbuf), off, len);
+    }
 
-      //Get the substring asked from the text
-      int pos = 0;  //Index position in the formatted text
+    @Override
+    public void write(int c) throws IOException {
 
-      for(int i = off; i < off + len; i++){
-          //Transform the substring into upper cases
-          newCbuf[pos] = Character.toUpperCase(cbuf[i]);
-          pos++;
-      }
-
-      //Write the formatted text
-      super.out.write(newCbuf);
-  }
-
-  @Override
-  public void write(int c) throws IOException {
-
-      int newC;  //Formatted character
-
-      //Transform the character into upper case
-      newC = Character.toUpperCase(c);
-
-      //Write the formatted character
-      super.out.write(newC);
-  }
+        //Write the formatted character
+        super.out.write(Character.toUpperCase(c));
+    }
 
 }

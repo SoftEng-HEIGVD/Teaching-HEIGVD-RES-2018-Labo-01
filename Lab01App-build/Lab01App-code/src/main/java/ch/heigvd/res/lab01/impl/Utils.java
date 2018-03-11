@@ -31,6 +31,7 @@ public class Utils {
         for (int i = 0; i < separators.length; i++) {
             positionSeparators[i] = lines.indexOf(separators[i], indexFrom);
 
+            //Replace the chosen separator if there is a better one (smaller position)
             if(positionSeparators[i] < positionSeparator && positionSeparators[i] != -1){
                 positionSeparator = positionSeparators[i];
                 separator = separators[i];
@@ -41,7 +42,7 @@ public class Utils {
         String firstPart = "";
         String secondPart = "";
 
-        //Separator has been found
+        //Separator has been found, split the text in two parts
         if(positionSeparator != lines.length()) {
             indexFrom = positionSeparator + separator.length();
 

@@ -134,6 +134,8 @@ public class Application implements IApplication {
             folders += "/" + tag;
         }
 
+
+        //Create sub-folders and files
         FileWriter writer = null;
 
         try{
@@ -141,9 +143,8 @@ public class Application implements IApplication {
             File pathFolders = new File(folders);
             pathFolders.mkdirs();
 
-            folders += "/quote-" + quote.getValue().getId() + ".utf8";
-
             //Create the quote file
+            folders += "/quote-" + quote.getValue().getId() + ".utf8";
             writer = new FileWriter(folders);
 
             //Store the quote into the file created
