@@ -31,7 +31,7 @@ public class Application implements IApplication {
      */
     public static String WORKSPACE_DIRECTORY = "./workspace/quotes";
     //public static String WORKSPACE_DIRECTORY = ".\\workspace\\quotes";
-    //public static String WORKSPACE_DIRECTORY = "." + File.pathSeparatorChar + "workspace" + File.pathSeparatorChar + "quotes";
+    //public static String WORKSPACE_DIRECTORY = "." + File.separator + "workspace" + File.separator + "quotes";
 
     private static final Logger LOG = Logger.getLogger(Application.class.getName());
 
@@ -107,6 +107,10 @@ public class Application implements IApplication {
              * one method provided by this class, which is responsible for storing the content of the
              * quote in a text file (and for generating the directories based on the tags).
              */
+            // START code added by me
+            storeQuote(quote, "quote-" + i + ".utf8");
+            // END code added by me
+
             LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
             for (String tag : quote.getTags()) {
                 LOG.info("> " + tag);
@@ -149,7 +153,7 @@ public class Application implements IApplication {
         // We are gonna follow the path of the tags first !
         String path = WORKSPACE_DIRECTORY;
         for (String tag : tags) {
-            path = path + File.pathSeparatorChar + "tag";
+            path = path + File.separator + tag;
         }
 
         // got the path now make dir happen !
@@ -161,13 +165,18 @@ public class Application implements IApplication {
         }
 
         // all folders are made, now let's make the quote itself !
-        File quoteFile = new File(path + File.pathSeparatorChar + filename);
+        File quoteFile = new File(path + File.separator + filename);
+        quoteFile.createNewFile();
+
+        // test if it worked
         if (!quoteFile.exists()) {
             throw new IOException("Failed to create the quote file.");
         } else {
             try {
                 Writer writer = new OutputStreamWriter(new FileOutputStream(quoteFile), "UTF-8");
                 writer.write(quote.getQuote());
+                writer.flush();
+                writer.close();
             } catch (Exception e) {
                 // just in case it would throw something else than a IOException
                 throw new IOException("Failed to write quote to file: " + e.getMessage());
@@ -190,9 +199,9 @@ public class Application implements IApplication {
                  * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
                  */
                 try {
-                    writer.write(file.getPath() + File.pathSeparatorChar + file.getName());
+                    writer.write(file.getPath() + "\n");
                 } catch (IOException ioe){
-                    throw new RuntimeException("Access denies to this file or directory: " + file.getPath() + File.pathSeparatorChar + file.getName() );
+                    throw new RuntimeException("Access denies to this file or directory: " + file.getPath());
                 }
             }
         });

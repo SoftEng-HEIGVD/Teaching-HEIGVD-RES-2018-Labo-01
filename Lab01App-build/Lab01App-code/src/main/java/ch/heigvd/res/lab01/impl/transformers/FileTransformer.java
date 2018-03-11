@@ -44,6 +44,7 @@ public abstract class FileTransformer implements IFileVisitor {
         try {
             Reader reader = new InputStreamReader(new FileInputStream(file), "UTF-8");
             Writer writer = new OutputStreamWriter(new FileOutputStream(file.getPath() + ".out"), "UTF-8"); // the bug fix by teacher
+
             writer = decorateWithFilters(writer);
 
             /*
@@ -54,28 +55,17 @@ public abstract class FileTransformer implements IFileVisitor {
 
             // START of what I added
 
-            // Oh yeah ! We gonna do this the fast way ! We got beer to carry !
-            BufferedReader bufferedReader = new BufferedReader(reader);     // A
-            //BufferedWriter bufferedWriter = new BufferedWriter(writer);     // B
+            int c;
 
-            // a placeholder for the buffered's transition string
-            String s;
-
-            // Inchert schlot A into schlot B
-            while ((s = bufferedReader.readLine()) != null) {
-                writer.write(s);
+            while((c = reader.read()) != -1){
+                writer.write(c);
             }
-
-            // don't forget to close !
-            bufferedReader.close();
-            //bufferedWriter.flush();     // and flush of course !
-            //bufferedWriter.close();
 
             // END of what I added
 
 
 
-            //reader.close();
+            reader.close();
             writer.flush();
             writer.close();
         } catch (IOException ex) {

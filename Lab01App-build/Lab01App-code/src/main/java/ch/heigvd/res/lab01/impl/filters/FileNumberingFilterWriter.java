@@ -36,51 +36,17 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
         //String beginning = str.substring(0,off);
         String sub = str.substring(off, off + len);
-        //String end = str.substring(off + len, str.length());
-    /*
-        for(char c : beginning.toCharArray()){
-            super.write(c);
-        }
-    */
         for(char c : sub.toCharArray()){
             write(c);
         }
-    /*
-        for(char c : end.toCharArray()){
-            super.write(c);
-        }
-    */
-        /*
-        String decorated = beginning + decorate(sub, "") + end;
-        len += decorated.length() - str.length();
-        super.write(decorated, off, len);
-        */
 
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        /*
-        String str = String.valueOf(cbuf);
-
-        String sub = decorate(str.substring(off, off + len), "");
-        String beginning = str.substring(0,off);
-        String end = str.substring(off + len, str.length());
-        */
-    /*
-        for(int i = 0; i < off; i++){
-            super.write(cbuf[i]);
-        }
-    */
         for(int i = off; i < off + len; i++){
             write(cbuf[i]);
         }
-     /*
-        for(int i = off + len; i < cbuf.length; i++){
-            write(cbuf[i]);
-        }
-    */
-        //super.write((beginning + sub + end).toCharArray(), off, len);
     }
 
     @Override
