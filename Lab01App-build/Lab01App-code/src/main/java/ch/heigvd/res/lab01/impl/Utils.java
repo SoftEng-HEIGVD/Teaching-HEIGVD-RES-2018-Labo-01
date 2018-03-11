@@ -42,12 +42,6 @@ public class Utils {
           nextLine[1] = lines;
       }
 
-
-
-      System.out.println("0:");
-      System.out.println(nextLine[0]);
-      System.out.println("1");
-      System.out.println(nextLine[1]);
       return nextLine;
   }
 

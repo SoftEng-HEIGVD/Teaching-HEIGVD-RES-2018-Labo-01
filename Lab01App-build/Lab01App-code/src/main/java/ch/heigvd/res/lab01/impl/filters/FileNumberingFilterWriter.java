@@ -1,9 +1,13 @@
 package ch.heigvd.res.lab01.impl.filters;
 
+import ch.heigvd.res.lab01.impl.Utils;
+
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
+
+import static ch.heigvd.res.lab01.impl.Utils.getNextLine;
 
 /**
  * This class transforms the streams of character sent to the decorated writer.
@@ -18,27 +22,57 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
-  private static int lineNumber;
+  private static int lineNumber = 1;
+  private static boolean firstLineWritten;
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
     lineNumber = 1;
+    firstLineWritten = false;
+
   }
+
+/*
+  public String getLineSeparator(String str){
+      String separator;
+      if(str.charAt(str.length()-2)== '\r'){
+          separator = "\r\n";
+      }else{
+          separator = String.valueOf(str.charAt(str.length()-1));
+      }
+      return separator;
+  }
+*/
+
   @Override
   public void write(String str, int off, int len) throws IOException {
-/*
+      String sub = "";
 
-    if(len > str.length() || (off+len) > str.length()){
-      return;
+      //String separator = getLineSeparator(lines[0]);
+    if((off+len) <= str.length()){
+        String[] line = getNextLine(str.substring(off, off+len));
+        if(!firstLineWritten)
+        {
+            sub += String.valueOf(lineNumber);
+            sub += '\t';
+            firstLineWritten = true;
+        }
+
+
+        while(!line[0].isEmpty()){
+            sub += line[0];
+            //sub += '\r';
+            sub += String.valueOf(++lineNumber);
+            sub += '\t';
+            line = getNextLine(line[1]);
+        }
+        sub += line[1];
+        out.write(sub);
+
     }
-
-    String line = String.valueOf(lineNumber);
-    line += '\t';
-    line += str.substring(off, off+len);
-
-
-    super.write(line);*/
   }
+
+
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
@@ -47,7 +81,12 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
+      {
+          out.write(String.valueOf(lineNumber));
+          out.write('\t');
+      }
+      out.write((char)c);
   }
 
 }
