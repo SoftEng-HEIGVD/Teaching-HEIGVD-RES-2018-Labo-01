@@ -20,33 +20,38 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
+    // Tab containing all separators
     String[] separators = {"\r\n", "\n", "\r"};
     int[] sepFound = new int[separators.length];
     
-    String[] splitted;
     String[] result = {"", ""};
     
     String separator = "";
     int indexFirstSeparator = lines.length();
   
     // We look for all three separators and we keep the first found in "separator".
+    // We also keep the index where we found it.
     for (int i = 0; i < separators.length; ++i) {
       sepFound[i] = lines.indexOf(separators[i]);
       
-      if (indexFirstSeparator > sepFound[i] && sepFound[i] != -1) {
+      // If we find one and its index is smaller than the previous one, we keep it.
+      if (sepFound[i] != -1 && indexFirstSeparator > sepFound[i]) {
         indexFirstSeparator = sepFound[i];
         separator = separators[i];
       }
     }
     
-    if (separator == "") {
+    // If we didn't find any separator, meaning "separator" is empty, we set "lines" in the second part of the result.
+    // Otherwise, we construct the result array using the index of the separator found.
+    if (separator.isEmpty()) {
       result[1] = lines;
-  
-      return result;
+    } else {
+      // First part containing the first line and the separator
+      result[0] = lines.substring(0, indexFirstSeparator + separator.length());
+      
+      // Second part containing the remaining text.
+      result[1] = lines.substring(indexFirstSeparator + separator.length());
     }
-    
-    result[0] = lines.substring(0, indexFirstSeparator + separator.length());
-    result[1] = lines.substring(indexFirstSeparator + separator.length());
     
     return result;
   }
