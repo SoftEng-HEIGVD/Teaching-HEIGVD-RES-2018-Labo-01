@@ -21,6 +21,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
    private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
+   private char lastChar = ' ';
    private int lastLineNumber = 0;
 
    public FileNumberingFilterWriter(Writer out) {
@@ -29,34 +30,35 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
    @Override
    public void write(String str, int off, int len) throws IOException {
-      String[] nextLine = Utils.getNextLine(str.substring(off, off + len));
-
-      if(lastLineNumber == 0)
-         out.write(addLineNumber());
-
-      if(nextLine[0].equals("")) {
-         out.write(str, off, len);
-      } else {
-         out.write(nextLine[0] + addLineNumber());
-
-         this.write(nextLine[1], 0, nextLine[1].length());
-      }
+      write(str.toCharArray(), off, len);
    }
 
    @Override
    public void write(char[] cbuf, int off, int len) throws IOException {
-      StringBuilder textToNumeroted = new StringBuilder();
       int lastCharIndex = off + len;
 
       for(int i = off; i < lastCharIndex; i++)
-         textToNumeroted.append(cbuf[i]);
-
-      this.write(textToNumeroted.toString(), 0, len);
+         write(cbuf[i]);
    }
 
    @Override
    public void write(int c) throws IOException {
-      this.write(Integer.toString(c), 0, 1);
+      // Constant for the End Of Line (EOF) char on different OS
+      final char EOF_MAC  = '\r';
+      final char EOF_UNIX = '\n';
+
+      if(lastLineNumber == 0)
+         out.write(addLineNumber());
+
+      if(lastChar == EOF_MAC && c != EOF_UNIX)
+         out.write(addLineNumber());
+
+      out.write(c);
+
+      if(c == EOF_UNIX)
+         out.write(addLineNumber());
+
+      lastChar = (char)c;
    }
 
    private String addLineNumber(){
