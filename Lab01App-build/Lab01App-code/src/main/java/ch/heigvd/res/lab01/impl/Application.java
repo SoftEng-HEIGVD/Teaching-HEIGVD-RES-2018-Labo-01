@@ -92,6 +92,9 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
+      //send the quote and the name of the file to the storeQuote function
+       storeQuote(quote, "quote-" + i + ".utf8");
+       
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -125,7 +128,22 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    try{  
+    // get path
+      String tmp =  Application.WORKSPACE_DIRECTORY + File.separator;
+      String path = new String(tmp);
+      for (String tag : quote.getTags()) {
+         path += tag + File.separator;
+      }
+      new File(String.valueOf(path)).mkdirs();
+      //put out
+      Writer out = new OutputStreamWriter(new FileOutputStream(new File(path + filename)), "UTF-8");
+      out.write(quote.getQuote());
+      out.flush();
+      out.close();
+    }catch(Exception e){
+        System.err.println(e);
+    }
   }
   
   /**
@@ -137,18 +155,20 @@ public class Application implements IApplication {
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
-        /*
-         * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-         * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-         * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-         */
+            try {
+               writer.write(file.getPath() + "\n");
+            } catch (IOException ex) {
+               LOG.log(Level.SEVERE, "Could not print the name of the encountered file or directory. {0}", ex.getMessage());
+               ex.printStackTrace();
+            }
       }
     });
   }
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+       String email = new String("marie.lemdjonzinke@heig-vd.ch");
+       return email;
   }
 
   @Override
