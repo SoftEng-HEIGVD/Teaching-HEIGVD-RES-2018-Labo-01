@@ -13,10 +13,16 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
-
+import java.util.Scanner;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 /**
  *
  * @author Olivier Liechti
@@ -83,6 +89,7 @@ public class Application implements IApplication {
   @Override
   public void fetchAndStoreQuotes(int numberOfQuotes) throws IOException {
     clearOutputDirectory();
+    createWorkingDirectory();
     QuoteClient client = new QuoteClient();
     for (int i = 0; i < numberOfQuotes; i++) {
       Quote quote = client.fetchQuote();
@@ -92,6 +99,8 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
+      String quoteName = "quote-" + String.valueOf(i) + ".utf8";
+      storeQuote(quote, quoteName);
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -99,6 +108,12 @@ public class Application implements IApplication {
     }
   }
   
+  void createWorkingDirectory() throws IOException {
+    if(!(new File(WORKSPACE_DIRECTORY)).mkdirs()){
+        LOG.severe("error: workspace not created");
+    }
+  }
+         
   /**
    * This method deletes the WORKSPACE_DIRECTORY and its content. It uses the
    * apache commons-io library. You should call this method in the main method.
@@ -125,7 +140,25 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+      List<String> tags = quote.getTags();
+      String text = quote.getQuote();
+      String path = WORKSPACE_DIRECTORY;
+      for(String tag : tags){
+          path += "/";
+          path += tag;
+      }
+      LOG.severe(path);
+      LOG.severe(filename);
+
+      new File(path).mkdirs();
+      
+      path += "/";
+      path += filename;
+      
+      BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path)));
+      output.write(text);
+      output.flush();
+      output.close();
   }
   
   /**
@@ -137,6 +170,12 @@ public class Application implements IApplication {
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
+          try{
+              writer.write(file.getPath() + "\n");
+          }catch(IOException e){
+              LOG.severe(e.getMessage());
+          }
+
         /*
          * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
@@ -148,7 +187,7 @@ public class Application implements IApplication {
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+      return "johanna.melly@heig-vd.ch";
   }
 
   @Override
