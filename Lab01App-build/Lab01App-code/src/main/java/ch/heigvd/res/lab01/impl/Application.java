@@ -89,14 +89,10 @@ public class Application implements IApplication {
     public void fetchAndStoreQuotes(int numberOfQuotes) throws IOException {
         clearOutputDirectory();
         QuoteClient client = new QuoteClient();
+
         for (int i = 0; i < numberOfQuotes; i++) {
             Quote quote = client.fetchQuote();
-            /* There is a missing piece here!
-             * As you can see, this method handles the first part of the lab. It uses the web service
-             * client to fetch quotes. We have removed a single line from this method. It is a call to
-             * one method provided by this class, which is responsible for storing the content of the
-             * quote in a text file (and for generating the directories based on the tags).
-             */
+
             StringBuilder filename = new StringBuilder("quote-");
             filename.append(i).append(".utf8");
             storeQuote(quote, filename.toString());
@@ -136,17 +132,20 @@ public class Application implements IApplication {
     void storeQuote(Quote quote, String filename) throws IOException {
         List<String> tagsList = quote.getTags();
         StringBuilder currentDirectory = new StringBuilder(WORKSPACE_DIRECTORY);
-        for(String tag : tagsList) {
-            currentDirectory.append("/").append(tag);
-        }
 
+        for(String tag : tagsList)
+            currentDirectory.append("/").append(tag);
+
+        // create directories with the path of tags
         File dir = new File(currentDirectory.toString());
         dir.mkdirs();
 
+        // create the output file
         File newFile = new File(currentDirectory.append("/").append(filename).toString());
         newFile.createNewFile();
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(newFile), StandardCharsets.UTF_8);
         writer.write(quote.getQuote());
+        writer.close();
     }
 
     /**
@@ -158,15 +157,16 @@ public class Application implements IApplication {
         explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
             @Override
             public void visit(File file) {
-                /*
-                 * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-                 * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-                 * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-                 */
+
                 StringBuilder path = new StringBuilder(file.getPath());
+
                 try {
+                    // write the filename, including the path, to the writer passed in argument
                     writer.write(path.append("\n").toString());
-                } catch (IOException e) {
+                    writer.close();
+                }
+
+                catch (IOException e) {
                     e.printStackTrace();
                 }
             }
