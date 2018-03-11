@@ -20,6 +20,7 @@ public class Utils {
      * contain any line separator, then the first element is an empty string.
      */
     public static String[] getNextLine(String lines) {
+        if (lines.equals("")) return new String[2];
         String[] strings = new String[2];
         if (lines.substring(lines.length()-1).contains("\n")) {
             strings[0] = lines.substring(0, lines.indexOf("\n", 0)+1);
