@@ -15,6 +15,7 @@ import java.util.logging.Logger;
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
  * @author Olivier Liechti
+ * @author Iando Rafidimalala
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
@@ -33,7 +34,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
      String[] tmp;
 
      StringBuilder strWellFormed = new StringBuilder();
-      
+     //Add line number for the first time 
      if(!str.isEmpty()){
         if(!wasNumbered){
             strWellFormed.append(addNumber());
@@ -42,6 +43,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
         
         tmp = Utils.getNextLine(str.substring(off, off + len));
         
+        //until the line with EOL occure, add the line number
         while(!tmp[0].isEmpty()){
                        
             strWellFormed.append(tmp[0]);
@@ -50,6 +52,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
             tmp = Utils.getNextLine(tmp[1]);
         }
         
+        //Add the last line
         strWellFormed.append(tmp[1]);
         out.write(strWellFormed.toString());
      }
@@ -64,7 +67,10 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-
+    /**
+     * Keep the track of MAC9 EOL to make up the action afterward
+     * Add the number line if it's the first occurrence
+     */
     if(!wasNumbered){
         out.write(addNumber());
         wasNumbered = !wasNumbered;
@@ -72,7 +78,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
     
     switch (c) {
         case '\r':
-            wasR_EOL = !wasR_EOL;
+            wasR_EOL = !wasR_EOL; // keep track the MAC EOL 
             out.write(c);
             break;
         case '\n':
@@ -81,7 +87,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
             out.write(addNumber());
             break;
         default:
-            if(wasR_EOL){
+            if(wasR_EOL){ //handle the MAC EOL 
                 wasR_EOL = !wasR_EOL;
                 out.write(addNumber());
             }
@@ -90,6 +96,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
     }
   }
   
+  //Add number in the beginning of each line
   private String addNumber(){
       StringBuilder tmp = new StringBuilder(Integer.toString(noLine));
       tmp.append(TABULATION);      
