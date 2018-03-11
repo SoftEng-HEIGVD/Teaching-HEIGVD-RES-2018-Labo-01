@@ -24,11 +24,13 @@ public class FileNumberingFilterWriter extends FilterWriter {
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
   private static int lineNumber = 1;
   private static boolean firstLineWritten;
+  private static boolean isBackslashR;
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
     lineNumber = 1;
     firstLineWritten = false;
+    isBackslashR = false;
 
   }
 
@@ -76,17 +78,44 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    String str = "";
+    for(char c : cbuf){
+        str += String.valueOf(c);
+    }
+    write(str, off, len);
   }
 
   @Override
   public void write(int c) throws IOException {
 
+      char cValue = (char)c;
+      boolean isBackslashN = false;
+      if(!firstLineWritten)
       {
           out.write(String.valueOf(lineNumber));
           out.write('\t');
+          firstLineWritten = true;
       }
-      out.write((char)c);
+
+      if(c == '\r'){
+          isBackslashR = true;
+          out.write(c);
+
+      }else if(c == '\n'){
+          out.write(c);
+          out.write(String.valueOf(++lineNumber));
+          out.write('\t');
+          isBackslashR = false;
+      }else{
+          if(!isBackslashR){
+              out.write(c);
+          }else{
+              out.write(String.valueOf(++lineNumber));
+              out.write('\t');
+              out.write(c);
+              isBackslashR = false;
+          }
+      }
   }
 
 }
