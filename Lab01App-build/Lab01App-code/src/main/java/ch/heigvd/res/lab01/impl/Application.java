@@ -141,7 +141,7 @@ public class Application implements IApplication {
      // Create the file and add the content ot it
      path = path + "/" + filename;
 
-     OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(path));  
+     OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(path), "UTF-8");  
      writer.write(quote.getQuote());
      writer.close();
   }
