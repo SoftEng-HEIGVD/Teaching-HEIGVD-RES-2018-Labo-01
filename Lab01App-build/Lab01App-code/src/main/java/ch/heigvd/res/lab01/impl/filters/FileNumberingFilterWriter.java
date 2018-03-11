@@ -23,7 +23,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     private int  lineNumber = 1;
     private boolean isBeginning = true;
-    private boolean lastWasALineSpliter = false;
+    private boolean lastWasRSpliter = false;
 
     public FileNumberingFilterWriter(Writer out) {
         super(out);
@@ -31,59 +31,48 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        String[] lines;
 
-        str = str.substring(off, str.length());
+        int lastIndex = (off + len) < str.length()? (off + len) : str.length();
+        str = str.substring(off, lastIndex);
 
-        while(!str.equals("") && len > 0){
-            super.write(((Integer)lineNumber).toString() + "\t", 0, ((Integer) lineNumber).toString().length() + 1);
-            ++lineNumber;
-            lines = Utils.getNextLine(str);
-            int length = len - lines[0].length() >= 0 ? len : lines[0].length();
-            if (!lines[0].equals("")) {
-                super.write(lines[0], 0, length);
-            } else {
-                super.write(lines[1], 0, length);
-            }
-            len -= length;
-            str = lines[1];
+        for(int i = 0; i < str.length(); ++i){
+            write(str.charAt(i));
         }
-        if(len > 0){
-            super.write(((Integer)lineNumber).toString() + "\t", 0, ((Integer) lineNumber).toString().length() + 1);
-        }
-
-
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        for(int i = 0; i < cbuf.length - off; ++i){
+
+        int lastIndex = (off + len) < cbuf.length? (off + len) : cbuf.length;
+        for(int i = 0; i < lastIndex - off; ++i){
             write(cbuf[i + off]);
         }
     }
 
     @Override
     public void write(int c) throws IOException {
-        testBeginning();
-        if(c == '\n' || c == '\r'){
+        if(isBeginning){
+            super.write(((Integer) lineNumber).toString() + "\t", 0, ((Integer) lineNumber).toString().length() + 1);
+            ++lineNumber;
+            isBeginning = false;
+        }
+        if(c == '\n'){
             super.write(c);
-            if(!lastWasALineSpliter) {
+            super.write(((Integer)lineNumber).toString() + "\t", 0, ((Integer) lineNumber).toString().length() + 1);
+            ++lineNumber;
+            lastWasRSpliter = false;
+        } else if(c == '\r'){
+            super.write(c);
+            lastWasRSpliter = true;
+        }else{
+            if(lastWasRSpliter){
                 super.write(((Integer)lineNumber).toString() + "\t", 0, ((Integer) lineNumber).toString().length() + 1);
                 ++lineNumber;
             }
-            lastWasALineSpliter = true;
-        } else{
             super.write(c);
-            lastWasALineSpliter = false;
+            lastWasRSpliter = false;
         }
 
-    }
-
-    private void testBeginning() throws IOException{
-        if(isBeginning){
-            super.write("1\t", 0, 2);
-            isBeginning = false;
-        }
     }
 
 }

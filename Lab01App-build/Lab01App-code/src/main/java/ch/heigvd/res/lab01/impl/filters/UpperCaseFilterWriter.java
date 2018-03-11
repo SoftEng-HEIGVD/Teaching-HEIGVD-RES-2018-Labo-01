@@ -15,17 +15,22 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        //the parent method is called with  an upper cased string instead of the original string
-        super.write(str.toUpperCase(), off, len);
+
+        int lastIndex = (off + len) < str.length()? (off + len) : str.length();
+        str = str.substring(off, lastIndex);
+
+        for(int i = 0; i < str.length(); ++i){
+            write(str.charAt(i));
+        }
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        String s = "";
-        for (char c : cbuf) {
-            s += c;
+
+        int lastIndex = (off + len) < cbuf.length? (off + len) : cbuf.length;
+        for(int i = 0; i < lastIndex - off; ++i){
+            write(cbuf[i + off]);
         }
-        super.write(s.toUpperCase(), off, len);
     }
 
     @Override
