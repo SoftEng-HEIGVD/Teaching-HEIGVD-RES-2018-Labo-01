@@ -19,12 +19,21 @@ public class Utils {
      * contain any line separator, then the first element is an empty string.
      */
     public static String[] getNextLine(String lines) {
+
+        // Regex comment : "?<=" zero-width positive lookbehind.
+        //                  | simple OR
+        // From : https://stackoverflow.com/questions/3481828/how-to-split-a-string-in-java
+        // From : https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
+
+        // if there is '\r' and directly '\n', we split this line in two and whitout the '\r'\n'
         if (lines.contains("\r\n"))
             return lines.split("(?<=\r\n)", 2);
 
+            // if there is one of the two separator Character, we split the line.
         else if (lines.contains("\r") || lines.contains("\n"))
-            return lines.split("(?<=\r)|(?<=\n)", 2);
+            return lines.split("(?<=\n)|(?<=\r)", 2);
 
+        // nothing to split.
         return new String[]{"", lines};
     }
 
