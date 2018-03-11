@@ -129,12 +129,12 @@ public class Application implements IApplication {
     // Creating the folder if not exist
     String path = WORKSPACE_DIRECTORY;
     for(String tag : quote.getTags()){
-      path += "/" + tag;
+      path += File.separator + tag;
     }
     createFolders(path);
 
     // create the file
-    FileOutputStream fileOutputStream  = new FileOutputStream(path + "/" + filename + ".utf8");
+    FileOutputStream fileOutputStream  = new FileOutputStream(path + File.separator + filename + ".utf8");
     Writer outputStreamWriter = new OutputStreamWriter(fileOutputStream, "UTF-8");
 
     // write in the file

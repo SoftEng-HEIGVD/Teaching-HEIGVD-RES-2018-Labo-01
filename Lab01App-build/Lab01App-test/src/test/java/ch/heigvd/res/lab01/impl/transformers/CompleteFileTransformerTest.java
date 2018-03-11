@@ -34,8 +34,6 @@ public class CompleteFileTransformerTest {
     writer.close();
     
     transformer.visit(inputFile);
-    System.out.println(expectedFile.length());
-    System.out.println(outputFile.length());
     assertTrue( FileUtils.contentEquals(expectedFile, outputFile) );
     FileUtils.deleteDirectory(new File("./tmp"));
   }

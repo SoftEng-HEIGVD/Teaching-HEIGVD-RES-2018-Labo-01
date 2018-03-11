@@ -29,7 +29,7 @@ public class DFSFileExplorer implements IFileExplorer {
           explore(f, vistor);
         }
       }
-      for(File f : rootDirectory.listFiles()){
+      for(File f : filesDir){
         if(f.isFile()){
           // show files name
           vistor.visit(f);
