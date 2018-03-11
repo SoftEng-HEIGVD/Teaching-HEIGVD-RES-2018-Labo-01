@@ -78,21 +78,31 @@ public class Application implements IApplication {
         }
     }
 
+    /**
+     * @brief this method fetch quotes from the client and store them in the workspace/quotes/<path> directory of the program
+     * @param numberOfQuotes the number of quotes the user wants to fetch
+     * @throws IOException
+     */
     @Override
     public void fetchAndStoreQuotes(int numberOfQuotes) throws IOException {
+
         clearOutputDirectory();
         QuoteClient client = new QuoteClient();
         for (int i = 0; i < numberOfQuotes; i++) {
             Quote quote = client.fetchQuote();
+
+            //the filename variable gives the syntax of the file name, including its DOM
             String filename = "/quote-" + i + ".utf8";
+
             /* There is a missing piece here!
              * As you can see, this method handles the first part of the lab. It uses the web service
              * client to fetch quotes. We have removed a single line from this method. It is a call to
              * one method provided by this class, which is responsible for storing the content of the
              * quote in a text file (and for generating the directories based on the tags).
              */
-            /*missing method*/
+            /*the missing method is storeQuote, a method used to store the fetched quotes in the program's file hierarchy*/
             storeQuote(quote, filename);
+
             LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
             for (String tag : quote.getTags()) {
                 LOG.info("> " + tag);
@@ -130,63 +140,67 @@ public class Application implements IApplication {
         List<String> tags = quote.getTags();
         String filePath = WORKSPACE_DIRECTORY;
 
+        //if the base diretories do not exist, we create them
         File baseDirecotries1 = new File(filePath);
         if (!baseDirecotries1.exists()) {
-            if (baseDirecotries1.mkdirs()) {
-                System.out.println("directories were created");
-            } else {
-                System.out.println("directories were not created");
-            }
-        } else {
-            System.out.println("directories already exist");
+            baseDirecotries1.mkdirs();
         }
+        //we use the tags of the quote file to generate the file hierarchy in which the quote will be stored
         for (String tag : tags) {
             filePath += "/" + tag;
             File newDirectory = new File(filePath);
+            //for each directory, we check if it already exists. If not, we create it.
             if (!newDirectory.exists()) {
-                if (newDirectory.mkdir()) {
-                    System.out.println("directory was created");
-                } else {
-                    System.out.println("directory was not created");
-                }
-            } else {
-                System.out.println("directory already exist");
+                newDirectory.mkdir();
             }
         }
 
+        //once the directory hierarchy is made, the quote file itself is created.
         File quoteFile = new File(filePath + filename);
         quoteFile.createNewFile();
 
+        //When the file is created, the quote is written inside
         Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(filePath + filename), "UTF8"));
-
         writer.write(quote.getQuote());
+
+        //we close properly the writer
+        writer.flush();
+        writer.close();
 
     }
 
     /**
      * This method uses a IFileExplorer to explore the file system and prints the name of each
      * encountered file and directory.
+     * @param writer, the Writer that allow to write the file path
      */
     void printFileNames(final Writer writer) {
         IFileExplorer explorer = new DFSFileExplorer();
         explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
             @Override
             public void visit(File file) {
-                try {
-                    writer.write(file.getPath() + "\n");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
                 /*
                  * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
                  * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
                  * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
                  */
+
+                try {
+                    //the path of each file is written, each time on a new line
+                    writer.write(file.getPath() + "\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
+    /**
+     * This method return the author name
+     * @return author name
+     */
     @Override
     public String getAuthorEmail() {
         return "loyse.krug@heig-vd.ch";

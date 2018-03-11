@@ -22,23 +22,34 @@ public class Utils {
 
         String spliter;
 
+        //Detection of a splitter in the lines
+        //windows version
         if (lines.indexOf("\r\n") > -1) {
             spliter = "\r\n";
+            //macOS version
         } else if (lines.indexOf("\r") > -1) {
             spliter = "\r";
+            //linux version
         } else if (lines.indexOf("\n") > -1) {
             spliter = "\n";
+            //no splitter found
         } else {
             spliter = "";
         }
 
+
         String[] separatedLines;
-        if(spliter.equals("")){
+        //if there was no splitter, then the method returns a String[], with a "" at index 0 and the only line at index 1
+        if (spliter.equals("")) {
             separatedLines = new String[]{"", lines};
         } else {
+            //the line is splitted in two strings (the first line at index 0, and all the others at index 1)
             separatedLines = lines.split(spliter, 2);
+            //the splitter (removed by the split operation, is re-added at the end of the first line)
             separatedLines[0] += spliter;
-            if(separatedLines.length == 1){
+            //if there was only one line, the split operation returns a String[] with length == 1. In this case, we
+            // add the second element "" at the index 1 of separatedLines
+            if (separatedLines.length == 1) {
                 separatedLines[1] = "";
             }
         }

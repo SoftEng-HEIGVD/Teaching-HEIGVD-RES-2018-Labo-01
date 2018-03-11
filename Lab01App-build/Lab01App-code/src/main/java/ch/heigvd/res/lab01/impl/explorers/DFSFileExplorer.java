@@ -18,17 +18,26 @@ import java.util.List;
  */
 public class DFSFileExplorer implements IFileExplorer {
 
+    /**
+     * @param rootDirectory the directory where to start the traversal
+     * @param vistor        defines the operation to be performed on each file
+     * @breief this method iterates on all the files of the file system, and apply a visit each encountered file
+     */
     @Override
     public void explore(File rootDirectory, IFileVisitor vistor) {
         File[] files = rootDirectory.listFiles();
 
+        //visit of the root file
         vistor.visit(rootDirectory);
 
-        if(files != null) {
+        if (files != null) {
+            //the files must be sorted for the OS may not automatically order the files before processing them
             Arrays.sort(files);
             for (File f : files) {
                 if (f.isFile()) {
                     vistor.visit(f);
+                    //if the file is a directory, there is a recursive call on explore in order to explore the
+                    // sub-directories as well
                 } else if (f.isDirectory()) {
                     explore(f, vistor);
                 }

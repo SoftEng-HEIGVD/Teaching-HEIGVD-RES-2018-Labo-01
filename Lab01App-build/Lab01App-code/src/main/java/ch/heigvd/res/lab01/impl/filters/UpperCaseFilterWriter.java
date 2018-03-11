@@ -16,10 +16,10 @@ public class UpperCaseFilterWriter extends FilterWriter {
     @Override
     public void write(String str, int off, int len) throws IOException {
 
-        int lastIndex = (off + len) < str.length()? (off + len) : str.length();
+        int lastIndex = (off + len) < str.length() ? (off + len) : str.length();
         str = str.substring(off, lastIndex);
 
-        for(int i = 0; i < str.length(); ++i){
+        for (int i = 0; i < str.length(); ++i) {
             write(str.charAt(i));
         }
     }
@@ -27,8 +27,8 @@ public class UpperCaseFilterWriter extends FilterWriter {
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
 
-        int lastIndex = (off + len) < cbuf.length? (off + len) : cbuf.length;
-        for(int i = 0; i < lastIndex - off; ++i){
+        int lastIndex = (off + len) < cbuf.length ? (off + len) : cbuf.length;
+        for (int i = 0; i < lastIndex - off; ++i) {
             write(cbuf[i + off]);
         }
     }
