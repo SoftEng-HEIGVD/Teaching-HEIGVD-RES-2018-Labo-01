@@ -145,6 +145,8 @@ public class Application implements IApplication {
         newFile.createNewFile();
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(newFile), StandardCharsets.UTF_8);
         writer.write(quote.getQuote());
+
+        writer.flush();
         writer.close();
     }
 
@@ -163,6 +165,8 @@ public class Application implements IApplication {
                 try {
                     // write the filename, including the path, to the writer passed in argument
                     writer.write(path.append("\n").toString());
+
+                    writer.flush();
                     writer.close();
                 }
 

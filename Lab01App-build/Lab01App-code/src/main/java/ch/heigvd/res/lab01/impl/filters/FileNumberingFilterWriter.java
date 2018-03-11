@@ -22,8 +22,8 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
-    private int  totalLines;
-    private char previousChar;
+    private int  totalLines;    // total number of lines added to the writer
+    private char previousChar;  // keep the previous written char
 
     public FileNumberingFilterWriter(Writer out) {
         super(out);
@@ -34,23 +34,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
     @Override
     public void write(String str, int off, int len) throws IOException {
         char[] cbuf = str.toCharArray();
-
         write(cbuf, off, len);
-
-        /*String[] strCut = Utils.getNextLine(str);
-        int i = 1;
-        for (; !strCut[0].equals(""); i++) {
-            StringBuilder line = new StringBuilder();
-
-            line.append(i).append('\t').append(strCut[0]);
-            out.write(line.toString());
-
-            strCut = Utils.getNextLine(strCut[1]);
-        }
-
-        StringBuilder lastLine = new StringBuilder();
-        lastLine.append(i).append('\t');
-        out.write(lastLine.toString());*/
     }
 
     @Override
@@ -65,7 +49,6 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(int c) throws IOException {
-
         // beginning of file
         if(totalLines == 0) {
             writeNewLine();
@@ -86,6 +69,13 @@ public class FileNumberingFilterWriter extends FilterWriter {
         previousChar = (char)c;
     }
 
+    /**
+     * this private method write a new line in this specific way:
+     *
+     * "totalLines"\t
+     *
+     * @throws IOException
+     */
     private void writeNewLine() throws IOException {
         StringBuilder newLine = new StringBuilder();
         out.write(newLine.append(++totalLines).append('\t').toString());

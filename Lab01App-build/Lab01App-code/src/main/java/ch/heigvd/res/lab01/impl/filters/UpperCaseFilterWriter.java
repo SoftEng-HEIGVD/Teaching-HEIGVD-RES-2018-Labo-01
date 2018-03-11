@@ -17,7 +17,8 @@ public class UpperCaseFilterWriter extends FilterWriter {
     public void write(String str, int off, int len) throws IOException {
         if(off + len > str.length())
             throw new IllegalArgumentException("invalid size of substring");
-        String s = str.substring(off, off+len);
+
+        String s = str.substring(off, off + len);
         out.write(s.toUpperCase());
     }
 

@@ -18,6 +18,7 @@ public class DFSFileExplorer implements IFileExplorer {
 
     @Override
     public void explore(File rootDirectory, IFileVisitor visitor) {
+
         // visits anyway the rootDirectory
         visitor.visit(rootDirectory);
 

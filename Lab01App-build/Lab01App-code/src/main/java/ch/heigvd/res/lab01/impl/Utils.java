@@ -38,6 +38,7 @@ public class Utils {
                 return splitStringHalf(lines, i+1);
             }
         }
+
         return new String[]{"", lines};
     }
 
