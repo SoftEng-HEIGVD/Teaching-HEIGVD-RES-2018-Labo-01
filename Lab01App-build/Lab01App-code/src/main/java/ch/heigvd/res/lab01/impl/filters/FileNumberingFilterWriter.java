@@ -87,32 +87,38 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-
-      char cValue = (char)c;
-      boolean isBackslashN = false;
+      // if the first line wasn't numbered
       if(!firstLineWritten)
       {
+          // numbering the line
           out.write(String.valueOf(lineNumber));
           out.write('\t');
           firstLineWritten = true;
       }
 
+      // if current character is the '\r' separator
       if(c == '\r'){
+          // we signal it
           isBackslashR = true;
+          // we write the character
           out.write(c);
 
-      }else if(c == '\n'){
-          out.write(c);
+      }else if(c == '\n'){ // if current character is the '\n' separator
+          out.write(c); //we write it
+          // as it will always be either a separator or the last part of the '\r\n' separator,
+          // we print the number and tabulation
           out.write(String.valueOf(++lineNumber));
           out.write('\t');
+          // new line, we'll potentially be searching for a new '\r'
           isBackslashR = false;
-      }else{
-          if(!isBackslashR){
+      }else{ // if it's a commom character
+          if(!isBackslashR){ // if there was no '\r' before we print it
               out.write(c);
-          }else{
+          }else{ //if there was a '\r' before, we need to print number and tabulation, and then the character
               out.write(String.valueOf(++lineNumber));
               out.write('\t');
               out.write(c);
+              // new line, we'll potentially be searching for a new '\r'
               isBackslashR = false;
           }
       }
