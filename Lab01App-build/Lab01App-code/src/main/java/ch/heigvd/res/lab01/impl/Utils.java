@@ -45,9 +45,10 @@ public class Utils {
       return result;
     }
     
+    result[0] = lines.substring(0, indexFirstSeparator + separator.length());
+    result[1] = lines.substring(indexFirstSeparator + separator.length());
     
-    
-    // If there was a separator, we split the String with it.
+    /*// If there was a separator, we split the String with it.
     splitted = lines.split(separator);
     
     // We put the first result in the first place.
@@ -56,7 +57,7 @@ public class Utils {
     // And for all other splitted Strings, we concatenate them into the second result.
     for(int i = 1; i < splitted.length; ++i) {
       result[1] += splitted[i] + separator;
-    }
+    }*/
     
     return result;
   }

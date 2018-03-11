@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author Olivier Liechti
  */
 public class FileNumberingFilterWriter extends FilterWriter {
-  private static int lineNumber = 1;
+  private int lineNumber = 1;
   private String output;
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
@@ -39,8 +39,13 @@ public class FileNumberingFilterWriter extends FilterWriter {
     
     do {
       fLineAndRemaining = Utils.getNextLine(fLineAndRemaining[1]);
-      output += fLineAndRemaining[0] + lineNumber++ + "\t";
       
+      if (fLineAndRemaining[0].isEmpty()) {
+        output += fLineAndRemaining[1];
+        break;
+      } else {
+        output += fLineAndRemaining[0] + lineNumber++ + "\t";
+      }
     } while (!fLineAndRemaining[1].isEmpty());
     
     out.write(output);
