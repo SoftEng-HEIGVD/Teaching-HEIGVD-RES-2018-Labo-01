@@ -120,11 +120,8 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    // We recover the tag list.
-    List<String> tagList = quote.getTags();
-    
-    // For each tag in the list, we add it to the filename path.
-    for (String tag : tagList) {
+    // For each tag, we add it to the filename path.
+    for (String tag : quote.getTags()) {
       filename += "/" + tag;
     }
     

@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
   private int lineNumber = 1;
   private String output;
+  private char lastChar;
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
@@ -58,15 +59,23 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-    if (c != '\n') {
-      output += (char) c;
-      out.write(output);
+    if (lastChar == '\r') {
+      if ((char) c != '\n') {
+        output += lineNumber++ + "\t" + (char) c;
+      } else {
+        output += "\n" + lineNumber++ + "\t";
+      }
     } else {
-      output += "\n" + lineNumber++ + "\t";
-      out.write(output);
+      if (c != '\n') {
+        output += (char) c;
+      } else {
+        output += "\n" + lineNumber++ + "\t";
+      }
     }
-  
+    
+    out.write(output);
     output = "";
+    lastChar = (char) c;
   }
 
 }
