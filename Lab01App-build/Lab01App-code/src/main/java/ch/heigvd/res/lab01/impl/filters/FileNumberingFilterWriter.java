@@ -21,11 +21,11 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
-    private static int nbrLine;
-    private static boolean isNewLine;
+    private static int nbrLine;         //Number of the line written
+    private static boolean isNewLine;   //True if nbrLine has to be written
+    private static char lastCharacter;  //Last character written
 
     public FileNumberingFilterWriter(Writer out) {
-
         super(out);
         nbrLine = 1;
         isNewLine = true;
@@ -47,7 +47,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
             isNewLine = false;
         }
 
-        while(!lineWithSeparator.isEmpty() && !lineWithSeparator.equals("\r")){
+        while(!lineWithSeparator.isEmpty()){
 
             //Get the next lines
             lines = Utils.getNextLine(remainingLines);
@@ -75,7 +75,39 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(int c) throws IOException {
-        String str = String.valueOf((char) c);
-        write(str, 0, str.length());
+
+        String newStr = "";             //Formatted text
+        char currentChar = (char) c;    //Current character to write
+
+        //If \r, don't write the number, because we don't know if the next character is an \n
+        if(currentChar == '\r'){
+            isNewLine = true;
+        }
+        //If \n, write the number and the \r if it was the last character
+        else if(currentChar == '\n'){
+            if(lastCharacter == '\r'){
+                newStr += String.valueOf(lastCharacter);
+            }
+
+            newStr += String.valueOf(currentChar) + nbrLine++ + "\t";
+            isNewLine = false;
+        }
+        //Otherwise write the character, and the \r if it was the last character
+        else{
+            if(isNewLine){
+                if(lastCharacter == '\r'){
+                    newStr += String.valueOf(lastCharacter);
+                }
+
+                newStr += nbrLine++ + "\t";
+            }
+
+            newStr += currentChar;
+            isNewLine = false;
+        }
+
+        //Write the formatted text
+        lastCharacter = currentChar;
+        super.out.write(newStr);
     }
 }
