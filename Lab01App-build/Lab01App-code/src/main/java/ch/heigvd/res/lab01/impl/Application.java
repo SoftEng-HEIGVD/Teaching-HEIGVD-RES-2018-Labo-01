@@ -134,18 +134,25 @@ public class Application implements IApplication {
             folders += "/" + tag;
         }
 
-        //Create sub-folders
-        File pathFolders = new File(folders);
+        FileWriter writer = null;
 
-        if(pathFolders.mkdirs()){
-            File newFile = new File(folders + "/quote-" + quote.getValue().getId() + ".utf8");
+        try{
+            //Create sub-folders
+            File pathFolders = new File(folders);
 
-            //Create the quote file
-            if(newFile.createNewFile()){
+            if(pathFolders.mkdirs()) {
+                folders += "/quote-" + quote.getValue().getId() + ".utf8";
+
+                //Create the quote file
+                writer = new FileWriter(folders);
 
                 //Store the quote into the file created
-                FileWriter writer = new FileWriter(newFile);
                 writer.write(quote.getQuote());
+            }
+        }
+        finally {
+            if(writer != null) {
+                writer.close();
             }
         }
     }
@@ -164,6 +171,12 @@ public class Application implements IApplication {
                  * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
                  * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
                  */
+                try{
+                    writer.write(file.getPath() + "\n");
+                }
+                catch(IOException e){
+                    System.out.println("The path and name of the file can't be written");
+                }
             }
         });
     }
