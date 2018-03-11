@@ -24,6 +24,7 @@ public class Utils {
     String[] arrayOfLines = {"",""};
     final int indexOfBSlashN = lines.indexOf('\n');
     final int indexOfBSlashR = lines.indexOf('\r');
+
     if(!lines.isEmpty()){ // if line is empty we do nothing
        if(indexOfBSlashN >= 0) { // It's like '\n' exist
          arrayOfLines[0] = lines.substring(0, indexOfBSlashN + 1);

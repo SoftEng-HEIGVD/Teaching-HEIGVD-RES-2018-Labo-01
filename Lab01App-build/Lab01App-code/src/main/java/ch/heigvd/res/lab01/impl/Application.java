@@ -21,6 +21,7 @@ package ch.heigvd.res.lab01.impl;
 /**
  *
  * @author Olivier Liechti
+ * @author GuillaumeBlanco
  */
 public class Application implements IApplication {
 
@@ -128,7 +129,7 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
 
-      List<String> listDirPath = quote.getTags();// containes the path as a list of string
+      List<String> listDirPath = quote.getTags();// Containes the path as a list of string
       StringBuilder dirPath = new StringBuilder(WORKSPACE_DIRECTORY); // Create a new sb who begin by ./workspace/quotes
 
       for(String dir : listDirPath) { // We create the path as a string
