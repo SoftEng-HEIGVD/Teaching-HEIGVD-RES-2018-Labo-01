@@ -30,13 +30,13 @@ public class Utils {
         } else {
             pos = lines.indexOf("\r");
         }
-        String lignes[] = new String[2];
-        lignes[1] = lines.substring(pos+1);
+        String linesTab[] = new String[2];
+        linesTab[1] = lines.substring(pos+1);
         if(pos!=-1)
-        lignes[0] = lines.substring(0,pos+1);
+        linesTab[0] = lines.substring(0,pos+1);
         else
-            lignes[0]="";
-        return lignes;
+            linesTab[0]="";
+        return linesTab;
     }
 
 }

@@ -93,7 +93,7 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
              */
-            storeQuote(quote,"quotes-"+i+".utf8" );
+            storeQuote(quote, "quotes-" + i + ".utf8");
             LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
             for (String tag : quote.getTags()) {
                 LOG.info("> " + tag);
@@ -130,12 +130,16 @@ public class Application implements IApplication {
      */
     void storeQuote(Quote quote, String filename) throws IOException {
         List<String> quotes = quote.getTags();
-        String directory = WORKSPACE_DIRECTORY;
+        StringBuilder directory = new StringBuilder(WORKSPACE_DIRECTORY);
         for (String q : quotes) {
-            directory = directory + "/" + q;
+            directory.append("/" + q);
         }
-        File file=new File(directory+filename);
+        File file = new File(directory + "/" + filename);
         file.mkdirs();
+        Writer writer = new OutputStreamWriter(new FileOutputStream(file), "utf-8");
+        writer.write(quote.getQuote());
+        writer.flush();
+        writer.close();
     }
 
     /**
@@ -152,8 +156,8 @@ public class Application implements IApplication {
                     * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
                     * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
                     * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-                    */
-                    writer.write(WORKSPACE_DIRECTORY+"/"+file.getName());
+                     */
+                    writer.write(WORKSPACE_DIRECTORY + "/" + file.getName());
                 } catch (IOException ex) {
                     Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
                 }
