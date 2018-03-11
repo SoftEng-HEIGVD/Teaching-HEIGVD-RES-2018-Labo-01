@@ -105,7 +105,7 @@ public class Application implements IApplication {
    */
   void createOutputDirectory() {
     if (!(new File(WORKSPACE_DIRECTORY)).mkdirs())
-      LOG.info("Error during creation of working directory.");
+      LOG.severe("Impossible to write on disk");
   }
   
   /**
@@ -135,10 +135,11 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
     List<String> tags = quote.getTags();
-    String path = String.join("/", tags);
-    if (!(new File(WORKSPACE_DIRECTORY + "/" + path)).mkdirs())
-      LOG.severe("Error while creating folders " + path + " for storing " + filename);
+    String path = String.join("/", tags); // We create the path with / delimiters
+    if (!(new File(WORKSPACE_DIRECTORY + "/" + path)).mkdirs()) // We create the directory hierarchie
+      LOG.severe("Impossible to write on disk");
 
+    // We create a utf-8 outputStream
     BufferedWriter outputStream = new BufferedWriter(
                                   new OutputStreamWriter(
                                   new FileOutputStream(WORKSPACE_DIRECTORY  + "/" + path + "/" + filename),
@@ -164,7 +165,9 @@ public class Application implements IApplication {
          */
         try {
           writer.write(file.getPath() + "\n");
-        } catch (IOException e) { LOG.severe(e.getMessage()); }
+        } catch (IOException e) {
+          LOG.severe(e.getMessage());
+        }
       }
     });
   }
@@ -175,7 +178,7 @@ public class Application implements IApplication {
   }
 
   @Override
-  public void processQuoteFiles() throws IOException {
+  public void processQuoteFiles() {
     IFileExplorer explorer = new DFSFileExplorer();
     explorer.explore(new File(WORKSPACE_DIRECTORY), new CompleteFileTransformer());    
   }
