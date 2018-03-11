@@ -24,9 +24,9 @@ public class Utils {
      result[0] = result[1] = ""; // initialization in case if there is no new line 
                                 // character at the end we will send an empty string
      
-     int index = lines.indexOf("\n"); // check for new line character \n
+     int index = lines.indexOf("\n"); // check for new line character \n (WIN and Linux tests)
      
-     if(index == -1) { //if there is no \n, we check for \r
+     if(index == -1) { //if there is no \n, we check for \r (MAC test)
         index = lines.indexOf("\r");
      }
      

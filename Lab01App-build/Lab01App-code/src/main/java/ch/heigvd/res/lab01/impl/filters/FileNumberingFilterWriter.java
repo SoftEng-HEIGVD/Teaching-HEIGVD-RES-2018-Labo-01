@@ -19,7 +19,8 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
-  
+  private Boolean flag = true;
+  private int lineNumber = 1;
   
   public FileNumberingFilterWriter(Writer out) {
     super(out);
@@ -27,18 +28,39 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-     
-     
+     this.write(str.toCharArray(), off, len);
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    
+    for(int i = 0; i < len; i++){
+       this.write(cbuf[i + off]);
+    }
   }
 
   @Override
   public void write(int c) throws IOException {
+    if(lineNumber == 1) {
+       newLine();
+    }
+     
+    if(flag && c != '\n'){
+       newLine();
+    }
     
+    super.write(c);
+    if (c == '\r') {
+       flag = true;
+    }
+    
+    if(c == '\n') {
+       newLine();
+    }
+  }
+  
+  public void newLine() throws IOException {
+     out.write(lineNumber++ + "\t");
+     flag = false;
   }
 
 }

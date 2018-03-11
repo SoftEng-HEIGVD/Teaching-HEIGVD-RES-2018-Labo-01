@@ -138,7 +138,7 @@ public class Application implements IApplication {
      
      new File(pathDirectory.toString()).mkdirs();
      
-     counter++;
+     counter++; // file numbering
      pathDirectory.append("quote-" + counter + ".utf8");
      File file = new File(pathDirectory.toString());
      
