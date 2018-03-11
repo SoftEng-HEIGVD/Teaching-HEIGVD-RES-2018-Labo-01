@@ -120,25 +120,23 @@ public class Application implements IApplication {
 	 * @throws IOException
 	 */
 	void storeQuote(Quote quote, String filename) throws IOException {
-		String fileSeparator = File.separator;
+		String fileSeparator = File.separator; // contains the system-dependent default name-separator character
 		StringBuilder path = new StringBuilder(WORKSPACE_DIRECTORY + fileSeparator);
-		List<String> tags = quote.getTags();
+		List<String> tags = quote.getTags(); // gets all the tags of the quote.
 		
-		for (String tag : tags) {
-			path.append(fileSeparator).append(tag);
+		for (String tag : tags) { // create the path depending on the tags of this quote.
+			path.append(tag).append(fileSeparator); // gives "./workspace/quotes/A/B/C/" for quote with tags A, B and C.
 		}
 		
-		//create the directories if it's necessary, else do nothing
 		File dir = new File(path.toString());
-		dir.mkdirs();
+		if (!dir.exists()) { // if the directory does not exist, we try to create it
+			dir.mkdirs();
+		}
 		
-		//create the file
-		path.append(fileSeparator + filename);
-		File file = new File(path.toString());
+		File file = new File(path.append(filename).toString()); // We create the file
 		
-		//write the quote in the file
 		BufferedWriter writer = new BufferedWriter(new PrintWriter(file));
-		writer.write(quote.getQuote());
+		writer.write(quote.getQuote()); // we write the quote in the file, then we flush and close the file.
 		writer.flush();
 		writer.close();
 	}

@@ -25,23 +25,22 @@ public class Utils {
 		String tabToReturn[] = new String[2];
 		int indexSeparator = lines.indexOf(WINDOWS);
 		
-		if (indexSeparator == -1) { // true if the caracter '\r\n' doesn't exist
+		if (indexSeparator == -1) { // true if there is no WINDOWS separator sequence
 			indexSeparator = lines.indexOf(OSX);
-			// Does the caract \r exist
-			if (indexSeparator == -1) { // true if the caracters '\r\n' and '\r' don't exist
+			if (indexSeparator == -1) { // true if there is no WINDOWS separator nor OSX separator sequence.
 				indexSeparator = lines.indexOf(LINUX);
-				// Does the caract \n exist
-				if (indexSeparator == -1) { // true if the caracters '\r\n', '\r' and '\n' doesn't exist
+				if (indexSeparator == -1) { // true if there is any separator sequence.
 					tabToReturn[0] = ""; // no separator found -> ""
 					tabToReturn[1] = lines;  // no separator means we have only one line -> return the whole line
 					return tabToReturn;
 				}
 			}
-			tabToReturn[0] = lines.substring(0, indexSeparator + 1); // split the string from first char to the separator (included)
+			// Done if there is OSX or LINUX separator only
+			tabToReturn[0] = lines.substring(0, indexSeparator + 1); // split the string from first char to the OSX or LINUX separator (included)
 			tabToReturn[1] = lines.substring(indexSeparator + 1, lines.length()); // contains the remaining text
-		} else {
-			tabToReturn[0] = lines.substring(0, indexSeparator + 2); // split the string from first char to the separator (included) -> +2 because Windows separator takes 2 char
-			tabToReturn[1] = lines.substring(indexSeparator + 2, lines.length());// contains the remaining text
+		} else { // true only if there is a WINDOWS separator sequence
+			tabToReturn[0] = lines.substring(0, indexSeparator + 2); // split the string from first char to the WINDOWS separator (included) -> +2 because Windows separator takes 2 char
+			tabToReturn[1] = lines.substring(indexSeparator + 2, lines.length()); // contains the remaining text
 		}
 		return tabToReturn;
 	}

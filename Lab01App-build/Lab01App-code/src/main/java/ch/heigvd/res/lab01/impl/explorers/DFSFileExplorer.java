@@ -23,12 +23,12 @@ public class DFSFileExplorer implements IFileExplorer {
 		if (rootDirectory != null) {
 			File[] tabFiles = rootDirectory.listFiles();
 			if (tabFiles != null) {
-				Arrays.sort(tabFiles);
+				Arrays.sort(tabFiles); // Sort the tabFiles to visit files and folder by alphabetical order
 				for (File tabFile : tabFiles) {
-					if (tabFile.isDirectory()) {
+					if (tabFile.isDirectory()) { // if directory -> explore the directory
 						explore(tabFile, visitor);
 					} else {
-						visitor.visit(tabFile);
+						visitor.visit(tabFile); // if file -> visit the file
 					}
 				}
 			}

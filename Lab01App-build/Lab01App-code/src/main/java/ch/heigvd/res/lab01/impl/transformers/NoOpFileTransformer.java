@@ -17,7 +17,7 @@ public class NoOpFileTransformer extends FileTransformer {
 		 * (no uppercase, no line number, etc.). So, we don't need to decorate the writer connected to
 		 * the output file at all. Just uncomment the following line and get rid of the UnsupportedOperationException and
 		 * you will be all set.
-		 */ // DONE
+		 */
 		return writer;
 	}
 	
