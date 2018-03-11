@@ -21,6 +21,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
       return;
     }
 
+
       for(int i = off; i < off+len; ++i){
         super.write(Character.toUpperCase(str.charAt(i)));
       }
