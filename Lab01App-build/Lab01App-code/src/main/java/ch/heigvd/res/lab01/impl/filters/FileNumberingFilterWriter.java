@@ -53,12 +53,20 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    write(String.valueOf(cbuf), off, len);
   }
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    if (c != '\n') {
+      output += (char) c;
+      out.write(output);
+    } else {
+      output += "\n" + lineNumber++ + "\t";
+      out.write(output);
+    }
+  
+    output = "";
   }
 
 }
