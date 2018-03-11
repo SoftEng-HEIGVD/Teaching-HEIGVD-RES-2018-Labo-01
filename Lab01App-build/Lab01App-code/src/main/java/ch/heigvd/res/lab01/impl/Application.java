@@ -92,7 +92,7 @@ public class Application implements IApplication {
             Quote quote = client.fetchQuote();
 
             //the filename variable gives the syntax of the file name, including its DOM
-            String filename = "/quote-" + i + ".utf8";
+            String filename = File.separator + "quote-" + i + ".utf8";
 
             /* There is a missing piece here!
              * As you can see, this method handles the first part of the lab. It uses the web service
@@ -140,14 +140,14 @@ public class Application implements IApplication {
         List<String> tags = quote.getTags();
         String filePath = WORKSPACE_DIRECTORY;
 
-        //if the base diretories do not exist, we create them
+        //if the base directories do not exist, we create them
         File baseDirecotries1 = new File(filePath);
         if (!baseDirecotries1.exists()) {
             baseDirecotries1.mkdirs();
         }
         //we use the tags of the quote file to generate the file hierarchy in which the quote will be stored
         for (String tag : tags) {
-            filePath += "/" + tag;
+            filePath += File.separator + tag;
             File newDirectory = new File(filePath);
             //for each directory, we check if it already exists. If not, we create it.
             if (!newDirectory.exists()) {
