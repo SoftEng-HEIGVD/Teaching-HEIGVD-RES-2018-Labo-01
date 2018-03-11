@@ -151,12 +151,13 @@ public class Application implements IApplication {
    * encountered file and directory.
    */
   void printFileNames(final Writer writer) {
-    IFileExplorer explorer = new DFSFileExplorer();
+    final IFileExplorer explorer = new DFSFileExplorer();
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
             try {
-               writer.write(file.getPath() + "\n");
+               writer.write(file.getPath());
+                writer.write("\n");
             } catch (IOException ex) {
                LOG.log(Level.SEVERE, "Could not print the name of the encountered file or directory. {0}", ex.getMessage());
                ex.printStackTrace();
