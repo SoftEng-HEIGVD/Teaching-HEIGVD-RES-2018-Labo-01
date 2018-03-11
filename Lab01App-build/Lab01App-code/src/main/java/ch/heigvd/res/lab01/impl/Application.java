@@ -139,16 +139,16 @@ public class Application implements IApplication {
         try{
             //Create sub-folders
             File pathFolders = new File(folders);
+            pathFolders.mkdirs();
 
-            if(pathFolders.mkdirs()) {
-                folders += "/quote-" + quote.getValue().getId() + ".utf8";
+            folders += "/quote-" + quote.getValue().getId() + ".utf8";
 
-                //Create the quote file
-                writer = new FileWriter(folders);
+            //Create the quote file
+            writer = new FileWriter(folders);
 
-                //Store the quote into the file created
-                writer.write(quote.getQuote());
-            }
+            //Store the quote into the file created
+            writer.write(quote.getQuote());
+
         }
         finally {
             if(writer != null) {

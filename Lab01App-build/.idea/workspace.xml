@@ -20,13 +20,13 @@
       <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="163" column="23" lean-forward="false" selection-start-line="163" selection-start-column="9" selection-end-line="163" selection-end-column="23" />
+            <state relative-caret-position="124">
+              <caret line="126" column="19" lean-forward="false" selection-start-line="126" selection-start-column="9" selection-end-line="126" selection-end-column="19" />
               <folding>
-                <element signature="e#6033#6792#0" expanded="true" />
-                <element signature="e#6791#6792#0" expanded="true" />
-                <element signature="e#6851#6852#0" expanded="true" />
-                <element signature="e#6901#6902#0" expanded="true" />
+                <element signature="e#5995#6754#0" expanded="true" />
+                <element signature="e#6753#6754#0" expanded="true" />
+                <element signature="e#6813#6814#0" expanded="true" />
+                <element signature="e#6863#6864#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -45,8 +45,8 @@
       <file leaf-file-name="ApplicationTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="57" column="50" lean-forward="false" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
+            <state relative-caret-position="234">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -65,7 +65,7 @@
       <file leaf-file-name="File.java" pinned="false" current-in-tab="false">
         <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/io/File.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
+            <state relative-caret-position="394">
               <caret line="1350" column="19" lean-forward="false" selection-start-line="1350" selection-start-column="19" selection-end-line="1350" selection-end-column="19" />
               <folding />
             </state>
@@ -355,7 +355,7 @@
       <module name="" />
       <envs />
     </configuration>
-    <configuration name="All in Lab01App-tests (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in Lab01App-tests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="Lab01App-tests" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -425,6 +425,31 @@
       <envs />
       <patterns />
     </configuration>
+    <configuration name="ApplicationTest.theApplicationShouldGenerateTheCorrectNumberOfQuoteFiles" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="ch.heigvd.res.lab01.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Lab01App-tests" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="ch.heigvd.res.lab01.impl" />
+      <option name="MAIN_CLASS_NAME" value="ch.heigvd.res.lab01.impl.ApplicationTest" />
+      <option name="METHOD_NAME" value="theApplicationShouldGenerateTheCorrectNumberOfQuoteFiles" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
     <configuration name="DFSFileExplorerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -437,31 +462,6 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="ch.heigvd.res.lab01.impl.explorers" />
       <option name="MAIN_CLASS_NAME" value="ch.heigvd.res.lab01.impl.explorers.DFSFileExplorerTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="FileNumberingFilterWriterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="ch.heigvd.res.lab01.impl.filters.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Lab01App-tests" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="ch.heigvd.res.lab01.impl.filters" />
-      <option name="MAIN_CLASS_NAME" value="ch.heigvd.res.lab01.impl.filters.FileNumberingFilterWriterTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -536,19 +536,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.FileNumberingFilterWriterTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ApplicationTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (1)" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.DFSFileExplorerTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ApplicationTest.theApplicationShouldBeAbleToGenerateTheListOfFileNames" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.ApplicationTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.DFSFileExplorerTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ApplicationTest.theApplicationShouldBeAbleToGenerateTheListOfFileNames" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ApplicationTest.theApplicationShouldGenerateTheCorrectNumberOfQuoteFiles" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.ApplicationTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ApplicationTest.theApplicationShouldBeAbleToGenerateTheListOfFileNames" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.DFSFileExplorerTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.FileNumberingFilterWriterTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests (1)" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ApplicationTest.theApplicationShouldGenerateTheCorrectNumberOfQuoteFiles" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.All in Lab01App-tests" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ApplicationTest.theApplicationShouldBeAbleToGenerateTheListOfFileNames" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.DFSFileExplorerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -570,31 +570,25 @@
       <workItem from="1520431082317" duration="7679000" />
       <workItem from="1520588677320" duration="461000" />
       <workItem from="1520708260625" duration="20446000" />
-      <workItem from="1520786456466" duration="3288000" />
+      <workItem from="1520786456466" duration="4491000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ApplicationTest - 2018.03.11 at 18h 08m 09s.xml">
-      <configuration name="ApplicationTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApplicationTest - 2018.03.11 at 18h 10m 17s.xml">
-      <configuration name="ApplicationTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApplicationTest - 2018.03.11 at 18h 14m 01s.xml">
-      <configuration name="ApplicationTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApplicationTest - 2018.03.11 at 18h 25m 16s.xml">
-      <configuration name="ApplicationTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="ApplicationTest - 2018.03.11 at 18h 30m 58s.xml">
-      <configuration name="ApplicationTest" configurationId="JUnit" />
+    <history-entry file="All_in_Lab01App-tests - 2018.03.11 at 18h 50m 00s.xml">
+      <configuration name="All in Lab01App-tests" configurationId="JUnit" />
     </history-entry>
     <history-entry file="ApplicationTest - 2018.03.11 at 18h 35m 46s.xml">
       <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ApplicationTest_theApplicationShouldBeAbleToGenerateTheListOfFileNames - 2018.03.11 at 18h 31m 58s.xml">
-      <configuration name="ApplicationTest.theApplicationShouldBeAbleToGenerateTheListOfFileNames" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.11 at 18h 51m 07s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ApplicationTest - 2018.03.11 at 18h 58m 33s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ApplicationTest - 2018.03.11 at 18h 59m 40s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="ApplicationTest_theApplicationShouldBeAbleToGenerateTheListOfFileNames - 2018.03.11 at 18h 32m 22s.xml">
       <configuration name="ApplicationTest.theApplicationShouldBeAbleToGenerateTheListOfFileNames" configurationId="JUnit" />
@@ -605,9 +599,15 @@
     <history-entry file="ApplicationTest_theApplicationShouldBeAbleToGenerateTheListOfFileNames - 2018.03.11 at 18h 35m 00s.xml">
       <configuration name="ApplicationTest.theApplicationShouldBeAbleToGenerateTheListOfFileNames" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ApplicationTest_theApplicationShouldGenerateTheCorrectNumberOfQuoteFiles - 2018.03.11 at 18h 53m 31s.xml">
+      <configuration name="ApplicationTest.theApplicationShouldGenerateTheCorrectNumberOfQuoteFiles" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ApplicationTest_theApplicationShouldGenerateTheCorrectNumberOfQuoteFiles - 2018.03.11 at 18h 54m 08s.xml">
+      <configuration name="ApplicationTest.theApplicationShouldGenerateTheCorrectNumberOfQuoteFiles" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41551000" />
+    <option name="totallyTimeSpent" value="42754000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -660,7 +660,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="38" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java</url>
+          <line>35</line>
+          <properties />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="41" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -670,10 +678,10 @@
         <state relative-caret-position="3096">
           <caret line="172" column="43" lean-forward="false" selection-start-line="172" selection-start-column="43" selection-end-line="172" selection-end-column="43" />
           <folding>
-            <element signature="e#6033#6792#0" expanded="true" />
-            <element signature="e#6791#6792#0" expanded="true" />
-            <element signature="e#6851#6852#0" expanded="true" />
-            <element signature="e#6901#6902#0" expanded="true" />
+            <element signature="e#5995#6754#0" expanded="true" />
+            <element signature="e#6753#6754#0" expanded="true" />
+            <element signature="e#6813#6814#0" expanded="true" />
+            <element signature="e#6863#6864#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1040,14 +1048,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/io/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="1350" column="19" lean-forward="false" selection-start-line="1350" selection-start-column="19" selection-end-line="1350" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/io/Writer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
@@ -1056,23 +1056,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/commons-io/commons-io/2.4/commons-io-2.4.jar!/org/apache/commons/io/FileUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="1353" column="0" lean-forward="false" selection-start-line="1353" selection-start-column="0" selection-end-line="1353" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="57" column="50" lean-forward="false" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
+        <state relative-caret-position="234">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="1350" column="19" lean-forward="false" selection-start-line="1350" selection-start-column="19" selection-end-line="1350" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="163" column="23" lean-forward="false" selection-start-line="163" selection-start-column="9" selection-end-line="163" selection-end-column="23" />
+        <state relative-caret-position="124">
+          <caret line="126" column="19" lean-forward="false" selection-start-line="126" selection-start-column="9" selection-end-line="126" selection-end-column="19" />
           <folding>
-            <element signature="e#6033#6792#0" expanded="true" />
-            <element signature="e#6791#6792#0" expanded="true" />
-            <element signature="e#6851#6852#0" expanded="true" />
-            <element signature="e#6901#6902#0" expanded="true" />
+            <element signature="e#5995#6754#0" expanded="true" />
+            <element signature="e#6753#6754#0" expanded="true" />
+            <element signature="e#6813#6814#0" expanded="true" />
+            <element signature="e#6863#6864#0" expanded="true" />
           </folding>
         </state>
       </provider>
