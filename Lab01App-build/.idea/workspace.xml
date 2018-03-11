@@ -14,11 +14,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="ApplicationTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="160" column="45" lean-forward="false" selection-start-line="160" selection-start-column="45" selection-end-line="160" selection-end-column="45" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6483#6484#0" expanded="true" />
+                <element signature="e#6529#6530#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="145" column="11" lean-forward="false" selection-start-line="145" selection-start-column="11" selection-end-line="145" selection-end-column="11" />
+            <state relative-caret-position="28">
+              <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -48,10 +62,10 @@
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Utils.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/explorers/DFSFileExplorer.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/CompleteFileTransformer.java" />
-        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/NoOpFileTransformer.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java" />
         <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/filters/FileNumberingFilterWriter.java" />
+        <option value="$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java" />
       </list>
     </option>
   </component>
@@ -535,29 +549,29 @@
     <history-entry file="ApplicationTest - 2018.03.11 at 04h 21m 20s.xml">
       <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CompleteFileTransformerTest - 2018.03.11 at 04h 20m 09s.xml">
-      <configuration name="CompleteFileTransformerTest" configurationId="JUnit" />
+    <history-entry file="ApplicationTest - 2018.03.11 at 04h 25m 04s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ApplicationTest - 2018.03.11 at 04h 26m 57s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ApplicationTest - 2018.03.11 at 04h 27m 00s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ApplicationTest - 2018.03.11 at 04h 27m 13s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ApplicationTest - 2018.03.11 at 04h 29m 43s.xml">
+      <configuration name="ApplicationTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="CompleteFileTransformerTest - 2018.03.11 at 04h 20m 54s.xml">
       <configuration name="CompleteFileTransformerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DFSFileExplorerTest - 2018.03.11 at 04h 20m 33s.xml">
-      <configuration name="DFSFileExplorerTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="DFSFileExplorerTest - 2018.03.11 at 04h 21m 00s.xml">
       <configuration name="DFSFileExplorerTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FileNumberingFilterWriterTest - 2018.03.11 at 04h 19m 49s.xml">
-      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="FileNumberingFilterWriterTest - 2018.03.11 at 04h 20m 40s.xml">
-      <configuration name="FileNumberingFilterWriterTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="FileTransformerTest - 2018.03.11 at 04h 21m 12s.xml">
       <configuration name="FileTransformerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="UpperCaseFilterWriterTest - 2018.03.11 at 04h 20m 48s.xml">
-      <configuration name="UpperCaseFilterWriterTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="UtilsTest - 2018.03.11 at 04h 21m 06s.xml">
       <configuration name="UtilsTest" configurationId="JUnit" />
@@ -600,7 +614,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java</url>
+          <line>143</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -654,10 +676,8 @@
           <caret line="94" column="42" lean-forward="true" selection-start-line="94" selection-start-column="42" selection-end-line="94" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5716#6356#0" expanded="true" />
-            <element signature="e#6355#6356#0" expanded="true" />
-            <element signature="e#6476#6477#0" expanded="true" />
-            <element signature="e#6522#6523#0" expanded="true" />
+            <element signature="e#6483#6484#0" expanded="true" />
+            <element signature="e#6529#6530#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -775,41 +795,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/ParentRunner.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="202" column="0" lean-forward="false" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/transformers/FileTransformer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
           <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
-          <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5716#6356#0" expanded="true" />
-            <element signature="e#6355#6356#0" expanded="true" />
-            <element signature="e#6476#6477#0" expanded="true" />
-            <element signature="e#6522#6523#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -877,11 +867,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/BlockJUnit4ClassRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/runners/ParentRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="208" column="0" lean-forward="false" selection-start-line="208" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Lab01App-test/src/test/java/ch/heigvd/res/lab01/impl/ApplicationTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="145" column="11" lean-forward="false" selection-start-line="145" selection-start-column="11" selection-end-line="145" selection-end-column="11" />
+        <state relative-caret-position="28">
+          <caret line="143" column="0" lean-forward="false" selection-start-line="143" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Lab01App-code/src/main/java/ch/heigvd/res/lab01/impl/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="160" column="45" lean-forward="false" selection-start-line="160" selection-start-column="45" selection-end-line="160" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6483#6484#0" expanded="true" />
+            <element signature="e#6529#6530#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
