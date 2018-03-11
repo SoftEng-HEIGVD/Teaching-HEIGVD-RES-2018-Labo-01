@@ -12,22 +12,25 @@ import java.util.Arrays;
  * files in the directory and then moves into the subdirectories.
  * 
  * @author Olivier Liechti
+ * @author Guillaume Blanco
  */
 public class DFSFileExplorer implements IFileExplorer {
 
   @Override
   public void explore(File rootDirectory, IFileVisitor vistor) {
 
-
       if (rootDirectory == null)
           return;
+
       vistor.visit(rootDirectory);
-      File[] arrayOfChildren = rootDirectory.listFiles();
-      if (arrayOfChildren == null)
+
+      File[] arrayOfChildrens = rootDirectory.listFiles();
+      if (arrayOfChildrens == null)
           return;
-      Arrays.sort(arrayOfChildren);
-      for ( File f : arrayOfChildren ) {
-          explore(f,vistor);
+      Arrays.sort(arrayOfChildrens); // test ask that the childrens(files) need to be sort
+
+      for ( File children : arrayOfChildrens ) { // for every children we apply the function
+          explore(children,vistor);
       }
     }
 

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 /**
  *
  * @author Olivier Liechti
+ * @author GuillaumeBlanco
  */
 public class Utils {
 
@@ -21,13 +22,15 @@ public class Utils {
    */
   public static String[] getNextLine(String lines) {
     String[] arrayOfLines = {"",""};
-    if(!lines.isEmpty()){
-       if(lines.indexOf('\n') >= 0) {
-         arrayOfLines[0] = lines.substring(0, lines.indexOf('\n') + 1);
-         arrayOfLines[1] = lines.substring(lines.indexOf('\n') + 1);
-       }else if(lines.indexOf('\r') >= 0){
-         arrayOfLines[0] = lines.substring(0, lines.indexOf('\r') + 1);
-         arrayOfLines[1] = lines.substring(lines.indexOf('\r') + 1);
+    final int indexOfBSlashN = lines.indexOf('\n');
+    final int indexOfBSlashR = lines.indexOf('\r');
+    if(!lines.isEmpty()){ // if line is empty we do nothing
+       if(indexOfBSlashN >= 0) { // It's like '\n' exist
+         arrayOfLines[0] = lines.substring(0, indexOfBSlashN + 1);
+         arrayOfLines[1] = lines.substring(indexOfBSlashN + 1);
+       }else if(indexOfBSlashR >= 0){ //It's like '\r' exist
+         arrayOfLines[0] = lines.substring(0, indexOfBSlashR + 1);
+         arrayOfLines[1] = lines.substring(indexOfBSlashR + 1);
        }else {
          arrayOfLines[1] = lines;
        }

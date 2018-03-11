@@ -93,7 +93,7 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
-      storeQuote(quote,"quote-" + i + ".utf8");
+      storeQuote(quote,"quote-" + i + ".utf8"); // We call store quote with a name like this : quote-0.utf8
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -127,18 +127,22 @@ public class Application implements IApplication {
    * @throws IOException
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-      List<String> listDirPath = quote.getTags();
-      StringBuilder dirPath = new StringBuilder(WORKSPACE_DIRECTORY);
-      for(String dir : listDirPath) {
+
+      List<String> listDirPath = quote.getTags();// containes the path as a list of string
+      StringBuilder dirPath = new StringBuilder(WORKSPACE_DIRECTORY); // Create a new sb who begin by ./workspace/quotes
+
+      for(String dir : listDirPath) { // We create the path as a string
           dirPath.append("/");
           dirPath.append(dir);
       }
+
       File  directories = new File(dirPath.toString());
-      directories.mkdirs();
-      File fileQuote = new File(dirPath + "/" + filename);
-      FileOutputStream FOSQuote = new FileOutputStream(fileQuote);
-      Writer writer = new OutputStreamWriter(FOSQuote);
-      writer.write(quote.getQuote());
+      directories.mkdirs(); // We create all the directories
+
+      File fileQuote = new File(dirPath + "/" + filename); // We create the file who will contains the quote
+
+      Writer writer = new OutputStreamWriter( new FileOutputStream(fileQuote), "UTF-8" ); // We create an OutputStream to write in the file
+      writer.write(quote.getQuote()); // We get the quote and write in the file
       writer.flush();
       writer.close();
       }
@@ -158,9 +162,11 @@ public class Application implements IApplication {
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
         try {
-            writer.write(file.getPath() + '\n');
+            writer.write(file.getPath() + '\n'); // We write the path in the write pass in parameter
+                                                    // (we need to add a \n to pass the tests)
         } catch (IOException e){
-            // faire quelque chose !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            LOG.log(Level.SEVERE, "Could not write the path ", e.getMessage());
+            e.printStackTrace();
         }
       }
     });

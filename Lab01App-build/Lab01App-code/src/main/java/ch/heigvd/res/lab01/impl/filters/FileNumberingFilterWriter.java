@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
  * @author Olivier Liechti
+ * @author GuillaumeBlanco
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
@@ -29,34 +30,33 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    write(str.toCharArray(),off,len);
+    write(str.toCharArray(),off,len); // We do all the treatment in write(int c) (so we pass by write(char[] cbuf ...))
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
     for(int i = off; i < (len + off); ++i){
-      write(cbuf[i]);
+      write(cbuf[i]); // We do all the treatment in write(int c)
     }
   }
 
   @Override
   public void write(int c) throws IOException {
 
-    if (lineNumber == 1) {
+    if (lineNumber == 1) { // first line of the file
       out.write(lineNumber++ + "\t");
     }
 
-    if (charBefore == '\r' && c !='\n')
+    if (charBefore == '\r' && c !='\n') // treat the case of \r\n
       out.write(lineNumber++ +"\t");
 
-    if (c == '\n') {
-        out.write("\n" + lineNumber++ + "\t");
-    } else if (c == '\r') {
-      out.write("\r");
-    } else {
-      out.write(c);
+    out.write(c);
+
+    if (c == '\n') { // if we have \n we need a new line
+        out.write( lineNumber++ + "\t");
     }
-    charBefore = c;
+
+    charBefore = c; // keep a track of previous character (to the case of \r\n)
   }
 
 }
