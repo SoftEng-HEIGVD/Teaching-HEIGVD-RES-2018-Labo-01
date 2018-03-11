@@ -20,7 +20,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
   private StringBuilder strBuilder;
   private int lineNb = 1;
-  private char prevChar = 'a';
+  private boolean prevWasR = false;
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
@@ -73,16 +73,27 @@ public class FileNumberingFilterWriter extends FilterWriter {
   }
 
   @Override
-  public void write(int c) throws IOException { //doesn't work for mac os9
+  public void write(int c) throws IOException {
     char c1 = (char) c;
     if (lineNb == 1) { // first line
       super.write(Integer.toString(lineNb++) + '\t', 0, 2);
     }
 
-    if (c1 == '\n') {
-      super.write(c1 + Integer.toString(lineNb++) + '\t', 0, 3);
-    } else {
+    if (c1 == '\r') {
+      prevWasR = true;
+    } else if (c1 == '\n') {
+      if (prevWasR) { // sep is \r\n
+        super.write("\r\n" + Integer.toString(lineNb++) + '\t', 0, 4);
+      } else { // sep is \n
+        super.write(c1 + Integer.toString(lineNb++) + '\t', 0, 3);
+      }
+      prevWasR = false;
+    } else { // current neither \r nor \n
+      if (prevWasR) { // sep is \r
+        super.write("\r" + Integer.toString(lineNb++) + '\t', 0, 3);
+      }
       super.write(c1);
+      prevWasR = false;
     }
   }
 }
