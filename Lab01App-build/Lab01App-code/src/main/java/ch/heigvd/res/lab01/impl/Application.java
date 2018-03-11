@@ -115,7 +115,7 @@ public class Application implements IApplication {
      *
      * - with quote.getTags(), it gets a list of tags and uses
      *   it to create sub-folders (for instance, if a quote has three tags "A", "B" and
-     *   "C", it will be stored in /quotes/A/B/C/quotes-n.utf8.
+     *   "C", it will be stored in /quotes/A/B/C/quote-n.utf8.
      *
      * - with quote.getQuote(), it has access to the text of the quote. It stores
      *   this text in UTF-8 file.
@@ -138,7 +138,7 @@ public class Application implements IApplication {
         File pathFolders = new File(folders);
 
         if(pathFolders.mkdirs()){
-            File newFile = new File(folders + "/quotes-" + quote.getValue().getId() + ".utf8");
+            File newFile = new File(folders + "/quote-" + quote.getValue().getId() + ".utf8");
 
             //Create the quote file
             if(newFile.createNewFile()){
