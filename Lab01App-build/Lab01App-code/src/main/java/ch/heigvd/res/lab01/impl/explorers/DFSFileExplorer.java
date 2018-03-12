@@ -19,11 +19,8 @@ public class DFSFileExplorer implements IFileExplorer {
 
     @Override
     public void explore(File rootDirectory, IFileVisitor vistor)  {
-        try {
-            vistor.visit(rootDirectory);
-        } catch (IOException ioe) {
 
-        }
+        vistor.visit(rootDirectory);
         if (rootDirectory.listFiles() != null)
             try {
                 dfs(rootDirectory, vistor);
@@ -38,6 +35,9 @@ public class DFSFileExplorer implements IFileExplorer {
      */
     private void dfs(File root, IFileVisitor visitor) throws IOException {
         File[] files = root.listFiles();
+
+        if (files == null)
+            return;
         Arrays.sort(files);
         for (File file : files) {
             visitor.visit(file);
