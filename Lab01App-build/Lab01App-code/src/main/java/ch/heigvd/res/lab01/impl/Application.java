@@ -134,35 +134,42 @@ public class Application implements IApplication {
   void storeQuote(Quote quote, String filename) throws IOException {
     // A stringBuilder is faster than a string when we append in a loop.
     // https://stackoverflow.com/questions/1532461/stringbuilder-vs-string-concatenation-in-tostring-in-java
-    StringBuilder sbPath = new StringBuilder(WORKSPACE_DIRECTORY);
-    String path;
-    File dir;
-    String file;
+    StringBuilder pathTo = new StringBuilder(WORKSPACE_DIRECTORY);
+    File dir = new File(pathTo.toString());
     File quoteFile;
     
-    // Get the path from the tags.
+    // Create the workspace if it doesn't exist and if it can write on the disk.
+    if(!dir.exists()){
+      if(!dir.mkdir()){
+        LOG.log(Level.SEVERE, "Impossible to write on disk");
+        throw new RuntimeException("Impossible to write on disk");
+      }
+    }
+    
+    // Get the path to and create the directories from the tags if it doesn't exist and if it can write on the disk.
     for (String tag : quote.getTags()) {
-      sbPath.append(File.separator + tag);
+      pathTo.append(File.separator + tag);
+      dir = new File(pathTo.toString());
+      if(!dir.exists()){
+        if(!dir.mkdir()){
+          LOG.log(Level.SEVERE, "Impossible to write on disk");
+          throw new RuntimeException("Impossible to write on disk");
+        }
+      }
     }
-    path = sbPath.toString();
     
-    // Create the directories and subdirectories.
-    dir = new File(sbPath.toString());
-    if (!dir.mkdirs()) {
-      LOG.log(Level.SEVERE, "Impossible to write on disk");
-      //throw new RuntimeException("Impossible to write on disk");
-    }
-    
-    // Get the path to and create the quote file
-    file = path + File.separator + filename;
-    quoteFile = new File(file);
-    if (!quoteFile.createNewFile()) {
-      LOG.log(Level.SEVERE, "Impossible to write on disk");
-      //throw new RuntimeException("Impossible to write on disk");
+    // Get the path to and create the quote file if it doesn't exist and if it can write on the disk.
+    pathTo.append(File.separator + filename);
+    quoteFile = new File(pathTo.toString());
+    if(!quoteFile.exists()) {
+      if (!quoteFile.createNewFile()) {
+        LOG.log(Level.SEVERE, "Impossible to write on disk");
+        throw new RuntimeException("Impossible to write on disk");
+      }
     }
     
     // Write the content of the quote in the file.
-    Writer writer = new OutputStreamWriter(new FileOutputStream(file));
+    Writer writer = new OutputStreamWriter(new FileOutputStream(pathTo.toString()));
     writer.write(quote.getQuote());
     writer.flush();
     writer.close();
