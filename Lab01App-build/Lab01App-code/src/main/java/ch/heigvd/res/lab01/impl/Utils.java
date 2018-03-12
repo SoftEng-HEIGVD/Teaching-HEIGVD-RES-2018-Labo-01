@@ -20,7 +20,43 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    String[] result = {"", lines};
+    // If there is no line separator
+    if (!lines.contains("\r") && !lines.contains("\n") && !lines.contains("\r\n")) {
+        return result;
+    }
+
+    boolean maybeAnewLine = false; // If we detect a '\r' => maybeANewLine = true
+
+    for (int i = 0; i < lines.length(); ++i) { // for each characters of lines
+
+        // New lines on MACOS9 (1)
+        if (lines.charAt(i) == '\r') {
+            // if we are at the end of the buffer
+            if (i == lines.length() - 1){
+                result[0] = lines.substring(0, i + 1);
+                result[1] = "";
+            }
+            // we are not at the end of the buffer
+            else {
+                maybeAnewLine = true;
+            }
+        }
+        // New lines on Windows and Unix
+        else if (lines.charAt(i) == '\n') {
+            result[0] = lines.substring(0, i + 1);
+            result[1] = lines.substring(i + 1);
+            break;
+        }
+        // New lines on MACOS9 (2)
+        else if (maybeAnewLine) {
+            result[0] = lines.substring(0, i);
+            result[1] = lines.substring(i);
+            break;
+        }
+
+    }
+    return result;
   }
 
 }
