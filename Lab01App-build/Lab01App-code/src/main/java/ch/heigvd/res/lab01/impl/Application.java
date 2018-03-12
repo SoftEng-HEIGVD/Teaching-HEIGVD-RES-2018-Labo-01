@@ -16,6 +16,7 @@ import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
+import sun.font.CreatedFontTracker;
 
 /**
  *
@@ -92,6 +93,11 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
+
+
+      storeQuote(quote, quote.getValue().getId()+ ".utf8");
+
+
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -125,7 +131,33 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
+    StringBuilder path = new StringBuilder(WORKSPACE_DIRECTORY);
+    for(String s :quote.getTags()){
+        path.append(File.separator);
+        path.append(s);
+    }
+    
+    File dir = new File(path.toString());
+    
+    // Directory création
+    try{
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        
+        path.append(File.separator);
+        path.append(filename);
+
+        Writer osw = new OutputStreamWriter(new FileOutputStream(path.toString()),  "UTF-8");
+        osw.write(quote.getQuote());
+        osw.close();
+        
+        
+    } catch (IOException e){
+        LOG.log(Level.SEVERE, "Can't Store Quote.", e.getMessage());
+        e.printStackTrace();
+    } 
   }
   
   /**
@@ -142,13 +174,21 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
+      try{
+        writer.write(file.getPath() + "\n");
+      } catch (IOException e){
+        LOG.log(Level.SEVERE, "Can't Store Quote.", e.getMessage());
+        e.printStackTrace();
+      }
+
       }
     });
   }
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
+    return "jeremie.chatillon@@heig-vd.ch";
   }
 
   @Override
@@ -156,5 +196,4 @@ public class Application implements IApplication {
     IFileExplorer explorer = new DFSFileExplorer();
     explorer.explore(new File(WORKSPACE_DIRECTORY), new CompleteFileTransformer());    
   }
-
 }

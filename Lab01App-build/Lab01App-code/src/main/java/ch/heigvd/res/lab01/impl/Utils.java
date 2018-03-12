@@ -20,7 +20,25 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    // Ref for .split() https://stackoverflow.com/questions/3481828/how-to-split-a-string-in-java
+    String[] ret = new String[2];
+
+
+     if(lines.contains("\r\n")){
+       ret = lines.split("\r\n", 2);
+       ret[0] += "\r\n";
+     }  else if(lines.contains("\n")){
+       ret = lines.split("\n", 2);
+       ret[0] += "\n";
+     } else if(lines.contains("\r")){
+       ret = lines.split("\r", 2);
+       ret[0] += "\r";
+     } else {
+       ret[0] = "";
+       ret[1] = lines;
+     }
+
+     return ret;
   }
 
 }
