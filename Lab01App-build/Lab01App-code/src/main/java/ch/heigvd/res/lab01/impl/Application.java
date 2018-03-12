@@ -138,7 +138,7 @@ public class Application implements IApplication {
         path = path + File.separator + filename; // add filename
         File files = new File(path); // we create file
         files.getParentFile().mkdirs(); //we create parent repertory
-        Writer Writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF-8"));
+        BufferedWriter Writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "UTF-8"));
         Writer.write(quote.getQuote());
         Writer.close();
     }
