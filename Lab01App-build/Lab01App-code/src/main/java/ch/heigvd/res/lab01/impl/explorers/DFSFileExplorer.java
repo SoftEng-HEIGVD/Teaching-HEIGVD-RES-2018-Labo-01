@@ -18,8 +18,13 @@ import java.util.Arrays;
 
 public class DFSFileExplorer implements IFileExplorer {
 
+<<<<<<< HEAD
   @Override
   public void explore(File rootDirectory, IFileVisitor vistor) {
+=======
+    @Override
+    public void explore(File rootDirectory, IFileVisitor vistor) {
+>>>>>>> f97ef05725c91e591f4ab579d5896b1500bf67af
 
     vistor.visit(rootDirectory);
 
