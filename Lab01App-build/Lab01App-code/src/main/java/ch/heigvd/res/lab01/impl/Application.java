@@ -125,13 +125,13 @@ public class Application implements IApplication {
     //create directories
     String dirsToCreate = "";
     for (String tag : quote.getTags()) {
-      dirsToCreate += "/" + tag;
+      dirsToCreate += File.separatorChar + tag;
     }
     File dir = new File(WORKSPACE_DIRECTORY + dirsToCreate);
     dir.mkdirs();
 
     //create file
-    File file = new File(dir.toString() + "/" + filename);
+    File file = new File(dir.toString() + File.separatorChar + filename);
 
     //write to file
     Writer writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");

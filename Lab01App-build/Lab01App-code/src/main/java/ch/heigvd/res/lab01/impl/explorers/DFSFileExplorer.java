@@ -18,7 +18,7 @@ public class DFSFileExplorer implements IFileExplorer {
 
   @Override
   public void explore(File rootDirectory, IFileVisitor visitor) {
-    visitor.visit(rootDirectory);
+    visitor.visit(rootDirectory); // visit dir when traversing
     File[] files = rootDirectory.listFiles();
     if (files != null) {
       Arrays.sort(files);
@@ -27,7 +27,7 @@ public class DFSFileExplorer implements IFileExplorer {
           explore(dir, visitor);
         }
       }
-
+      // Files are visited while getting back up
       for (File file : files) {
         if (!file.isDirectory()) {
           visitor.visit(file);

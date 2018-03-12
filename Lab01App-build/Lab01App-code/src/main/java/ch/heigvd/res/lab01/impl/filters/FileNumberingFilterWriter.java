@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * When filter encounters a line separator, it sends it to the decorated writer.
  * It then sends the line number and a tab character, before resuming the write
  * process.
- * <p>
+ *
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
  * @author Olivier Liechti
@@ -44,13 +44,13 @@ public class FileNumberingFilterWriter extends FilterWriter {
           break;
         case '\r':
           if (i + 1 != correctLengthString.length()) { // not last char
-            if (correctLengthString.charAt(i + 1) == '\n') { // next char is \n -> new line Windows
+            if (correctLengthString.charAt(i + 1) == '\n') { // next char is \n -> new line
               strBuilder.append("\r\n" + Integer.toString(lineNb++) + '\t');
               i++; // \n handled
-            } else { //next char is \n -> new line MAC OS9
+            } else { //next char is \n -> new line
               strBuilder.append("\r" + Integer.toString(lineNb++) + '\t');
             }
-          } else { // \r last char -> new line MAC OS9
+          } else { // \r last char -> new line MAC OS9 only
             strBuilder.append("\r" + Integer.toString(lineNb++) + '\t');
           }
           break;
