@@ -26,16 +26,21 @@ public class Utils {
         boolean canReturn = false;
         String[] result = new String[2];
 
+        //we go through the given string, until we met a break line
         for(int i = 0; i < lines.length(); i++) {
+
+            //MACOS and Windows break line
             if(lines.charAt(i) == CARRIAGE){
+                //windows second part of break line
                 if(i != lines.length() - 1 && lines.charAt(i + 1) == LINEFEED){
                     i++;
                 }
                 canReturn = true;
-            } else if(lines.charAt(i) == LINEFEED){
+            } else if(lines.charAt(i) == LINEFEED){ // Linux break line
                 canReturn = true;
             }
 
+            //if we encounter a break line of the third type, we split the string
             if(canReturn){
                 result[0] = lines.substring(0, i+1);
                 result[1] = lines.substring(i + 1);
@@ -43,6 +48,7 @@ public class Utils {
                 return result;
             }
         }
+        //if no break line were encountered :
         result[0] = "";
         result[1] = lines;
 

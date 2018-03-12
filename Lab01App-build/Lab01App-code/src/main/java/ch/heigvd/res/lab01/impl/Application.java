@@ -120,21 +120,22 @@ public class Application implements IApplication {
      * @throws IOException
      */
     void storeQuote(Quote quote, String filename) throws IOException {
-        List<String> tags = quote.getTags();
-        Collections.sort(tags);
+        List<String> SortedTags = quote.getTags();
+        Collections.sort(SortedTags);
 
+        //sub-folders to create
+        String path = "/" + join("/", SortedTags );
 
-        String path = "/" + join("/", tags );
+        //create sub-folders
         if( !(new File( WORKSPACE_DIRECTORY+ path ).mkdirs()) ){
             LOG.severe("Cannot create all necessary directories.");
         }
-        //int nbFilesInDir = new File( WORKSPACE_DIRECTORY + path ).list().length;
 
-        Writer writer = new BufferedWriter(
-                new OutputStreamWriter(
-                        new FileOutputStream(WORKSPACE_DIRECTORY + path +  "/" + filename), "UTF-8") );
+        //We put some ink on the pen
+        Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(WORKSPACE_DIRECTORY + path +  "/" + filename), "UTF-8") );
 
-        writer.write( quote.getQuote() );
+        //We wrote in the file
+        writer.write(quote.getQuote());
 
         writer.flush();
         writer.close();
@@ -150,8 +151,8 @@ public class Application implements IApplication {
             @Override
             public void visit(File file) {
                 try {
+                    //It write the name of the current file in a given writer
                     writer.write(file.getPath() + "\n");
-                    // System.out.println(file.getAbsolutePath());
                 }catch(IOException ex){
                     LOG.log(Level.SEVERE, null, ex);
                 }

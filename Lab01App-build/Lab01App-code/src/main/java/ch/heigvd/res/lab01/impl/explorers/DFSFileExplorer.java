@@ -18,21 +18,22 @@ public class DFSFileExplorer implements IFileExplorer {
   @Override
   public void explore(File rootDirectory, IFileVisitor vistor) {
 
+    //Do we work on something ?
     if(rootDirectory != null){
 
+      //We do what we have to do
       vistor.visit(rootDirectory);
+
+      //And we parkour his chilren
       File[] fileList = rootDirectory.listFiles();
 
+      //If it had some, it should have use protection
       if(fileList != null)
-        //Arrays.sort(fileList);
         for(File subDir: fileList){
-          if(subDir.isFile()){
-            vistor.visit(subDir);
-          } else {
-            explore(subDir, vistor);
-          }
+          explore(subDir, vistor);
         }
     }
   }
-
 }
+
+

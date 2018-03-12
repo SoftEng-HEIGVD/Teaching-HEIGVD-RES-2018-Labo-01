@@ -9,7 +9,7 @@ import java.io.Writer;
  * @author Olivier Liechti
  */
 public class UpperCaseFilterWriter extends FilterWriter {
-  
+
   public UpperCaseFilterWriter(Writer wrappedWriter) {
     super(wrappedWriter);
   }
@@ -21,7 +21,9 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    for(int i = off; i < off + len; i++){
+
+    int end = off + len;
+    for (int i = off; i < end; i++) {
       this.write(cbuf[i]);
     }
   }

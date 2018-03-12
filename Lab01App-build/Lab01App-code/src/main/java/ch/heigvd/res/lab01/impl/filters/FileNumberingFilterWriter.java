@@ -31,12 +31,12 @@ public class FileNumberingFilterWriter extends FilterWriter {
   @Override
   public void write(String str, int off, int len) throws IOException {
     this.write(str.toCharArray(), off, len);
-
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    for(int i = off; i < off + len; i++){
+    int end = off + len;
+    for(int i = off; i < end; i++){
       this.write(cbuf[i]);
     }
   }
@@ -86,10 +86,18 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   }
 
+  /**
+   * Generate a String with the actual line number and a tab
+   *
+   * @return the actual line number and a tab in a string
+   */
   public String number(){
+
     StringBuilder lineTab = new StringBuilder();
+
     lineTab.append(lineNumber++);
     lineTab.append('\t');
+
     return lineTab.toString();
   }
 }
