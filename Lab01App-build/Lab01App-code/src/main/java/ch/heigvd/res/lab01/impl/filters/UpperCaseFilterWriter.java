@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
+ * This class transforms the streams of character sent to the decorated writer.
+ * It transform a text in uppercase
  *
  * @author Olivier Liechti
+ * @author Adam Zouari
  */
 public class UpperCaseFilterWriter extends FilterWriter {
 
@@ -17,7 +20,7 @@ public class UpperCaseFilterWriter extends FilterWriter {
     @Override
     public void write(String str) throws IOException {
         String str2 = str.toUpperCase();
-        out.append(str2);
+        out.write(str2);
     }
 
     @Override
@@ -40,6 +43,6 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
     @Override
     public void write(int c) throws IOException {
-        out.append(Character.toUpperCase((char)c));
+        out.write(Character.toUpperCase((char)c));
     }
 }
