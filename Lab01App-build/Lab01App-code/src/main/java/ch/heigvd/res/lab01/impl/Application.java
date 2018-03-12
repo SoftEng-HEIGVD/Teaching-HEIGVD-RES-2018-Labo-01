@@ -93,7 +93,8 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
              */
-            storeQuote(quote, "quotes-" + i + ".utf8");
+            StringBuilder fileQuoteName = new StringBuilder("quote-" + i + ".utf8");
+            storeQuote(quote, fileQuoteName.toString());
             LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
             for (String tag : quote.getTags()) {
                 LOG.info("> " + tag);
@@ -129,13 +130,15 @@ public class Application implements IApplication {
      * @throws IOException
      */
     void storeQuote(Quote quote, String filename) throws IOException {
-        List<String> quotes = quote.getTags();
+        List<String> tags = quote.getTags();
         StringBuilder directory = new StringBuilder(WORKSPACE_DIRECTORY);
-        for (String q : quotes) {
-            directory.append("/" + q);
+        for (String t : tags) {
+            directory.append(File.separator).append(t);
         }
-        File file = new File(directory + "/" + filename);
-        file.mkdirs();
+        File repos = new File(directory.toString() + File.separator);
+        repos.mkdirs();
+        File file = new File(directory.toString() + File.separator + filename);
+        file.createNewFile();
         Writer writer = new OutputStreamWriter(new FileOutputStream(file), "utf-8");
         writer.write(quote.getQuote());
         writer.flush();
@@ -157,7 +160,8 @@ public class Application implements IApplication {
                     * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
                     * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
                      */
-                    writer.write(WORKSPACE_DIRECTORY + "/" + file.getName());
+                    StringBuilder path = new StringBuilder(file.getPath() + "\n");
+                    writer.write(path.toString());
                 } catch (IOException ex) {
                     Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
                 }

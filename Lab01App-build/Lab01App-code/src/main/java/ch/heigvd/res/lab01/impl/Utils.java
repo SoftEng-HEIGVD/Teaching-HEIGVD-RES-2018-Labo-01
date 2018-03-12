@@ -31,11 +31,12 @@ public class Utils {
             pos = lines.indexOf("\r");
         }
         String linesTab[] = new String[2];
-        linesTab[1] = lines.substring(pos+1);
-        if(pos!=-1)
-        linesTab[0] = lines.substring(0,pos+1);
-        else
-            linesTab[0]="";
+        linesTab[1] = lines.substring(pos + 1);
+        if (pos != -1) {
+            linesTab[0] = lines.substring(0, pos + 1);
+        } else {
+            linesTab[0] = "";
+        }
         return linesTab;
     }
 
