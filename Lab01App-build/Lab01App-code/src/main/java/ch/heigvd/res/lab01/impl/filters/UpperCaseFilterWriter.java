@@ -15,21 +15,22 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-        if(off + len > str.length())
-            throw new IllegalArgumentException("invalid size of substring");
-
-        String s = str.substring(off, off + len);
-        out.write(s.toUpperCase());
+        write(str.toCharArray(), off, len);
     }
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        write(new String(cbuf), off, len);
+        if (off + len > cbuf.length)
+            throw new IllegalArgumentException("invalid size of substring");
+
+        for(int i = off; i < off + len; i++) {
+            write(cbuf[i]);
+        }
     }
 
     @Override
     public void write(int c) throws IOException {
-        out.write(Character.toUpperCase((char)c));
+        out.write(Character.toUpperCase((char) c));
     }
 
 }
