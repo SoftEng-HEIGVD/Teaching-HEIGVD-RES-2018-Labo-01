@@ -18,23 +18,23 @@ import java.util.Arrays;
 
 public class DFSFileExplorer implements IFileExplorer {
 
-    @Override
-    public void explore(File rootDirectory, IFileVisitor vistor) throws IOException {
+  @Override
+  public void explore(File rootDirectory, IFileVisitor vistor) {
 
-        vistor.visit(rootDirectory);
+    vistor.visit(rootDirectory);
 
-        if (rootDirectory.isDirectory()) {
-            //create an array of all files contained in rootDirectory
-            File[] files = rootDirectory.listFiles();
-            Arrays.sort(files);
-            if (files != null) {
-                //recursive exploring
-                for (File file : files) {
-                    if (file.isFile()) explore(file, vistor);
-                    if (file.isDirectory()) explore(file, vistor);
-                }
-            }
-
+    if (rootDirectory.isDirectory()) {
+      //create an array of all files contained in rootDirectory
+      File[] files = rootDirectory.listFiles();
+      Arrays.sort(files);
+      if (files != null) {
+        //recursive exploring
+        for (File file : files) {
+          if (file.isFile()) explore(file, vistor);
+          if (file.isDirectory()) explore(file, vistor);
         }
+      }
+
     }
+  }
 }

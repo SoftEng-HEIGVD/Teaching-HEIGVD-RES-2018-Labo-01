@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 /**
  *
  * @author Olivier Liechti
- *
  */
 public class UpperCaseFilterWriterTest {
 
