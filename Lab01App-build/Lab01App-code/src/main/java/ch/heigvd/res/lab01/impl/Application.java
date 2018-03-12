@@ -175,7 +175,7 @@ public class Application implements IApplication {
   
   @Override
   public String getAuthorEmail() {
-   return email;
+   return email; //getting my email 
   }
 
   @Override

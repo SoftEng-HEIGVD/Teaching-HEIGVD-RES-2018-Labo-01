@@ -67,7 +67,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
           super.write('\t');
         }
         else {
-             numberOfLine++;
+           numberOfLine++;
           super.write('\n');
          
           String s = Integer.toString(numberOfLine);
