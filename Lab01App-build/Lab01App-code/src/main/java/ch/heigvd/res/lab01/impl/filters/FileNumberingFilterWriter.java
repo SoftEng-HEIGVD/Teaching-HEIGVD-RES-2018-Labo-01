@@ -29,10 +29,6 @@ public class FileNumberingFilterWriter extends FilterWriter {
 	@Override
 	public void write(String str, int off, int len) throws IOException {
 		
-		if (str.length() < off + len) {
-			return;
-		}
-		
 		StringBuilder output = new StringBuilder();
 		
 		// if the line is the first one
@@ -42,14 +38,15 @@ public class FileNumberingFilterWriter extends FilterWriter {
 		}
 		
 		String[] currentQuote;
-		String currentLine = str.substring(off, off + len);
+		String restOfTheQuote = str.substring(off, off + len);
 		
-		while (!((currentQuote = Utils.getNextLine(currentLine))[0]).isEmpty()) {
+		// while where is lines in our quotes, we add this line to our output
+		while (!((currentQuote = Utils.getNextLine(restOfTheQuote))[0]).isEmpty()) {
 			output.append(currentQuote[0]).append(lineNumber++).append('\t');
-			currentLine = currentQuote[1];
+			restOfTheQuote = currentQuote[1];
 		}
 		
-		output.append(currentQuote[1]);
+		output.append(currentQuote[1]); // we add the final line of the quote
 		
 		this.out.write(output.toString());
 	}
@@ -76,11 +73,11 @@ public class FileNumberingFilterWriter extends FilterWriter {
 			output.append("\n" + lineNumber++ + "\t");
 		} else { // no windows or Linux separator
 			
-			if (previousChar == '\r') { // the previous character was a OSX one
+			if (previousChar == '\r') { // the previous character was the OSX line separator
 				
 				output.append("\r" + lineNumber++ + "\t");
 			}
-			if (c != '\r') {
+			if (c != '\r') { // if the current character is the OSX line separator
 				output.append((char) c);
 			}
 		}
@@ -88,6 +85,5 @@ public class FileNumberingFilterWriter extends FilterWriter {
 		previousChar = c;
 		
 		this.out.write(output.toString());
-		
 	}
 }

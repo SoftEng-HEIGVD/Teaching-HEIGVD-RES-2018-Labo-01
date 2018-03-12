@@ -145,6 +145,8 @@ public class Application implements IApplication {
   
       // writing the quote
       writer.write(quote.getQuote());
+      
+      // close the writer
       writer.close();
   }
   
