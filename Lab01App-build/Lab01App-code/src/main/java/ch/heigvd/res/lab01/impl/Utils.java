@@ -25,7 +25,6 @@ public class Utils {
 
       int lineSeparator;
       
-      
       if((lineSeparator = lines.indexOf("\r\n")) == -1){ // true if no windows separator
          if((lineSeparator = lines.indexOf("\r")) == -1) { // true if no OSX separator
             if((lineSeparator = lines.indexOf("\n")) == -1) { // true if no Linux separator
