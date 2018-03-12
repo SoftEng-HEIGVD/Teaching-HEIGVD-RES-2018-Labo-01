@@ -8,12 +8,17 @@ import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.io.BufferedWriter;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
-
-import javax.management.RuntimeErrorException;
 
 /**
  *
@@ -156,8 +161,9 @@ public class Application implements IApplication {
       public void visit(File file) {
         try {
           writer.write(file.getPath() + '\n');
-        } catch (IOException e) {
-          throw new RuntimeException(e.getMessage());
+          writer.close();
+        } catch (Exception e) {
+          e.printStackTrace();
         }
       }
     });

@@ -17,10 +17,10 @@ import java.util.Arrays;
  */
 public class DFSFileExplorer implements IFileExplorer {
     @Override
-    public void explore(File rootDirectory, IFileVisitor visitor) {
+    public void explore(File rootDirectory, IFileVisitor vistor) {
         try {
-            visitor.visit(rootDirectory);
-        }catch(IOException e){
+            vistor.visit(rootDirectory);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -32,7 +32,7 @@ public class DFSFileExplorer implements IFileExplorer {
 
             for (File file : fileList) {
                 if (file.isDirectory()) {
-                    explore(file, visitor);
+                    explore(file, vistor);
                 }
             }
         }//end if(rootDirectory.isDirectory())
