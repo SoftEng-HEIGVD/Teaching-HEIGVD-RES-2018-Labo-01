@@ -122,7 +122,30 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    
+    StringBuilder path = new StringBuilder(WORKSPACE_DIRECTORY);
+    
+    // write path
+    for (String tag : quote.getTags()) {
+      path.append(File.separator).append(tag);
+    }
+    
+    // create the directory, and parent directories if needed
+    File file = new File(path.toString());
+    if(!file.mkdirs()){
+      LOG.log(Level.SEVERE, "All parent directories have not been created");
+    }
+    
+    // create the file
+    path.append(File.separator).append(filename).append(".utf8");
+    file = new File(path.toString());
+    file.createNewFile();
+    
+    // write the quote in the file previously created
+    Writer writer = new OutputStreamWriter(new FileOutputStream(path.toString()),"UTF-8");
+    writer.write(quote.getQuote());
+    writer.flush();
+    writer.close();
   }
   
   /**
