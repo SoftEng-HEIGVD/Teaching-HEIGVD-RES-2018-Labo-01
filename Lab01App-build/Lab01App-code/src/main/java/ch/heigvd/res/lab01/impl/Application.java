@@ -28,8 +28,9 @@ public class Application implements IApplication {
    * This constant defines where the quotes will be stored. The path is relative
    * to where the Java application is invoked.
    */
+  //public static String WORKSPACE_DIRECTORY = "." + File.separator + "workspace" + File.separator + "quotes";
   public static String WORKSPACE_DIRECTORY = "./workspace/quotes";
-  
+
   private static final Logger LOG = Logger.getLogger(Application.class.getName());
   
   public static void main(String[] args) {
@@ -94,9 +95,7 @@ public class Application implements IApplication {
        * quote in a text file (and for generating the directories based on the tags).
        */
 
-
-      storeQuote(quote, quote.getValue().getId()+ ".utf8");
-
+      storeQuote(quote, "quote-" + quote.getValue().getId()+ ".utf8");
 
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
@@ -137,20 +136,26 @@ public class Application implements IApplication {
         path.append(File.separator);
         path.append(s);
     }
-    
+
+    path.append(File.separator);
     File dir = new File(path.toString());
+
+
     
     // Directory
     try{
-        if(!dir.exists()){
-            dir.mkdir();
-        }
-        
-        path.append(File.separator);
+
+      if(!dir.exists()){
+        dir.mkdirs();
+      }
+
+
         path.append(filename);
 
         Writer osw = new OutputStreamWriter(new FileOutputStream(path.toString()),  "UTF-8");
+
         osw.write(quote.getQuote());
+        osw.flush();
         osw.close();
         
         
