@@ -28,11 +28,17 @@ public class FileNumberingFilterWriter extends FilterWriter {
     int lineNb = 1;
     int prevChar = ' ';
 
+    /*
+     *@brief : Write a string plus line numbers in a writer (use the char to char method)
+     */
     @Override
     public void write(String str, int off, int len) throws IOException {
         write(str.toCharArray(), off, len);
     }
 
+    /*
+     *@brief : Write a char array plus line numbers in a writer (use the char to char method)
+     */
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
 
@@ -42,6 +48,9 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     }
 
+    /*
+     *@brief : Write a character with a given int in a writer and add the line number
+     */
     @Override
     public void write(int c) throws IOException {
         //write line number if first line or if Mac OS newline detected
@@ -49,6 +58,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
             out.write(lineNb++ + "\t");
         }
 
+        //Look for newlines in every OS
         if (c == '\n') {
             out.write("\n" + lineNb++ + "\t");
         } else if (c == '\r') {

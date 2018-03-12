@@ -14,15 +14,17 @@ public class UpperCaseFilterWriter extends FilterWriter {
         super(wrappedWriter);
     }
 
+    /*
+     *@brief : Write a string in all caps in a writer
+     */
     @Override
     public void write(String str, int off, int len) throws IOException {
-        String newString = "";
-        for (int i = off; i < len+off; i++) {
-            newString += str.charAt(i);
-        }
-        out.write(newString.toUpperCase());
+        out.write(str.substring(off, len+off).toUpperCase());
     }
 
+    /*
+     *@brief : Write a char array in all caps in a writer
+     */
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
         String string = "";
@@ -32,6 +34,9 @@ public class UpperCaseFilterWriter extends FilterWriter {
         out.write(string.toUpperCase());
     }
 
+    /*
+     *@brief : Write an int as a char in all caps in a writer
+     */
     @Override
     public void write(int c) throws IOException {
         String charS = "" + (char)c;

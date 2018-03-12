@@ -17,6 +17,9 @@ import java.util.Arrays;
  */
 public class DFSFileExplorer implements IFileExplorer {
 
+    /*
+     *@brief : Explore every subdirectory of a given File with a given visitor
+     */
     @Override
     public void explore(File rootDirectory, IFileVisitor vistor)  {
 
@@ -38,7 +41,7 @@ public class DFSFileExplorer implements IFileExplorer {
 
         if (files == null)
             return;
-        Arrays.sort(files);
+        Arrays.sort(files); //Sort files before visiting them
         for (File file : files) {
             visitor.visit(file);
             dfs(file, visitor);

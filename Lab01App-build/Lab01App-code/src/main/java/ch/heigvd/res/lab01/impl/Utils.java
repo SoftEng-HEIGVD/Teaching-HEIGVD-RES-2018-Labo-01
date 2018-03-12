@@ -33,6 +33,7 @@ public class Utils {
             strings[1] = lines.substring(strings[0].length(), lines.length());
         }
 
+        //Check if the given line ends with an endline character
         if (!lines.endsWith("\n") && !lines.endsWith("\r") && !lines.endsWith("\r\n")) {
             strings[0] = "";
             strings[1] = lines;
