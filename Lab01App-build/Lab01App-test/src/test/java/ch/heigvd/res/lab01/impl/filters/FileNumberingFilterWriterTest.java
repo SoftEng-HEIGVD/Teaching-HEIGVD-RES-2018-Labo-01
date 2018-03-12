@@ -79,8 +79,6 @@ public class FileNumberingFilterWriterTest {
       int c = line.charAt(i);
       writer.write(c);
     }
-    System.out.println(stringWriter.toString());
-    System.out.println(stringWriter.toString());
 
     Assert.assertEquals("1\tThis is line 1\r\n2\tThis is line 2\n3\tThis is line 3", stringWriter.toString());
   }

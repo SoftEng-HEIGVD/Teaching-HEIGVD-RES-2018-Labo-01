@@ -21,7 +21,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
   private int lineNumber = 1;
-  private boolean lastWasR = false;
+  private boolean lastWasENDL = false;
 
 
   public FileNumberingFilterWriter(Writer out) {
@@ -30,46 +30,66 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    if(lineNumber == 1) {
-      out.write("1\t");
-      lineNumber++;
-    }
+    this.write(str.toCharArray(), off, len);
 
-    String[] lines = Utils.getNextLine(str);
-
-    if(lines[0] == ""){
-      out.write(str, off, len);
-    } else {
-
-      out.write(lines[0], off, lines[0].length());
-      String cbuf1 = Integer.toString(lineNumber);
-      out.write(cbuf1, 0, cbuf1.length());
-      lineNumber++;
-
-      char last = lines[0].charAt(lines[0].length() -1);
-
-
-
-      char[] cbuf = new char[1];
-      cbuf[0] = '\t';
-      out.write(cbuf, 0, 1);
-
-      //Appel récursif
-      this.write(lines[1], 0 ,lines[1].length());
-    }
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    this.write(new String(cbuf), 0, len);
-
+    for(int i = off; i < off + len; i++){
+      this.write(cbuf[i]);
+    }
   }
 
   @Override
   public void write(int c) throws IOException {
+    final char CARRIAGE = '\r';
+    final char LINEFEED = '\n';
 
-    char[] cbuf = Character.toChars(c);
+    //Is it the first call ?
+    if(lineNumber == 1) {
+      out.write(number());
+    }
 
-    this.write(cbuf, 0, cbuf.length);  }
+    //Do we need to write the number of the line ?
+    //---------------------------------------------------------
 
+    //On Windows and OSX
+    if(c == CARRIAGE) {
+
+      out.write(c);
+      lastWasENDL = true;
+    }
+
+    //Does CARRIAGE happened before or another linebreak?
+    else if(lastWasENDL && c != LINEFEED) {
+
+      out.write(number());
+      out.write(c);
+      lastWasENDL = false;
+    }
+
+    //Are we on Linux or is the the end of a Windows break ?
+    else if(c == LINEFEED) {
+
+      out.write(c);
+      out.write(number());
+
+      if(lastWasENDL) {
+        lastWasENDL = false;
+      }
+    }
+
+    else {
+      out.write(c);
+    }
+
+  }
+
+  public String number(){
+    StringBuilder lineTab = new StringBuilder();
+    lineTab.append(lineNumber++);
+    lineTab.append('\t');
+    return lineTab.toString();
+  }
 }
