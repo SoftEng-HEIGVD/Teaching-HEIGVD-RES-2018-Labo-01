@@ -28,7 +28,9 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-      write(str.toCharArray(), off, len);
+      for(int i = off; i < off + len; ++i){
+         write(str.charAt(i));
+      }
   }
 
   @Override
@@ -40,7 +42,6 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(int c) throws IOException {
-     
   }
 
 }
