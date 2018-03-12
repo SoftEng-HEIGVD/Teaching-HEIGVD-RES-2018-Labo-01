@@ -8,10 +8,8 @@ import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
@@ -21,7 +19,8 @@ import org.apache.commons.io.FileUtils;
 
 /**
  *
- * @author Olivier Liechti Modified by : Léo Cortès
+ * @author Olivier Liechti
+ * Modified by : Léo Cortès
  */
 public class Application implements IApplication {
 

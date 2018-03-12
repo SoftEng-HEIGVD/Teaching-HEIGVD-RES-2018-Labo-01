@@ -1,10 +1,8 @@
 package ch.heigvd.res.lab01.impl.filters;
 
 import ch.heigvd.res.lab01.impl.Utils;
-import java.io.BufferedReader;
 import java.io.FilterWriter;
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.Writer;
 import java.util.logging.Logger;
 
@@ -16,7 +14,8 @@ import java.util.logging.Logger;
  *
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
- * @author Olivier Liechti Modified by : Léo Cortès
+ * @author Olivier Liechti
+ * Modified by : Léo Cortès
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
