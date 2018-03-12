@@ -18,6 +18,10 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+  
+  private int lineNumber = 0;
+  private boolean beginning = true; // true if we are at the beginning of the file
+  private int prevChar; // previous character treated
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
@@ -25,17 +29,56 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    
+      /* if the parameters would throw an ArrayOutOfBoundsException,
+       * then simply write the whole String */
+      if(off < 0 || len < 0 || (off + len) < 0 || (off + len ) > str.length()){
+          off = 0;
+          len = str.length();
+      }
+    
+    for (int i = 0; i < len; i++){
+          write(str.charAt(i + off));
+      } 
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    
+      write(new String(cbuf), off, len);
   }
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    
+    if(beginning) {
+        writeLineNumber();
+        beginning = false;
+    }
+    
+    // when line separator is \n or \r\n
+    if (c == '\n') {
+        super.write(c);
+        writeLineNumber();
+
+    // MacOS 9 case, where line separator is \r
+    } else if (prevChar == '\r'){
+
+        writeLineNumber();
+        super.write(c);
+
+    } else {
+        super.write(c);
+    }
+    
+    prevChar = c;
+  }
+  
+  // this methode writes the line number followed by a tab (\t)
+  private void writeLineNumber() throws IOException{
+
+    super.out.write(++lineNumber + "\t");
+  
   }
 
 }

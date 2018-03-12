@@ -86,12 +86,9 @@ public class Application implements IApplication {
     QuoteClient client = new QuoteClient();
     for (int i = 0; i < numberOfQuotes; i++) {
       Quote quote = client.fetchQuote();
-      /* There is a missing piece here!
-       * As you can see, this method handles the first part of the lab. It uses the web service
-       * client to fetch quotes. We have removed a single line from this method. It is a call to
-       * one method provided by this class, which is responsible for storing the content of the
-       * quote in a text file (and for generating the directories based on the tags).
-       */
+
+      storeQuote(quote, "quote-" + quote.getValue().getId());
+      
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -125,7 +122,30 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    
+    StringBuilder path = new StringBuilder(WORKSPACE_DIRECTORY);
+    
+    // write path
+    for (String tag : quote.getTags()) {
+      path.append(File.separator).append(tag);
+    }
+    
+    // create the directory, and parent directories if needed
+    File file = new File(path.toString());
+    if(!file.mkdirs()){
+      LOG.log(Level.SEVERE, "All parent directories have not been created");
+    }
+    
+    // create the file
+    path.append(File.separator).append(filename).append(".utf8");
+    file = new File(path.toString());
+    file.createNewFile();
+    
+    // write the quote in the file previously created
+    Writer writer = new OutputStreamWriter(new FileOutputStream(path.toString()),"UTF-8");
+    writer.write(quote.getQuote());
+    writer.flush();
+    writer.close();
   }
   
   /**
@@ -137,18 +157,19 @@ public class Application implements IApplication {
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
-        /*
-         * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-         * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-         * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-         */
+
+        try {
+          writer.write(file.getPath() + '\n');
+        } catch (IOException ex) {
+          LOG.log(Level.SEVERE, "Could not fetch quotes. {0}", ex.getMessage());
+        }
       }
     });
   }
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    return "romain.gallay@heig-vd.ch";
   }
 
   @Override
