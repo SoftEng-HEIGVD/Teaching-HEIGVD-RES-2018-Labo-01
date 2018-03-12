@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class DFSFileExplorer implements IFileExplorer {
 
     @Override
-    public void explore(File rootDirectory, IFileVisitor vistor) throws IOException {
+    public void explore(File rootDirectory, IFileVisitor vistor) {
 
         vistor.visit(rootDirectory);
 
