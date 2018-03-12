@@ -17,9 +17,12 @@ import java.util.Arrays;
  */
 public class DFSFileExplorer implements IFileExplorer {
     @Override
-    public void explore(File rootDirectory, IFileVisitor visitor) throws IOException{
-
-        visitor.visit(rootDirectory);
+    public void explore(File rootDirectory, IFileVisitor visitor) {
+        try {
+            visitor.visit(rootDirectory);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
 
         //Don't execute exploration if the argument isn't a directory)
         if(rootDirectory.isDirectory()) {
