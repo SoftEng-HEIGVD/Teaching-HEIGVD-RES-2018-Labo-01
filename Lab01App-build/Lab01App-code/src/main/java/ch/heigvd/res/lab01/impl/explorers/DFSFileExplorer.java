@@ -18,19 +18,13 @@ public class DFSFileExplorer implements IFileExplorer {
   public void explore(File rootDirectory, IFileVisitor vistor) {
     vistor.visit(rootDirectory);
     if(rootDirectory.listFiles() != null){
-        //list to store nodes when is'n a leaf
-         LinkedList<File> subNodes = new LinkedList<File>();
          for (File node : rootDirectory.listFiles()) {
             if (node.isDirectory()) {
-               subNodes.add(node);
+                explore(node, vistor);
             } else {
-               vistor.visit(node);
-            }
+                vistor.visit(node);
+            } 
          }
-         /* explores all subdirectories nodes recursively*/
-         for (File subNode : subNodes) {
-         explore(subNode, vistor);
-        }
     }
   }
 
