@@ -161,8 +161,7 @@ public class Application implements IApplication {
       public void visit(File file) {
         try {
           writer.write(file.getPath() + '\n');
-          writer.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
           e.printStackTrace();
         }
       }
