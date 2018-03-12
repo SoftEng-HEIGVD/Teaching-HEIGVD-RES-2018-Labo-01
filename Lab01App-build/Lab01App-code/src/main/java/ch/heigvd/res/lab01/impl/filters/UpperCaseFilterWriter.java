@@ -10,6 +10,7 @@ import java.io.Writer;
 /**
  *
  * @author Olivier Liechti
+ * @author Jérémie Châtillon
  */
 public class UpperCaseFilterWriter extends FilterWriter {
   
@@ -30,8 +31,6 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
     for (int i = off; i < off + len; ++i)
       this.write(cbuf[i]);
-
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
 
   @Override

@@ -13,6 +13,7 @@ import java.util.Arrays;
  * files in the directory and then moves into the subdirectories.
  * 
  * @author Olivier Liechti
+ * @author Jérémie Châtillon
  */
 public class DFSFileExplorer implements IFileExplorer {
 
@@ -23,6 +24,7 @@ public class DFSFileExplorer implements IFileExplorer {
     if(rootDirectory == null)
       return;
 
+
     vistor.visit(rootDirectory);
 
     File[] lfs = rootDirectory.listFiles();
@@ -30,13 +32,14 @@ public class DFSFileExplorer implements IFileExplorer {
     if(lfs == null)
       return;
 
-
+    // DFS explore on each directories ordered
     Arrays.sort(lfs);
     for (File lf: lfs){
       if(lf.isDirectory())
         explore(lf, vistor);
     }
 
+    // Apply the visit method on each files
     for (File lf: lfs){
       if(lf.isFile())
         vistor.visit(lf);

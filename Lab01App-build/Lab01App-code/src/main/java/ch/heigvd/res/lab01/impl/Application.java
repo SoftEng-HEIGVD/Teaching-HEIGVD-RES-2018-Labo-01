@@ -20,7 +20,9 @@ import sun.font.CreatedFontTracker;
 
 /**
  *
+ *
  * @author Olivier Liechti
+ * @author Jérémie Châtillon    I didn't delete some of your comments because they are usefull :D
  */
 public class Application implements IApplication {
 
@@ -28,7 +30,6 @@ public class Application implements IApplication {
    * This constant defines where the quotes will be stored. The path is relative
    * to where the Java application is invoked.
    */
-  //public static String WORKSPACE_DIRECTORY = "." + File.separator + "workspace" + File.separator + "quotes";
   public static String WORKSPACE_DIRECTORY = "./workspace/quotes";
 
   private static final Logger LOG = Logger.getLogger(Application.class.getName());
@@ -88,12 +89,6 @@ public class Application implements IApplication {
     QuoteClient client = new QuoteClient();
     for (int i = 0; i < numberOfQuotes; i++) {
       Quote quote = client.fetchQuote();
-      /* There is a missing piece here!
-       * As you can see, this method handles the first part of the lab. It uses the web service
-       * client to fetch quotes. We have removed a single line from this method. It is a call to
-       * one method provided by this class, which is responsible for storing the content of the
-       * quote in a text file (and for generating the directories based on the tags).
-       */
 
       storeQuote(quote, "quote-" + quote.getValue().getId()+ ".utf8");
 
@@ -131,6 +126,7 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
 
+    // Gererating the path
     StringBuilder path = new StringBuilder(WORKSPACE_DIRECTORY);
     for(String s :quote.getTags()){
         path.append(File.separator);
@@ -140,16 +136,12 @@ public class Application implements IApplication {
     path.append(File.separator);
     File dir = new File(path.toString());
 
-
-    
-    // Directory
+    // Directory cration with the file having quote
     try{
 
       if(!dir.exists()){
         dir.mkdirs();
       }
-
-
         path.append(filename);
 
         Writer osw = new OutputStreamWriter(new FileOutputStream(path.toString()),  "UTF-8");
@@ -157,8 +149,7 @@ public class Application implements IApplication {
         osw.write(quote.getQuote());
         osw.flush();
         osw.close();
-        
-        
+
     } catch (IOException e){
         LOG.log(Level.SEVERE, "Can't Store Quote.", e.getMessage());
         e.printStackTrace();
@@ -174,11 +165,6 @@ public class Application implements IApplication {
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
-        /*
-         * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-         * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-         * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-         */
       try{
         writer.write(file.getPath() + "\n");
       } catch (IOException e){
@@ -192,7 +178,6 @@ public class Application implements IApplication {
   
   @Override
   public String getAuthorEmail() {
-
     return "jeremie.chatillon@@heig-vd.ch";
   }
 

@@ -3,8 +3,9 @@ package ch.heigvd.res.lab01.impl;
 import java.util.logging.Logger;
 
 /**
- *
+ *  Never used except in the Tests.
  * @author Olivier Liechti
+ * @author Jérémie Châtillon
  */
 public class Utils {
 

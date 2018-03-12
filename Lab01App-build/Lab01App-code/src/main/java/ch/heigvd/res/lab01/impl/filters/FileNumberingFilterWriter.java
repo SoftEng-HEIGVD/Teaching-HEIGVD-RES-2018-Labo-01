@@ -16,14 +16,17 @@ import java.util.logging.Logger;
  *
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
+ * Warning: If the last char is à \r, it won't be displayed
+ *
  * @author Olivier Liechti
+ * @author Jérémie Châtillon
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
-  private int nbLines = 1;
-  private boolean isR;
+  private int nbLines = 1;    // count the current line
+  private boolean isR;        // Needed if we have a \r\n
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
@@ -32,56 +35,12 @@ public class FileNumberingFilterWriter extends FilterWriter {
   @Override
   public void write(String str, int off, int len) throws IOException {
     this.write(str.toCharArray(), off, len);
-/*
-
-    boolean isInside = false;
-    String[] nlStr = Utils.getNextLine(str.substring(off, (off + len)));
-
-    if(nbLines == 1){
-
-    }
-    while(nlStr[0].compareTo("") != 0){
-
-      super.write(Integer.toString(nbLines));
-      nbLines++;
-      super.write("\t", 0, 1);
-      super.write(nlStr[0], 0, nlStr[0].length());
-
-
-      nlStr = Utils.getNextLine(nlStr[1]);
-
-      isInside = true;
-    }
-
-    if(nbLines == 1) {
-      this.out.write(Integer.toString(nbLines));
-      nbLines++;
-      super.write("\t", 0, 1);
-      super.write(nlStr[1].toString(), 0, nlStr[1].length());
-    } else{
-      super.write(nlStr[1].toString(), 0, nlStr[1].length());
-    }
-    /*
-    if(!isInside) {
-      super.write(Integer.toString(nbLines++), 0, 1);
-      super.write("\t", 0, 1);
-      super.write(nlStr[1].toString(), 0, nlStr[1].length());
-  } else {
-      super.write(nlStr[1].toString(), 0, nlStr[1].length());
-    }
-*/
-
-
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    //this.write(cbuf.toString(), off, len);
-    for(int i = off; i < off + len; ++i){
+    for(int i = off; i < off + len; ++i)
       write(cbuf[i]);
-    }
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
 
   @Override
@@ -93,8 +52,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
        this.out.write("\t");
      }
 
-
-     if(isR){
+     if(isR){   // If there were a \r as last char, we have to verify the \n
        if(c == '\r'){
          this.out.write(Integer.toString(nbLines++));
          this.out.write("\t");
@@ -120,104 +78,9 @@ public class FileNumberingFilterWriter extends FilterWriter {
          this.out.write(c);
          this.out.write(Integer.toString(nbLines++));
          this.out.write("\t");
-         isR = false;
        } else{
          this.out.write(c);
-         isR = false;
        }
-
-
      }
-
-
-
-
-
-
-
-
-
-/*
-    if(c == '\n' && isR){
-      this.out.write(c);
-      this.out.write(Integer.toString(nbLines++));
-      this.out.write("\t");
-    } else if(c == '\n' && c == '\r') {
-      this.out.write(c);
-      this.out.write(Integer.toString(nbLines++));
-      this.out.write("\t");
-      isR = false;
-    } else {
-      this.out.write(c);
-      isR = false;
-    }
-
-
-/*
-    if(c == '\n' && isR){
-      this.out.write(c);
-      this.out.write(Integer.toString(nbLines++));
-      this.out.write("\t");
-    } else if(c == '\n'){
-      this.out.write(c);
-      this.out.write(Integer.toString(nbLines++));
-      this.out.write("\t");
-      isR = false;
-    } else if (isR) {
-      this.out.write(Integer.toString(nbLines++));
-      this.out.write("\t");
-      this.out.write(c);
-      isR = false;
-    } else {
-      this.out.write(c);
-      isR = false;
-    }
-*/
-
-
-    /*
-    if(c == '\r'){
-      this.out.write(c);
-      isR = true;
-
-    } else if(c == '\n'){
-      if(!isR){
-        this.out.write(c);
-        this.out.write(Integer.toString(nbLines++));
-        this.out.write("\t");
-      } else {
-        this.out.write(c);
-
-      }
-
-      isR = false;
-    } else{
-      this.out.write(c);
-      isR = false;
-    }
-
-    /*
-    if (c == '\n' && !isR){
-      this.out.write(Integer.toString(nbLines++));
-      this.out.write("\t");
-    }
-
-    else if(c == '\n' && !isR){
-      this.out.write(Integer.toString(nbLines++));
-      this.out.write("\t");
-      isR = false;
-    } else{
-       isR = false;
-    }
-    */
-
-
-    /*
-    if( c == '\n') {
-      this.out.write(Integer.toString(nbLines++));
-      this.out.write("\t");
-    }*/
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
   }
-
 }
