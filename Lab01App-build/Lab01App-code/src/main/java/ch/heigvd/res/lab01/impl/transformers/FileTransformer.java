@@ -1,6 +1,8 @@
 package ch.heigvd.res.lab01.impl.transformers;
 
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -58,6 +60,23 @@ public abstract class FileTransformer implements IFileVisitor {
        * writer has been decorated by the concrete subclass!). You need to write a loop to read the
        * characters and write them to the writer.
        */
+      
+        //use (buffered) reader and writer
+        BufferedReader buffReader = new BufferedReader(reader);
+        BufferedWriter buffWriter = new BufferedWriter(writer);
+        
+        
+        // read and write (block by block)
+        char[] buff = new char[1024];
+        int ch;
+        while ((ch = buffReader.read(buff)) != -1) {
+                buffWriter.write(buff, 0, ch);
+            }
+        
+        // close (buffered) reader and writer since we are done using them
+        buffWriter.close();
+        buffReader.close();
+      
       
       reader.close();
       writer.flush();
