@@ -4,7 +4,6 @@ import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import java.io.File;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 /**
  * This implementation of the IFileExplorer interface performs a depth-first
@@ -13,39 +12,9 @@ import java.util.LinkedList;
  * files in the directory and then moves into the subdirectories.
  * 
  * @author Olivier Liechti
+ * francine youndzo
  */
 public class DFSFileExplorer implements IFileExplorer {
-
-   
- /*@Override
-  public void explore(File rootDirectory, IFileVisitor vistor) {
-   
-      
-      vistor.visit(rootDirectory);
-      
-      
-      if(rootDirectory.listFiles() == null) 
-          return;
-     
-      LinkedList<File> subDirectories = new LinkedList<File>();
-      File[] files = rootDirectory.listFiles();
-      Arrays.sort(files);
-      
-      for(File file : rootDirectory.listFiles()){
-          if(file.isDirectory())
-              subDirectories.add(file);
-          else{
-              vistor.visit(file);
-          }
-             
-      }
-      for(File subDirectory : subDirectories)
-          explore(subDirectory,vistor);
-  }
-
-}
-
-*/
     
   @Override
   public void explore(File rootDirectory, IFileVisitor vistor) {
@@ -55,7 +24,7 @@ public class DFSFileExplorer implements IFileExplorer {
         if(rootDirectory.listFiles() == null)  //tests whether current doirectories is emptx 
           return;
 
-      if(rootDirectory.isDirectory()) {
+        if(rootDirectory.isDirectory()) {
           File[] files = rootDirectory.listFiles();
           
           Arrays.sort(files); // sort all files
@@ -66,7 +35,5 @@ public class DFSFileExplorer implements IFileExplorer {
           }
       }
   }
-
-  
-  
+ 
 }

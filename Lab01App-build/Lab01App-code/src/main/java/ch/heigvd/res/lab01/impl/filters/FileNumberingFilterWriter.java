@@ -14,6 +14,7 @@ import ch.heigvd.res.lab01.impl.Utils;
  * Hello\n\World -> 1\Hello\n2\tWorld
  *
  * @author Olivier Liechti
+ * youndzo francine
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
@@ -27,19 +28,20 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
    public void write(String str, int off, int len) throws IOException {
+    
+    String MyString = "";
     String nextLine[] = Utils.getNextLine(str.substring(off, off+len));
-    String strF = "";
 
     if (numberOfLine == 0)
-      strF += (++numberOfLine) + "\t";
+      MyString += (++numberOfLine) + "\t";
 
     while (!nextLine[0].isEmpty()) {
-      strF += nextLine[0] + (++numberOfLine) + "\t";
+      MyString += nextLine[0] + (++numberOfLine) + "\t";
       nextLine = Utils.getNextLine(nextLine[1]);
     }
 
-    strF += nextLine[1];
-    super.write(strF, 0, strF.length());
+    MyString += nextLine[1];
+    super.write(MyString, 0, MyString.length());
   }
 
   @Override
@@ -56,8 +58,8 @@ public class FileNumberingFilterWriter extends FilterWriter {
       super.write('\t');
     }
 
-    switch (c) {
-      case '\n':
+     if (c == '\n') {
+     
         if (previousCharacter != '\r') {
           super.write('\n');
           numberOfLine++;
@@ -75,8 +77,8 @@ public class FileNumberingFilterWriter extends FilterWriter {
             super.write(s.charAt(i));
           super.write('\t');
         }
-        break;
-      default:
+     }
+     else{
         if (previousCharacter == '\r') {
           numberOfLine++;
           String s = Integer.toString(numberOfLine);
