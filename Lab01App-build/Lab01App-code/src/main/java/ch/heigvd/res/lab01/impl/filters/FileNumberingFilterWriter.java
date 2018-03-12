@@ -59,35 +59,28 @@ public class FileNumberingFilterWriter extends FilterWriter {
       isEmpty = false;
     }
 
-    /*if(line_to_write.length() == 0)
-      return;*/
-
-
-    /*if(line_to_write.length() > 0 && last_written_char_is_r && line_to_write.charAt(0) == '\n'){
-      //super.write('\n');
-      last_written_char_is_r = false;
-      return;
-    }*/
-
-    boolean test = false;
-
-
     iterator = 0;
 
-    if(line_to_write.length() > 0){
-      if(last_written_char_is_r && line_to_write.charAt(iterator) == '\n')
-        test = true;
-      else
+    // On fait ici une vérification. Si le caractère
+    // actuel est '\r', on met la variable "last_written_char_is_r"
+    // à vrai qui permettera par la suite d'obliger au programme
+    // d'attendre de voir si le prochain char est '\n' avant de faire
+    // le saut de ligne.
+    if(line_to_write.length() > 0)
         last_written_char_is_r = line_to_write.charAt(iterator) == '\r';
-    }else
+    else
       last_written_char_is_r = false;
 
+    // on écrit chaque caractère de la ligne...
     for(; iterator < line_to_write.length(); iterator++)
       super.write((int)line_to_write.charAt(iterator));
 
 
+    // Si la ligne avait un retour à la ligne...
     if(!first_line.equals("")){
-      if(!last_written_char_is_r || test){
+      // ... est que le dernier charactère n'était pas un '\r'
+      if(!last_written_char_is_r){
+        // On écrit le nouveau numéro de ligne avec une tabulation.
         line_number  =  String.valueOf(++line_counter);
 
         for(iterator = 0; iterator < line_number.length(); iterator++)
