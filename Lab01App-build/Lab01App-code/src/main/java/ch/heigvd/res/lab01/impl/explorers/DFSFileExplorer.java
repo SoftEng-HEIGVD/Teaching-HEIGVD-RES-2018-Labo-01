@@ -19,9 +19,9 @@ public class DFSFileExplorer implements IFileExplorer {
     vistor.visit(rootDirectory);
     if(rootDirectory.listFiles() != null){
          for (File node : rootDirectory.listFiles()) {
-            if (node.isDirectory()) {
+            if (node.isDirectory()) { //Continue to explore when it is directory
                 explore(node, vistor);
-            } else {
+            } else { //it is a file
                 vistor.visit(node);
             } 
          }
