@@ -96,6 +96,8 @@ public class Application implements IApplication {
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
       }
+      //We store the quote in the right file.
+      storeQuote(quote, "quote-" + i +".utf8");
     }
   }
   
@@ -125,7 +127,23 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    //Create the sub-folders
+    String path = "";
+    for(String tag: quote.getTags()) {
+       path += File.separatorChar + tag;
+    }
+    File subFolders = new File(WORKSPACE_DIRECTORY + path);
+    subFolders.mkdirs();
+    
+    //Create a file
+    File file = new File(subFolders.toString() + File.separatorChar + filename);
+    
+    //Stores the text of the quote in a file
+    
+    //We create an OutputStreamWriter to specify the encoding
+    Writer out = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+    out.write(quote.getQuote());
+    out.close();
   }
   
   /**
@@ -148,7 +166,7 @@ public class Application implements IApplication {
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    return "loic.schurch@heig-vd.ch";
   }
 
   @Override
