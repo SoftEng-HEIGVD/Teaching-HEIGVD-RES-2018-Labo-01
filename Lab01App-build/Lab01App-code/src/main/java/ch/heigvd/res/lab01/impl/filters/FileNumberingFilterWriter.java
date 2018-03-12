@@ -54,36 +54,32 @@ public class FileNumberingFilterWriter extends FilterWriter {
     //Do we need to write the number of the line ?
     //---------------------------------------------------------
 
+    //Does CARRIAGE happened before or another linebreak?
+    if(lastWasENDL && c != LINEFEED) {
+
+      out.write(number());
+
+      lastWasENDL = false;
+    }
     //On Windows and OSX
     if(c == CARRIAGE) {
 
-      out.write(c);
       lastWasENDL = true;
     }
 
-    //Does CARRIAGE happened before or another linebreak?
-    else if(lastWasENDL && c != LINEFEED) {
+    //We write the char
+    out.write(c);
 
-      out.write(number());
-      out.write(c);
-      lastWasENDL = false;
-    }
 
     //Are we on Linux or is the the end of a Windows break ?
-    else if(c == LINEFEED) {
+    if(c == LINEFEED) {
 
-      out.write(c);
       out.write(number());
 
       if(lastWasENDL) {
         lastWasENDL = false;
       }
     }
-
-    else {
-      out.write(c);
-    }
-
   }
 
   /**

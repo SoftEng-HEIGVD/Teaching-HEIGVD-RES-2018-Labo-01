@@ -42,7 +42,7 @@ public class Utils {
 
             //if we encounter a break line of the third type, we split the string
             if(canReturn){
-                result[0] = lines.substring(0, i+1);
+                result[0] = lines.substring(0, i + 1);
                 result[1] = lines.substring(i + 1);
 
                 return result;
