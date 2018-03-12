@@ -133,14 +133,13 @@ public class Application implements IApplication {
    */
   void storeQuote(Quote quote, String filename) throws IOException {
     // A stringBuilder is faster than a string when we append in a loop.
-    // https://stackoverflow.com/questions/1532461/stringbuilder-vs-string-concatenation-in-tostring-in-java
     StringBuilder pathTo = new StringBuilder(WORKSPACE_DIRECTORY);
     File dir = new File(pathTo.toString());
     File quoteFile;
     
     // Create the workspace if it doesn't exist and if it can write on the disk.
-    if(!dir.exists()){
-      if(!dir.mkdir()){
+    if (!dir.exists()) {
+      if (!dir.mkdirs()) {
         LOG.log(Level.SEVERE, "Impossible to write on disk");
         throw new RuntimeException("Impossible to write on disk");
       }
@@ -150,8 +149,8 @@ public class Application implements IApplication {
     for (String tag : quote.getTags()) {
       pathTo.append(File.separator + tag);
       dir = new File(pathTo.toString());
-      if(!dir.exists()){
-        if(!dir.mkdir()){
+      if (!dir.exists()) {
+        if (!dir.mkdir()) {
           LOG.log(Level.SEVERE, "Impossible to write on disk");
           throw new RuntimeException("Impossible to write on disk");
         }
@@ -161,7 +160,7 @@ public class Application implements IApplication {
     // Get the path to and create the quote file if it doesn't exist and if it can write on the disk.
     pathTo.append(File.separator + filename);
     quoteFile = new File(pathTo.toString());
-    if(!quoteFile.exists()) {
+    if (!quoteFile.exists()) {
       if (!quoteFile.createNewFile()) {
         LOG.log(Level.SEVERE, "Impossible to write on disk");
         throw new RuntimeException("Impossible to write on disk");
@@ -196,7 +195,6 @@ public class Application implements IApplication {
           LOG.log(Level.SEVERE, "Could not fetch the quotes. {0}", e.getMessage());
           e.printStackTrace();
         }
-        
       }
     });
   }
@@ -215,5 +213,4 @@ public class Application implements IApplication {
     IFileExplorer explorer = new DFSFileExplorer();
     explorer.explore(new File(WORKSPACE_DIRECTORY), new CompleteFileTransformer());
   }
-  
 }
