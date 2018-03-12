@@ -22,7 +22,8 @@ import org.apache.commons.io.FileUtils;
  * @author Olivier Liechti
  */
 public class Application implements IApplication {
-
+    
+  private String email="youndzokengne@heig-vd.ch";
   /**
    * This constant defines where the quotes will be stored. The path is relative
    * to where the Java application is invoked.
@@ -92,6 +93,7 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
+      storeQuote(quote,"quote-" + i +".utf8"); //missing piece
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -125,8 +127,26 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+  
+    //creation of path
+  String path = Application.WORKSPACE_DIRECTORY + File.separator; 
+    for (String tag : quote.getTags())
+      path += tag + File.separator;
+
+    /* creates tags tree */
+    File f = new File(path);
+    f.mkdirs();
+
+    /* stores quote into file */
+    Writer output = new OutputStreamWriter(new FileOutputStream(new File(path + filename)), "UTF-8");
+
+    output.write(quote.getQuote());
+    output.flush();
+    output.close();
+  
+  
   }
+  
   
   /**
    * This method uses a IFileExplorer to explore the file system and prints the name of each
@@ -142,13 +162,20 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
-      }
+        try{
+            writer.write(file.getPath() + "\n");
+        }
+        catch (IOException e){
+            LOG.log(Level.SEVERE, "can't be able to print name of file. {0}", e.getMessage());
+            e.printStackTrace();
+        }
+      }  
     });
   }
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+   return email;
   }
 
   @Override
