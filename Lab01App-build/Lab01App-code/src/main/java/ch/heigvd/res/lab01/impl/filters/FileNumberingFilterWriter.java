@@ -30,7 +30,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
   @Override
   public void write(String str, int off, int len) throws IOException {
     
-         /* if the parameters would throw an ArrayOutOfBoundsException,
+      /* if the parameters would throw an ArrayOutOfBoundsException,
        * then simply write the whole String */
       if(off < 0 || len < 0 || (off + len) < 0 || (off + len ) > str.length()){
           off = 0;
@@ -56,12 +56,12 @@ public class FileNumberingFilterWriter extends FilterWriter {
         beginning = false;
     }
     
-    // when return line is \n or \r\n
+    // when line separator is \n or \r\n
     if (c == '\n') {
         super.write(c);
         writeLineNumber();
 
-    // MacOS 9 case, where return line is \r
+    // MacOS 9 case, where line separator is \r
     } else if (prevChar == '\r'){
 
         writeLineNumber();
