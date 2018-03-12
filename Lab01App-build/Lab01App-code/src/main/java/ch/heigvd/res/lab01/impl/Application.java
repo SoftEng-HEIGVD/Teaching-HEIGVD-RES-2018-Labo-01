@@ -7,6 +7,7 @@ import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,16 +40,14 @@ public class Application implements IApplication {
      * better to use a Logger rather than using System.out.println
      */
     System.setProperty("java.util.logging.SimpleFormatter.format", "%4$s: %5$s%6$s%n");
-    
-       
+   
     int numberOfQuotes = 0;
-    try {
+    try { 
       numberOfQuotes = Integer.parseInt(args[0]);
     } catch (Exception e) {
       System.err.println("The command accepts a single numeric argument (number of quotes to fetch)");
       System.exit(-1);
-    }
-        
+    }     
     Application app = new Application();
     try {
       /*
@@ -93,6 +92,7 @@ public class Application implements IApplication {
        * quote in a text file (and for generating the directories based on the tags).
        */
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
+       storeQuote(quote, "quote-" + i + ".utf8");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
       }
@@ -125,9 +125,26 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+     
+      String pathFile = WORKSPACE_DIRECTORY + File.separator; 
+            for (String tags : quote.getTags()) {
+                pathFile += tags+ File.separator; // extract the path
+            }
+            
+            pathFile +=  "/" + filename; //add file name to the path
+            File myFile = new File(pathFile); // create file 
+            myFile.getParentFile().mkdirs(); // create the repository of file 
+            
+            try{
+            BufferedWriter bufferedWriter = new BufferedWriter(new
+            OutputStreamWriter(new FileOutputStream(pathFile),"UTF-8"));
+            bufferedWriter.write(quote.getQuote());
+            bufferedWriter.close();
+            }catch(IOException ex){
+                ex.getStackTrace();
+            }
+            
   }
-  
   /**
    * This method uses a IFileExplorer to explore the file system and prints the name of each
    * encountered file and directory.
@@ -142,13 +159,20 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
+        
+        try{
+           writer.write(file.getPath()+ "\n"); 
+        }catch(IOException ex){
+            ex.getStackTrace();
+        }
+        
       }
     });
   }
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+      return "zacharie.nguefack@heig-vd.ch";
   }
 
   @Override

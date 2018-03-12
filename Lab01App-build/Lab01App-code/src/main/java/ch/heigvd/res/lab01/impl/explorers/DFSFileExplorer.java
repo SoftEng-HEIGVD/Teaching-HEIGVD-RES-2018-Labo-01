@@ -3,6 +3,7 @@ package ch.heigvd.res.lab01.impl.explorers;
 import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import java.io.File;
+import java.util.Arrays;
 
 /**
  * This implementation of the IFileExplorer interface performs a depth-first
@@ -16,39 +17,26 @@ public class DFSFileExplorer implements IFileExplorer {
 
   @Override
   public void explore(File rootDirectory, IFileVisitor vistor) {
+      // visit the File
+     vistor.visit(rootDirectory);
+     //test if it Directory 
+  if(rootDirectory.isDirectory()){
+      // get list of all files in Directory 
+      File fileList[] = rootDirectory.listFiles();
+      if(fileList!=null){
+      Arrays.sort(fileList); // sort the list
+         for(File file: fileList) {
+             if(file.isFile()){
+                 // visit if it is the file
+                  vistor.visit(file); 
+             }else{
+                 // explore if it is a Directory
+                 explore(file, vistor);
+             }
+         }
+      }    
       
-    // test if the root directory is not null 
-    if (rootDirectory != null) {
-        
-        // visit the root Directory
-            vistor.visit(rootDirectory);
-            
-            // text if it is the directory 
-            if (rootDirectory.isDirectory()) {
-                
-                // retrieve the list of Elements from the directory
-                File[] Elements = rootDirectory.listFiles();
-                
-                // check each elements
-                for (File file : Elements) {
-                    // If element is file
-                    if (file.isFile()) {
-                        //visit it
-                        vistor.visit(file);
-                    }
-                }
-                // if it is not a file it can be a directory 
-                for (File file : Elements) {
-                    // test if is a directory
-                    if (file.isDirectory()) {
-                        // explore it
-                        explore(file, vistor);
-                    }
-                }
-
-            }
-        }
- 
+  }
   }
 
 }
