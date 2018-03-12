@@ -17,17 +17,17 @@ public class DFSFileExplorer implements IFileExplorer {
 
   @Override
   public void explore(File rootDirectory, IFileVisitor visitor) {
-    visitor.visit(rootDirectory);
-    exploreUnderRootDirectory(rootDirectory, visitor);
-  }
+    visitor.visit(rootDirectory); // We start by visiting the current folder
+    File[] folderContent = rootDirectory.listFiles(); // Fetches folder content
 
-  private void exploreUnderRootDirectory(File directory, IFileVisitor visitor) {
-    File[] folderContent = directory.listFiles();
-    if (null != folderContent)  // listFiles can return null if the directory does not exists
+    if (null != folderContent) { // listFiles can return null if the directory does not exists
+
       for (File f : folderContent) {
+        if (f.isDirectory())  // If it is a directory, we explore it
+          explore(f, visitor);
+        else  // We visit each file
           visitor.visit(f);
-          if (f.isDirectory())
-            exploreUnderRootDirectory(f, visitor);
-        }
+      }
+    }
   }
 }

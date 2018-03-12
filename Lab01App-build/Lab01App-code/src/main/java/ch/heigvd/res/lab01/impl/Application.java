@@ -82,7 +82,7 @@ public class Application implements IApplication {
   @Override
   public void fetchAndStoreQuotes(int numberOfQuotes) throws IOException {
     clearOutputDirectory();
-    createOutputDirectory();
+    createOutputDirectory();  // We have to create the working directory before storing quotes into it
     QuoteClient client = new QuoteClient();
     for (int i = 0; i < numberOfQuotes; i++) {
       Quote quote = client.fetchQuote();
@@ -131,12 +131,14 @@ public class Application implements IApplication {
    * 
    * @param quote the quote object, with tags and text
    * @param filename the name of the file to create and where to store the quote text
+   * @since 1.8+
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    List<String> tags = quote.getTags();
+    List<String> tags = quote.getTags();  // The tags are used to create the path of the quote
     String path = String.join("/", tags); // We create the path with / delimiters
-    if (!(new File(WORKSPACE_DIRECTORY + "/" + path)).mkdirs()) // We create the directory hierarchie
+
+    if (!(new File(WORKSPACE_DIRECTORY + "/" + path)).mkdirs()) // We create the directory hierarchy
       LOG.severe("Impossible to write on disk");
 
     // We create a utf-8 outputStream
@@ -144,6 +146,7 @@ public class Application implements IApplication {
                                   new OutputStreamWriter(
                                   new FileOutputStream(WORKSPACE_DIRECTORY  + "/" + path + "/" + filename),
                                           StandardCharsets.UTF_8));
+    // We write the quote
     outputStream.write(quote.getQuote());
     outputStream.flush();
     outputStream.close();
