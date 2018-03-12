@@ -15,9 +15,8 @@ import java.util.logging.Logger;
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 	private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
-	private static String LINUX = "\n";
-	private static String WINDOWS = "\r\n";
-	private static String OSX = "\r";
+	private static final String LINUX = "\n";
+	private static final String OSX = "\r";
 	
 	private boolean isFirstChar = true;
 	private int lineNumber = 1;
@@ -47,16 +46,17 @@ public class FileNumberingFilterWriter extends FilterWriter {
 		}
 		
 		if (previousCharWasOSX && c == LINUX.charAt(0)) { // We detect the WINDOWS separator sequence -> we are on Windows -> we write the WINDOWS separator then the lineNumber with the '\t'.
-			this.out.write(WINDOWS + lineNumber++ + "\t");
+			this.out.write(LINUX + lineNumber++ + "\t"); // We write only the remaining \n (LINUX separator) because we wrote \r (OSX separator) when we detect it the char before!
 			previousCharWasOSX = false;
-		} else if (c == OSX.charAt(0)) { // we detect OSX separator -> we have to wait for the next one to see if we are on Windows or MacOSX.
+		} else if (c == OSX.charAt(0)) { // we detect OSX separator -> we write the OSX separator
 			previousCharWasOSX = true;
+			this.out.write(c); // we write the OSX separator. If next char is \n -> then we are on WINDOWS and we will have to write only the remaining \n.
 		} else if (c == LINUX.charAt(0)) { // we detect LINUX separator -> we are on Linux -> we write LINUX separator then the lineNumber with the '\t'.
 			this.out.write(LINUX + lineNumber++ + "\t");
 		} else { // c is not OSX neither LINUX separator -> no need to write lineNumber except if previous char war OSX separator.
 			if (previousCharWasOSX) { // previous char was OSX separator and actual one is not LINUX separator -> It's not the WINDOWS separator sequence -> we are on MacOSX.
 				previousCharWasOSX = false;
-				this.out.write(OSX + lineNumber++ + "\t"); // we write the previous OSX separator first. Then we write the lineNumber with the '\t'.
+				this.out.write( lineNumber++ + "\t"); // we write the lineNumber with the '\t'.
 			}
 			this.out.write(c); // the character is any of the separator sequences -> we are writing a line -> we just write the character.
 		}
