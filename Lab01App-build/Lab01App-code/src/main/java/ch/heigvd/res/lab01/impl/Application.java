@@ -7,12 +7,9 @@ import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
+
+import java.io.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
@@ -128,22 +125,28 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    try{  
-    // get path
-      String tmp =  Application.WORKSPACE_DIRECTORY + File.separator;
-      String path = new String(tmp);
-      for (String tag : quote.getTags()) {
-         path += tag + File.separator;
+    try{
+      StringBuilder path = new StringBuilder();
+      path.append("./workspace/quotes/");
+      List<String> tags = quote.getTags();
+      for(int i = 0; i < tags.size(); i++){
+        path.append(tags.get(i));
+        path.append("/");
       }
-      new File(String.valueOf(path)).mkdirs();
-      //put out
-      Writer out = new OutputStreamWriter(new FileOutputStream(new File(path + filename)), "UTF-8");
-      out.write(quote.getQuote());
-      out.flush();
-      out.close();
-    }catch(Exception e){
-        System.err.println(e);
+
+      File theDir = new File(String.valueOf(path));
+      theDir.mkdirs();
+
+      path.append(filename);
+
+      FileWriter fichier = new FileWriter(String.valueOf(path));
+      fichier.write(quote.getQuote());
+      fichier.close();
     }
+    catch(Exception e){
+      System.out.println(e);
+    }
+
   }
   
   /**
