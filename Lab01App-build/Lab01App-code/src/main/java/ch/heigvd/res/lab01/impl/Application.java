@@ -7,12 +7,8 @@ import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
+
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
@@ -135,9 +131,11 @@ public class Application implements IApplication {
 
         //File creation
         subPath += "/" + filename;
-        FileOutputStream fos = new FileOutputStream(subPath);
-        Writer writer = new OutputStreamWriter(fos, "UTF-8");
+        File file = new File(subPath);
+        BufferedWriter writer = new BufferedWriter(new PrintWriter(file));
         writer.write(quote.getQuote());
+        writer.flush();
+        writer.close();
     }
 
     /**
