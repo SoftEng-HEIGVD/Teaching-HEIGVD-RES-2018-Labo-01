@@ -23,40 +23,12 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     private int numberOfLines = 1;
     private boolean newLine = true;
-    
+    private char lastCharacter;
+
     public FileNumberingFilterWriter(Writer out) {
         super(out);
     }
-/*
-    @Override
-    public void write(String str, int off, int len) throws IOException {
 
-        //Appel a la methode getNextLine() de Utils
-        String lines[] = Utils.getNextLine(str.substring(off, off + len));
-        String nextLine = lines[0];
-        String remainingLines = lines[1];
-
-
-     
-
-        String strTmp = "\t" + nextLine;
-        
-        while(!nextLine.isEmpty()){
-
-            lines = Utils.getNextLine(remainingLines);
-            nextLine = lines[0];
-            remainingLines = lines[1];
-            strTmp += ++numberOfLines + "\t" + nextLine;
-
-        }
-
-
-        strTmp += remainingLines;
-
-
-        super.write(strTmp);
-    }
-*/
     public void write(String str, int off, int len) throws IOException {
 
         //Appel a la methode getNextLine de Utils
@@ -64,14 +36,13 @@ public class FileNumberingFilterWriter extends FilterWriter {
         String nextLine = lines[0];
         String remainingLines = lines[1];
 
-
         //chaine a afficher a la fin
         String textToWrite = (newLine ? numberOfLines + "\t" : "") + nextLine;
 
         //verification de l'existence d'une nouvelle ligne
-        newLine = !nextLine.isEmpty();
+        newLine = nextLine.isEmpty();
 
-        while(!nextLine.isEmpty()){
+        while (!nextLine.isEmpty()) {
 
             //recuperation de la ligne suivante
             lines = Utils.getNextLine(remainingLines);
@@ -80,7 +51,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
             //ajout de la ligne
             textToWrite += ++numberOfLines + "\t" + nextLine;
-            
+
             //newLine est vrai tant que le texte restant (lines[1] n'est pas vide)
             newLine = !remainingLines.isEmpty();
         }
@@ -90,20 +61,43 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
         super.out.write(textToWrite);
     }
-    
+
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
-        if(off >= 0 && off + len < cbuf.length) {
+
             write(String.valueOf(cbuf), off, len);
-        }
-        
-        return;
+
     }
 
     @Override
     public void write(int c) throws IOException {
-        //Utilisation de la methode getNextLine de Utils
-        super.write(c);
-    }
+        String textToWrite = "";             
+        char currentChar = (char) c;    
 
+        //si le caractere courant est \r on cherche si le suivant est \n
+        if (currentChar == '\r') {
+            newLine = true;
+        } else if (currentChar == '\n') {
+            if (lastCharacter == '\r') {
+                textToWrite += String.valueOf(lastCharacter);
+            }
+
+            textToWrite += String.valueOf(currentChar) + numberOfLines++ + "\t";
+            newLine = false;
+            
+        } else {
+            if (newLine) {
+                if (lastCharacter == '\r') {
+                    textToWrite += String.valueOf(lastCharacter);
+                }
+                textToWrite += numberOfLines++ + "\t";
+            }
+
+            textToWrite += currentChar;
+            newLine = false;
+        }
+
+        lastCharacter = currentChar;
+        super.out.write(textToWrite);
+    }
 }

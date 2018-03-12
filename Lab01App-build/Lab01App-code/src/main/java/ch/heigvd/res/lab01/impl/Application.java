@@ -95,9 +95,8 @@ public class Application implements IApplication {
         QuoteClient client = new QuoteClient();
         for (int i = 0; i < numberOfQuotes; i++) {
             Quote quote = client.fetchQuote();
-            /* 
-             * Appel de la methode storeQuote
-             */
+            
+            
             storeQuote(quote, "quote-" + i + ".utf8");
             
             LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
@@ -151,6 +150,12 @@ public class Application implements IApplication {
         //puis enfin creation du nouveau dossier
         File newFile = new File(directory.toString() + "/" + filename);
         newFile.createNewFile();
+        
+        //ecriture en sortie
+        OutputStreamWriter ow = new OutputStreamWriter(new FileOutputStream(newFile), StandardCharsets.UTF_8);
+        ow.write(quote.getQuote(), 0, quote.getQuote().length());
+        ow.flush();
+        ow.close();
     }
 
     /**
@@ -162,11 +167,12 @@ public class Application implements IApplication {
         explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
             @Override
             public void visit(File file) {
-                /*
-                 * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-                 * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-                 * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-                 */
+                try {
+                    writer.write(file.getPath() + "\n");
+                } catch (IOException e){
+                  LOG.log(Level.SEVERE, "Can't Store Quote.", e.getMessage());
+                  e.printStackTrace();
+                }
             }
         });
     }

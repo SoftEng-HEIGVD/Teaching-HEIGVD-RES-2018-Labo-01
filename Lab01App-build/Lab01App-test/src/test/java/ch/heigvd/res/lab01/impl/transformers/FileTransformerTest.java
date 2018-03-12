@@ -13,21 +13,21 @@ import org.junit.Test;
  * @author Olivier Liechti
  */
 public class FileTransformerTest {
-  
-  @Test
-  public void itShouldDuplicateATextFile() throws IOException {
-    FileUtils.deleteDirectory(new File("./tmp"));
-    new File("./tmp").mkdir();
-    FileTransformer ft = new NoOpFileTransformer();
-    File inputFile = new File("./tmp/test.txt");
-    File outputFile = new File("./tmp/test.txt.out");
-    OutputStreamWriter writer = new OutputStreamWriter( new FileOutputStream(inputFile), "UTF-8" );
-    writer.write("Les bons élèves sont tous très assidus.\nLes bons maîtres sont appliqués.");
-    writer.flush();
-    writer.close();
-    ft.visit(inputFile);
-    assertTrue( FileUtils.contentEquals(inputFile, outputFile) );
-    FileUtils.deleteDirectory(new File("./tmp"));
-  }
-  
+
+    @Test
+    public void itShouldDuplicateATextFile() throws IOException {
+        FileUtils.deleteDirectory(new File("./tmp"));
+        new File("./tmp").mkdir();
+        FileTransformer ft = new NoOpFileTransformer();
+        File inputFile = new File("./tmp/test.txt");
+        File outputFile = new File("./tmp/test.txt.out");
+        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(inputFile), "UTF-8");
+        writer.write("Les bons élèves sont tous très assidus.\nLes bons maîtres sont appliqués.");
+        writer.flush();
+        writer.close();
+        ft.visit(inputFile);
+        assertTrue(FileUtils.contentEquals(inputFile, outputFile));
+        FileUtils.deleteDirectory(new File("./tmp"));
+    }
+
 }
