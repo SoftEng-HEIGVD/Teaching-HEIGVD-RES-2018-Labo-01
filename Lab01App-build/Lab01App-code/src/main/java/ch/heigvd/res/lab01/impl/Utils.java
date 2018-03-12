@@ -20,8 +20,8 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    final char CARRIAGE          = '\r',
-               LINE_FEED         = '\n';
+    final char CARRIAGE_RETURN = '\r',
+               LINE_FEED       = '\n';
 
     String[] nextLine = {"", lines};
 
@@ -29,7 +29,7 @@ public class Utils {
       if(lines.charAt(i) == LINE_FEED)
         return separateLines(lines, i);
 
-      if(lines.charAt(i) == CARRIAGE){
+      if(lines.charAt(i) == CARRIAGE_RETURN){
         if(i < lines.length() - 1 && lines.charAt(i + 1) == LINE_FEED)
           return separateLines(lines, i + 1);
         else
@@ -48,5 +48,4 @@ public class Utils {
 
     return nextLine;
   }
-
 }

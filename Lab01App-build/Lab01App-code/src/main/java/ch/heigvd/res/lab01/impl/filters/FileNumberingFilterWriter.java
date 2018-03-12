@@ -50,17 +50,24 @@ public class FileNumberingFilterWriter extends FilterWriter {
       if(lastLineNumber == 0)
          out.write(addLineNumber());
 
+      // If the end of line is \r
       if(lastChar == EOF_MAC && c != EOF_UNIX)
          out.write(addLineNumber());
 
       out.write(c);
 
+      // If the end of line is \r or \r\n
       if(c == EOF_UNIX)
          out.write(addLineNumber());
 
       lastChar = (char)c;
    }
 
+   /**
+    * @brief Increment the line number
+    * @return String with the line number and a tabulation
+    *         Example : "1    "
+    */
    private String addLineNumber(){
       return Integer.toString(++lastLineNumber) + '\t';
    }
