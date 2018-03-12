@@ -88,7 +88,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
    * Increment the line number.
    * @throws IOException when it can't write.
    */
-  public void newLineWriter() throws IOException{
+  private void newLineWriter() throws IOException{
     // Manage the case when the line number contains more than 1 digits.
     super.write(String.valueOf(line), 0, String.valueOf(line).length());
     super.write(TAB);
