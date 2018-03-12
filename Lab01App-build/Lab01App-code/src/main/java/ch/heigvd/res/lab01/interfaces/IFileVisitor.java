@@ -20,6 +20,6 @@ public interface IFileVisitor {
    * 
    * @param file the current file or directory visited by the IFileExplorer instance
    */
-  public void visit(File file) throws IOException, RuntimeErrorException;
+  public void visit(File file);
   
 }
