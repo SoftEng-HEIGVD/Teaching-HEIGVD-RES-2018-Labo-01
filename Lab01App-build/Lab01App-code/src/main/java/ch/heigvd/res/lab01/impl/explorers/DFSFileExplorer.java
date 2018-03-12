@@ -21,6 +21,7 @@ public class DFSFileExplorer implements IFileExplorer {
     File[] folderContent = rootDirectory.listFiles(); // Fetches folder content
 
     if (null != folderContent) { // listFiles can return null if the directory does not exists
+      Arrays.sort(folderContent); // This should sort the files
 
       for (File f : folderContent) {
         if (f.isDirectory())  // If it is a directory, we explore it
