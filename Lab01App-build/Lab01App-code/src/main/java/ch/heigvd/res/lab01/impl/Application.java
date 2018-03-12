@@ -140,7 +140,7 @@ public class Application implements IApplication {
     
     File dir = new File(path.toString());
     
-    // Directory création
+    // Directory
     try{
         if(!dir.exists()){
             dir.mkdir();
