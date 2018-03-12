@@ -20,7 +20,7 @@ public class DFSFileExplorer implements IFileExplorer {
   public void explore(File rootDirectory, IFileVisitor vistor) {
 
       //check if the directory is not null
-      if(!rootDirectory.isDirectory()){
+      if(rootDirectory == null){
           return;
       }
 
