@@ -1,5 +1,6 @@
 package ch.heigvd.res.lab01.impl.transformers;
 
+//added the corresponding imports
 import ch.heigvd.res.lab01.impl.filters.FileNumberingFilterWriter;
 import ch.heigvd.res.lab01.impl.filters.UpperCaseFilterWriter;
 
