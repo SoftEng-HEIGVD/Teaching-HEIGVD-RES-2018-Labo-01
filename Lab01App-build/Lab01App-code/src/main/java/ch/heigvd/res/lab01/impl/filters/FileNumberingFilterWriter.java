@@ -20,6 +20,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 	private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 	
 	private int lineNumber = 1;
+	private int previousChar = 0;
 	
 	public FileNumberingFilterWriter(Writer out) {
 		super(out);
@@ -40,16 +41,15 @@ public class FileNumberingFilterWriter extends FilterWriter {
 			output.append('\t');
 		}
 		
-		String[] result;
-		String nextLine = str.substring(off, off + len);
+		String[] currentQuote;
+		String currentLine = str.substring(off, off + len);
 		
-		while (!((result = Utils.getNextLine(nextLine))[0]).isEmpty()) {
-			
-			output.append(result[0]).append(lineNumber++).append('\t');
-			nextLine = result[1];
+		while (!((currentQuote = Utils.getNextLine(currentLine))[0]).isEmpty()) {
+			output.append(currentQuote[0]).append(lineNumber++).append('\t');
+			currentLine = currentQuote[1];
 		}
 		
-		output.append(result[1]);
+		output.append(currentQuote[1]);
 		
 		this.out.write(output.toString());
 	}
@@ -62,7 +62,32 @@ public class FileNumberingFilterWriter extends FilterWriter {
 	@Override
 	public void write(int c) throws IOException {
 		
+		StringBuilder output = new StringBuilder();
 		
-	
+		if (lineNumber == 1) {
+			output.append(lineNumber++ + "\t");
+		}
+		
+		if (c == '\n' && previousChar == '\r') { // the line separator for windows is detected
+			output.append("\r\n" + lineNumber++ + "\t");
+			
+		} else if (c == '\n') { // the line separator for linux is detected
+			
+			output.append("\n" + lineNumber++ + "\t");
+		} else { // no windows or Linux separator
+			
+			if (previousChar == '\r') { // the previous character was a OSX one
+				
+				output.append("\r" + lineNumber++ + "\t");
+			}
+			if (c != '\r') {
+				output.append((char) c);
+			}
+		}
+		
+		previousChar = c;
+		
+		this.out.write(output.toString());
+		
 	}
 }
