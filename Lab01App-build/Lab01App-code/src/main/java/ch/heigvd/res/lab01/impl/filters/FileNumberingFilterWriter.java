@@ -4,6 +4,8 @@ import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.logging.Logger;
+import ch.heigvd.res.lab01.impl.Utils;
+import javassist.bytecode.analysis.Util;
 
 /**
  * This class transforms the streams of character sent to the decorated writer.
@@ -18,6 +20,8 @@ import java.util.logging.Logger;
 public class FileNumberingFilterWriter extends FilterWriter {
 
   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+  private int numberLine = 1;
+  private boolean backR = false;
 
   public FileNumberingFilterWriter(Writer out) {
     super(out);
@@ -25,17 +29,24 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    write(str.toCharArray(), off, len);
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    for(int i = 0; i < len; i++)
+      write(cbuf[i + off]);
   }
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    //If this line is the first line or is a non empty line print the line number
+    if(numberLine == 1 || c != '\n' && backR) out.write(numberLine++ + "\t");
+    out.write(c);
+
+    if(c == '\n') out.write(numberLine++ + "\t");
+
+    backR = c == '\r';
   }
 
 }
