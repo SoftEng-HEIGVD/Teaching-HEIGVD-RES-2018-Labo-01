@@ -29,7 +29,7 @@ public class Utils {
        //Then we look if it is '\r'
        //If so, we must look for a '\n' right after
        if(lines.charAt(i) == '\r') {
-          if(lines.length() > i) {
+          if(lines.length() > i+1) {
              if(lines.charAt(i + 1) == '\n') {
                 return new String[]{lines.substring(0, i+2), lines.substring(i+2)};
              }
