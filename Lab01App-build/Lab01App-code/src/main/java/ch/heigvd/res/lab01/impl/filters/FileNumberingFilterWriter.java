@@ -19,9 +19,14 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
+    // Indicate that we are in the beginning of the file
     private boolean begin = true;
+    // Allow us to store the actual number of line
     private Integer lineNumber = 1;
-    private boolean lineSeparator = false;
+    // Indicate if we are at the end of the line for the differents line separators
+    private boolean endOfLine = false;
+    // Indicate the string to write
+    private String toWrite;
 
     public FileNumberingFilterWriter(Writer out) {
         super(out);
@@ -29,7 +34,7 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(String str, int off, int len) throws IOException {
-
+        // write char by char using the algorithm of the write(int c) function
         for (int i = off; i < off + len; ++i) {
             this.write(str.charAt(i));
         }
@@ -37,33 +42,37 @@ public class FileNumberingFilterWriter extends FilterWriter {
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
+        // write char by char using the algorithm of the write(int c) function
         for (int i = off; i < off + len; ++i) {
             this.write(cbuf[i]);
         }
-        //throw new UnsupportedOperationException("The student has not implemented this method yet.");
     }
 
     @Override
     public void write(int c) throws IOException {
-        String beginLine = "";
+        // If we are at the beginning of the file, we print
+        // the number of the line followed by a tabulation
         if (begin) {
-            beginLine = Integer.toString(lineNumber) + "\t" + (char)c;
+            toWrite = Integer.toString(lineNumber) + "\t" + (char)c;
             begin = false;
-        } else if(c == (int)'\r'){
-            beginLine += (char)c;
-            lineSeparator = true;
-        } else if(c == (int)'\n') {
+            // if there is a '\r', we will know with the next character if 
+            // that's the end of the line or not
+        } else if(c == (int)'\r'){ 
+            toWrite = "" + (char)c;
+            endOfLine = true;
+        } else if(c == (int)'\n') { // We are sure that's the end of a line
             ++lineNumber;
-            beginLine = (char)c + Integer.toString(lineNumber) + "\t";
-            lineSeparator = false;
-        } else if(lineSeparator){
+            toWrite = (char)c + Integer.toString(lineNumber) + "\t";
+            endOfLine = false;
+        } else if(endOfLine){ // We are sure that's the end of the line
             ++lineNumber;
-            beginLine = Integer.toString(lineNumber) + "\t" + (char)c;
-            lineSeparator = false;
-        }else{
-            beginLine += (char)c;
+            toWrite = Integer.toString(lineNumber) + "\t" + (char)c;
+            endOfLine = false;
+        }else{ // for all other characters, we simply add them to the string
+            toWrite = "" + (char)c;
         }
-        super.write(beginLine, 0, beginLine.length());
+        // We finally write the appropriate string
+        super.write(toWrite, 0, toWrite.length());
     }
 
 }

@@ -52,19 +52,16 @@ public abstract class FileTransformer implements IFileVisitor {
             return;
         }
         try {
+            // Open in read-mode the file given in parameter
             Reader reader = new InputStreamReader(new FileInputStream(file), "UTF-8");
+            // Create a new file in write-mode to store the result
             Writer writer = new OutputStreamWriter(new FileOutputStream(file.getPath() + ".out"), "UTF-8"); // the bug fix by teacher
+            // add the decoration filter to the writer stream.
             writer = decorateWithFilters(writer);
 
-            /*
-            * There is a missing piece here: you have an input reader and an ouput writer (notice how the
-            * writer has been decorated by the concrete subclass!). You need to write a loop to read the
-            * characters and write them to the writer.
-            */
+            // read the input file char by char and write it with filters in the output.
             int c;
-            BufferedReader br = new BufferedReader(reader);
-            String line;
-            while ((c = br.read()) != -1) {
+            while ((c = reader.read()) != -1) {
                 writer.write(c);
             }
 

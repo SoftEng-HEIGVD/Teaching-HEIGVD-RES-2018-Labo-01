@@ -85,13 +85,9 @@ public class Application implements IApplication {
         QuoteClient client = new QuoteClient();
         for (int i = 0; i < numberOfQuotes; i++) {
             Quote quote = client.fetchQuote();
-            /* There is a missing piece here!
-       * As you can see, this method handles the first part of the lab. It uses the web service
-       * client to fetch quotes. We have removed a single line from this method. It is a call to
-       * one method provided by this class, which is responsible for storing the content of the
-       * quote in a text file (and for generating the directories based on the tags).
-             */
-            storeQuote(quote, "quote-" + Integer.toString(i) + ".utf8");
+
+            // Store the quote in the corresponding file
+            storeQuote(quote, "quote-" + i + ".utf8");
             LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
             for (String tag : quote.getTags()) {
                 LOG.info("> " + tag);
@@ -127,15 +123,31 @@ public class Application implements IApplication {
      * @throws IOException
      */
     void storeQuote(Quote quote, String filename) throws IOException {
+        // filePath creation
         StringBuilder filePath = new StringBuilder(WORKSPACE_DIRECTORY);
+        // Append all the corresponding tags to the filePath (Parents folders of the file)
         for (String tag : quote.getTags()) {
-            filePath.append("/" + tag);
+            filePath.append("/");
+            filePath.append(tag);
         }
+        // parents folders creations
         new File(filePath.toString()).mkdirs();
-        filePath.append("/" + filename);
+
+        // add filename to the parent path
+        filePath.append("/");
+        filePath.append(filename);
+
+        // creation of the file using its filename
         File quoteFile = new File(filePath.toString());
-        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(filePath.toString()), "UTF-8");
+        quoteFile.createNewFile();
+
+        // Open it in write-mode
+        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(quoteFile), "UTF-8");
+
+        // write the corresponding quote into the file
         writer.write(quote.getQuote());
+
+        // correctly close the file
         writer.flush();
         writer.close();
     }
@@ -149,15 +161,18 @@ public class Application implements IApplication {
         explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
             @Override
             public void visit(File file) {
-                /*
-         * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-         * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-         * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
+                /**
+                 * We use an anonymous class here. We provide the implementation
+                 * of the the IFileVisitor interface inline. You just have to
+                 * add the body of the visit method, which should be pretty easy
+                 * (we want to write the filename, including the path, to the
+                 * writer passed in argument).
                  */
                 try {
+                    // Write the path of the file followed by a newline character
                     writer.write(file.getPath() + '\n');
-                } catch (IOException ioe) {
-                    System.out.println(ioe);
+                } catch (IOException ioE) {
+                    LOG.log(Level.SEVERE, "Write error to the file\n", ioE.getMessage());
                 }
             }
         });
@@ -166,7 +181,6 @@ public class Application implements IApplication {
     @Override
     public String getAuthorEmail() {
         return "aurelien.siu@heig-vd.ch";
-        //throw new UnsupportedOperationException("The student has not implemented this method yet.");
     }
 
     @Override

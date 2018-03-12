@@ -17,24 +17,32 @@ public class DFSFileExplorer implements IFileExplorer {
 
     @Override
     public void explore(File rootDirectory, IFileVisitor visitor) {
-        visitor.visit(rootDirectory);
-        exploration(rootDirectory, visitor);
+        if (rootDirectory != null) {
+            visitor.visit(rootDirectory);
+            exploration(rootDirectory, visitor);
+        }
+
     }
 
     private void exploration(File directory, IFileVisitor visitor) {
+        if (directory == null) {
+            return;
+        }
+        // Retrieve the list of the files
         File[] filesDirectory = directory.listFiles();
-        try{
+
+        if (filesDirectory != null) {
+            // sort the files
             Arrays.sort(filesDirectory);
+            // browse and visit the differents files
             for (File f : filesDirectory) {
 
                 visitor.visit(f);
                 if (f.isDirectory()) {
                     exploration(f, visitor);
                 }
-                
+
             }
-        } catch (NullPointerException npe){
-            ;
         }
     }
 

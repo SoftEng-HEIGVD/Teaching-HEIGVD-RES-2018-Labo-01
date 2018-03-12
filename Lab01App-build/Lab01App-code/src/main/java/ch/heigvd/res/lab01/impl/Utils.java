@@ -21,6 +21,8 @@ public class Utils {
      * an empty string.
      */
     public static String[] getNextLine(String lines) {
+        // Implementation according to the specification just above,
+        // with the help of substring()
         String[] nextLine = new String[2];
         int separator1 = lines.indexOf('\r');
         int separator2 = lines.indexOf('\n');
