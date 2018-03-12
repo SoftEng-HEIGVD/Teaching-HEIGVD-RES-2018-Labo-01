@@ -127,7 +127,22 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    
+     String pathname = WORKSPACE_DIRECTORY;
+     
+     //Add separator and tag to the pathname
+     for(String tag: quote.getTags())
+     {
+        pathname += File.separator + tag;
+     }
+	  
+     File directorie = new File(pathname);
+     directorie.mkdirs();
+	  
+     File file = new File(pathname + File.separator + filename);
+     OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
+     writer.write(quote.getQuote());
+     writer.close();
   }
   
   /**

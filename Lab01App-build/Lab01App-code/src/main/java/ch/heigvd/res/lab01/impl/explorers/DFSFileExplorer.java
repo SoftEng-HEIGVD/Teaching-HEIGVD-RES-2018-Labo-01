@@ -24,7 +24,7 @@ public class DFSFileExplorer implements IFileExplorer {
     //if there is no file
     if(list == null) return;
     
-
+    //call vistor for all files and subdirectories
     for(File temp : list){
        explore(temp, vistor);
     }
