@@ -7,9 +7,12 @@ import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
-
-import java.io.*;
-import java.util.List;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
@@ -125,28 +128,22 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    try{
-      StringBuilder path = new StringBuilder();
-      path.append("./workspace/quotes/");
-      List<String> tags = quote.getTags();
-      for(int i = 0; i < tags.size(); i++){
-        path.append(tags.get(i));
-        path.append("/");
+    try {
+      // get path 
+      String path = Application.WORKSPACE_DIRECTORY + File.separator;
+      for (String tag : quote.getTags()) {
+         path += tag + File.separator;
       }
-
-      File theDir = new File(String.valueOf(path));
-      theDir.mkdirs();
-
-      path.append(filename);
-
-      FileWriter fichier = new FileWriter(String.valueOf(path));
-      fichier.write(quote.getQuote());
-      fichier.close();
+      File file = new File(path);
+      file.mkdirs();
+      //put out
+      Writer out = new OutputStreamWriter(new FileOutputStream(new File(path + filename)), "UTF-8");
+      out.write(quote.getQuote());
+      out.flush();
+      out.close();
+    }catch(Exception e){
+        System.out.println(e); 
     }
-    catch(Exception e){
-      System.out.println(e);
-    }
-
   }
   
   /**
@@ -154,13 +151,12 @@ public class Application implements IApplication {
    * encountered file and directory.
    */
   void printFileNames(final Writer writer) {
-    final IFileExplorer explorer = new DFSFileExplorer();
+    IFileExplorer explorer = new DFSFileExplorer();
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
             try {
-               writer.write(file.getPath());
-                writer.write("\n");
+               writer.write(file.getPath() + "\n");
             } catch (IOException ex) {
                LOG.log(Level.SEVERE, "Could not print the name of the encountered file or directory. {0}", ex.getMessage());
                ex.printStackTrace();
