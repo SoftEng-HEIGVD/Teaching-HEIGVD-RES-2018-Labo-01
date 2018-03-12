@@ -3,6 +3,8 @@ package ch.heigvd.res.lab01.impl.explorers;
 import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This implementation of the IFileExplorer interface performs a depth-first
@@ -20,14 +22,19 @@ public class DFSFileExplorer implements IFileExplorer {
           return;
       }
 
-    vistor.visit(rootDirectory);
+      vistor.visit(rootDirectory);
 
-    File[] listOfFiles = rootDirectory.listFiles();
-    if(listOfFiles == null){
-      return;
-    }
+      File[] listOfFiles =  rootDirectory.listFiles();
 
-   for(File f : listOfFiles){
+      if(listOfFiles == null){
+          return;
+      }
+
+      //sort the array in order to be in alphabetical order
+      Arrays.sort(listOfFiles);
+
+    for(File f : listOfFiles){
+        //if file visit or if dir go explore
       if (f.isFile()) {
         vistor.visit(f);
       } else if (f.isDirectory()) {

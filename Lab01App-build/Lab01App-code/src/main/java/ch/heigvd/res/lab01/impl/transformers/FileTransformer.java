@@ -45,6 +45,7 @@ public abstract class FileTransformer implements IFileVisitor {
 
   @Override
   public void visit(File file) {
+    char[] cbufs = {'1'};
     if (!file.isFile()) {
       return;
     }
@@ -58,7 +59,15 @@ public abstract class FileTransformer implements IFileVisitor {
        * writer has been decorated by the concrete subclass!). You need to write a loop to read the
        * characters and write them to the writer.
        */
-      
+
+
+      //i read 1 char by 1 char and write them 1 by 1
+      while(reader.read(cbufs) != -1){
+        writer.write(cbufs);
+      }
+
+
+
       reader.close();
       writer.flush();
       writer.close();
