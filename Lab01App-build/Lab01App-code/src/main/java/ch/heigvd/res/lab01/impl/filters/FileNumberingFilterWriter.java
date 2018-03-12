@@ -33,7 +33,6 @@ public class FileNumberingFilterWriter extends FilterWriter {
         for (int i = off; i < off + len; ++i) {
             this.write(str.charAt(i));
         }
-        //throw new UnsupportedOperationException("The student has not implemented this method yet.");
     }
 
     @Override
