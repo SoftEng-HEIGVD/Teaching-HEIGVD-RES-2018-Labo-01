@@ -14,21 +14,25 @@ import java.util.Arrays;
  * @author Olivier Liechti
  */
 public class DFSFileExplorer implements IFileExplorer {
-
+  /**
+   * Launches the DFS exporation of the file system
+   * @param rootDirectory the folder the exploration starts from
+   * @param visitor an IFIleVisitor that implements the visit(File) function
+   *                that performs a custom action with any file/directory DFS visits
+   */
   @Override
-  public void explore(File rootDirectory, IFileVisitor vistor) {
-    //throw new UnsupportedOperationException("The student has not implemented this method yet.");
-    vistor.visit(rootDirectory);
+  public void explore(File rootDirectory, IFileVisitor visitor) {
+    visitor.visit(rootDirectory);
     // Launch the DFS
     if (rootDirectory.isDirectory()) {
-      runFileSystem(rootDirectory.listFiles(), vistor);
+      runFileSystem(rootDirectory.listFiles(), visitor);
     }
   }
 
   /**
    * Runs a pre ordered DFS over the file system
    * @param files Files in the current directory
-   * @param visitor Implements the visit() method
+   * @param visitor Implements the visit(File) method
    */
   private void runFileSystem(File[] files, IFileVisitor visitor) {
     Arrays.sort(files);
