@@ -83,14 +83,17 @@ public class FileNumberingFilterWriter extends FilterWriter {
       prevWasR = true;
     } else if (c1 == '\n') {
       if (prevWasR) { // sep is \r\n
-        super.write("\r\n" + Integer.toString(lineNb++) + '\t', 0, 4);
+        String strToWrite = "\r\n" + Integer.toString(lineNb++) + '\t';
+        super.write(strToWrite, 0, strToWrite.length());
       } else { // sep is \n
-        super.write(c1 + Integer.toString(lineNb++) + '\t', 0, 3);
+        String strToWrite = c1 + Integer.toString(lineNb++) + '\t';
+        super.write(strToWrite, 0, strToWrite.length());
       }
       prevWasR = false;
     } else { // current neither \r nor \n
       if (prevWasR) { // sep is \r
-        super.write("\r" + Integer.toString(lineNb++) + '\t', 0, 3);
+        String strToWrite = "\r" + Integer.toString(lineNb++) + '\t';
+        super.write(strToWrite, 0, strToWrite.length());
       }
       super.write(c1);
       prevWasR = false;
