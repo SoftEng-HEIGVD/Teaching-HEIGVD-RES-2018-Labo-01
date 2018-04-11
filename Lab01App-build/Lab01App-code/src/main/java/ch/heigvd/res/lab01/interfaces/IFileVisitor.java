@@ -1,6 +1,8 @@
 package ch.heigvd.res.lab01.interfaces;
 
+import javax.management.RuntimeErrorException;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * This interface is used together with the IFileExplorer interface. It defines
