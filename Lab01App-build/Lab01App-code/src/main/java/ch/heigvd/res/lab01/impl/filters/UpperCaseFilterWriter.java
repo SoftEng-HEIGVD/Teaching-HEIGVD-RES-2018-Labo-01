@@ -16,17 +16,26 @@ public class UpperCaseFilterWriter extends FilterWriter {
 
   @Override
   public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    for (int i = off; i < off+len; i++)
+        this.write(str.charAt(i));
   }
 
   @Override
   public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    for(int i = off; i < off+len; i++)
+        this.write(cbuf[i]);
   }
 
   @Override
   public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+
+    // Avant d'appeler la méthode toUpperCase fournis par la classe
+    // Character, on vérifie que le char donné en paramètre est bien
+    // une lettre.
+    if(Character.isLetter(c))
+      super.write(Character.toUpperCase(c));
+    else
+      super.write(c);
   }
 
 }
