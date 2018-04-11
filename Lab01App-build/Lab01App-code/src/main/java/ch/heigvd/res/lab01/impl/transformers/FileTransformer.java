@@ -1,3 +1,7 @@
+
+/**
+ * autor : youndzo francine
+ */
 package ch.heigvd.res.lab01.impl.transformers;
 
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
@@ -14,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  * This abstract class implements the IFileVisitor interface and has the responsibility
@@ -59,6 +64,11 @@ public abstract class FileTransformer implements IFileVisitor {
        * characters and write them to the writer.
        */
       
+      int c;
+      while((c=reader.read()) != -1){
+          writer.write(c);
+      }
+
       reader.close();
       writer.flush();
       writer.close();
