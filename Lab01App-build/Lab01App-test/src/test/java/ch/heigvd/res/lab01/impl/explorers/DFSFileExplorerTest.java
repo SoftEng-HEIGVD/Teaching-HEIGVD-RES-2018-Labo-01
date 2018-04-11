@@ -44,6 +44,7 @@ public class DFSFileExplorerTest {
     IFileExplorer explorer = new DFSFileExplorer();
 
     explorer.explore(new File("./fs-test"), new IFileVisitor() {
+
       @Override
       public void visit(File file) {
         directories.add(file.getName());
@@ -51,9 +52,9 @@ public class DFSFileExplorerTest {
     });
     assertArrayEquals(dfsNodes.toArray(), directories.toArray());
   }
-  
+
   private List<String> generateTestTree(int levels, int maxChildrenFolders, int maxChildrenFiles) {
-    List<String> dfsNodes = new ArrayList<>();  
+    List<String> dfsNodes = new ArrayList<>();
     File dir = new File("./fs-test");
     try {
       FileUtils.deleteDirectory(dir);
