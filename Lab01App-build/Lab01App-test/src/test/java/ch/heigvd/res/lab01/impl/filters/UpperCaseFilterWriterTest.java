@@ -14,7 +14,7 @@ public class UpperCaseFilterWriterTest {
   @Test
   public void itShouldWorkWhenWritingAString() throws IOException {
     String line = "hello world";
-    StringWriter stringWriter = new StringWriter();
+      StringWriter stringWriter = new StringWriter();
     UpperCaseFilterWriter writer = new UpperCaseFilterWriter(stringWriter);
     writer.write(line);
     assertEquals("HELLO WORLD", stringWriter.toString());
