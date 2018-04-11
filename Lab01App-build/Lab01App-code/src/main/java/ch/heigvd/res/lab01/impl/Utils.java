@@ -20,7 +20,33 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    int separatorIndex = -1;
+    String[] splitted = new String[2];
+    int separatorLength = 0;
+
+    // First, look if there is a "\r\n" separator
+    // If no such separator is found, look for '\n' or '\r' line separator
+    // If any type of a separator is found, store it's index and length to
+    // be able to split the string
+    if((separatorIndex = lines.indexOf("\r\n")) != -1) {
+      separatorLength = 2;
+    } else if ((separatorIndex = lines.indexOf("\n")) != -1
+            || (separatorIndex = lines.indexOf("\r")) != -1) {
+      separatorLength = 1;
+    }
+
+    if (separatorIndex == -1) { // no separator is found
+      // Store the whole string in the second line
+      splitted[0] = "";
+      splitted[1] = lines;
+    } else { // a separator was detected
+      // Store the characters before the separator + the separator in the first line
+      splitted[0] = lines.substring(0, separatorIndex + separatorLength);
+      // Store the remaining text in the second line
+      splitted[1] = lines.substring(separatorIndex + separatorLength, lines.length());
+    }
+
+    return splitted;
   }
 
 }

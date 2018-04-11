@@ -1,5 +1,4 @@
 package ch.heigvd.res.lab01.impl.filters;
-
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.logging.Logger;
@@ -41,7 +40,7 @@ public class FileNumberingFilterWriterTest {
     StringWriter stringWriter = new StringWriter();
     FileNumberingFilterWriter writer = new FileNumberingFilterWriter(stringWriter);
     writer.write(line1);
-    writer.write(line2);  
+    writer.write(line2);
     Assert.assertEquals("1\t" + line1 + "2\t" + line2, stringWriter.toString());
   }
 
@@ -54,7 +53,7 @@ public class FileNumberingFilterWriterTest {
     FileNumberingFilterWriter writer = new FileNumberingFilterWriter(stringWriter);
     writer.write(line1_1);
     writer.write(line1_2);
-    writer.write(line2);  
+    writer.write(line2);
     Assert.assertEquals("1\t" + line1_1 + line1_2 + "2\t" + line2, stringWriter.toString());
   }
 
