@@ -1,5 +1,7 @@
 package ch.heigvd.res.lab01.impl.filters;
 
+import ch.heigvd.res.lab01.impl.Utils;
+
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -17,25 +19,57 @@ import java.util.logging.Logger;
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
-  private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+   private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
-  public FileNumberingFilterWriter(Writer out) {
-    super(out);
-  }
+   private char lastChar = ' ';
+   private int lastLineNumber = 0;
 
-  @Override
-  public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+   public FileNumberingFilterWriter(Writer out) {
+      super(out);
+   }
 
-  @Override
-  public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+   @Override
+   public void write(String str, int off, int len) throws IOException {
+      write(str.toCharArray(), off, len);
+   }
 
-  @Override
-  public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+   @Override
+   public void write(char[] cbuf, int off, int len) throws IOException {
+      int lastCharIndex = off + len;
+
+      for(int i = off; i < lastCharIndex; i++)
+         write(cbuf[i]);
+   }
+
+   @Override
+   public void write(int c) throws IOException {
+      // Constant for the End Of Line (EOF) char on different OS
+      final char EOF_MAC  = '\r';
+      final char EOF_UNIX = '\n';
+
+      if(lastLineNumber == 0)
+         out.write(addLineNumber());
+
+      // If the end of line is \r
+      if(lastChar == EOF_MAC && c != EOF_UNIX)
+         out.write(addLineNumber());
+
+      out.write(c);
+
+      // If the end of line is \r or \r\n
+      if(c == EOF_UNIX)
+         out.write(addLineNumber());
+
+      lastChar = (char)c;
+   }
+
+   /**
+    * @brief Increment the line number
+    * @return String with the line number and a tabulation
+    *         Example : "1    "
+    */
+   private String addLineNumber(){
+      return Integer.toString(++lastLineNumber) + '\t';
+   }
 
 }
