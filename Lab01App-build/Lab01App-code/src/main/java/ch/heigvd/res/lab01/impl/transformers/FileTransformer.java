@@ -1,5 +1,6 @@
 package ch.heigvd.res.lab01.impl.transformers;
 
+import ch.heigvd.res.lab01.impl.Utils;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,11 +25,14 @@ import java.util.logging.Logger;
  * a list of filters and decorates the output writer with them.
  * 
  * @author Olivier Liechti
+ * @author updated by Joel Schar
  */
 public abstract class FileTransformer implements IFileVisitor {
 
   private static final Logger LOG = Logger.getLogger(FileTransformer.class.getName());
   private final List<FilterWriter> filters = new ArrayList<>();
+
+  private final int BUFFER_SIZE = 1024;
   
   /**
    * The subclasses implement this method to define what transformation(s) are
@@ -58,7 +62,20 @@ public abstract class FileTransformer implements IFileVisitor {
        * writer has been decorated by the concrete subclass!). You need to write a loop to read the
        * characters and write them to the writer.
        */
-      
+
+      // read inputstramreader and append to string builder
+      final char[] buffer = new char[BUFFER_SIZE];
+      final StringBuilder outStr = new StringBuilder();
+      while (true) {
+        int len = reader.read(buffer, 0, buffer.length);
+        if (len < 0)
+          break;
+        outStr.append(buffer, 0, len);
+      }
+
+      // write the string, this will call the corresponding string function
+      writer.write(outStr.toString());
+
       reader.close();
       writer.flush();
       writer.close();

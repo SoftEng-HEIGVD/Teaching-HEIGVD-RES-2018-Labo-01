@@ -7,12 +7,9 @@ import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.StringWriter;
-import java.io.Writer;
+
+import java.io.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
@@ -20,6 +17,7 @@ import org.apache.commons.io.FileUtils;
 /**
  *
  * @author Olivier Liechti
+ * @author updated by Joel Schar
  */
 public class Application implements IApplication {
 
@@ -92,6 +90,7 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
+      storeQuote(quote, "quote-" + i + ".utf8");
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -125,9 +124,45 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    List<String> tagList = quote.getTags();
+    String quoteText = quote.getQuote();
+
+    // creating the file directory path
+    StringBuilder path = new StringBuilder(WORKSPACE_DIRECTORY);
+    File dir = new File(path.toString());
+
+    // create the workspace_directory
+    if(!dir.mkdirs())
+      LOG.log(Level.SEVERE,"directory {0} coun't be created",dir.getName());
+
+    // creating subdirectories for heach tag
+    path.append("/");
+    for(String tag: tagList){
+      path.append(tag);
+      dir = new File(path.toString());
+
+      if(!dir.mkdirs())
+        LOG.log(Level.SEVERE,"directory {0} coun't be created",dir.getName());
+
+      path.append("/");
+    }
+
+
+    // create the file and write the text
+    try{
+      File file = new File(path.toString(), filename);
+      BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+      LOG.info(writer.toString());
+
+      writer.write(quoteText);
+      writer.close();
+
+    }catch(IOException e){
+      LOG.log(Level.SEVERE,"file {0} coun't be created",e.getMessage());
+    }
+
   }
-  
+
   /**
    * This method uses a IFileExplorer to explore the file system and prints the name of each
    * encountered file and directory.
@@ -142,19 +177,26 @@ public class Application implements IApplication {
          * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
          * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
          */
+        try {
+          writer.write(file.getPath() + "\n");
+          LOG.info(writer.toString());
+
+        } catch (IOException e) {
+          LOG.log(Level.SEVERE,"coun't find {0}",e.getMessage());
+        }
       }
     });
   }
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+    return "joel.schar@heig-vd.ch";
   }
 
   @Override
   public void processQuoteFiles() throws IOException {
     IFileExplorer explorer = new DFSFileExplorer();
-    explorer.explore(new File(WORKSPACE_DIRECTORY), new CompleteFileTransformer());    
+    explorer.explore(new File(WORKSPACE_DIRECTORY), new CompleteFileTransformer());
   }
 
 }
