@@ -5,28 +5,32 @@ import java.io.IOException;
 import java.io.Writer;
 
 /**
- *
  * @author Olivier Liechti
  */
 public class UpperCaseFilterWriter extends FilterWriter {
-  
-  public UpperCaseFilterWriter(Writer wrappedWriter) {
-    super(wrappedWriter);
-  }
 
-  @Override
-  public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    public UpperCaseFilterWriter(Writer wrappedWriter) {
+        super(wrappedWriter);
+    }
 
-  @Override
-  public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    @Override
+    public void write(String str, int off, int len) throws IOException {
+        write(str.toCharArray(), off, len);
+    }
 
-  @Override
-  public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    @Override
+    public void write(char[] cbuf, int off, int len) throws IOException {
+        if (off + len > cbuf.length)
+            throw new IllegalArgumentException("invalid size of substring");
+
+        for(int i = off; i < off + len; i++) {
+            write(cbuf[i]);
+        }
+    }
+
+    @Override
+    public void write(int c) throws IOException {
+        out.write(Character.toUpperCase((char) c));
+    }
 
 }
