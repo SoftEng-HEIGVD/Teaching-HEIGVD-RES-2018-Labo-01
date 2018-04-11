@@ -129,4 +129,20 @@ public class FileNumberingFilterWriterTest {
     Assert.assertEquals(referenceValue, computedValue);
   }
 
+
+  /*
+  @Test
+  public void itShouldWorkWithCharArray() throws IOException {
+    String line = "This is line 1\r\nThis is line 2\r\nThis is line 3";
+    String expected = "1\tThis is line 1\r\n2\tThis is line 2\r\n3\tThis is line 3";
+
+    StringWriter stringWriter = new StringWriter();
+    FileNumberingFilterWriter writer = new FileNumberingFilterWriter(stringWriter);
+
+    char[] charArray = {'T','h','i','s',' ','i','s',' ','l','i','n','e',' ','1','\r','\n','T','h','i','s',' ','i','s',' ','l','i','n','e',' ','2',
+            '\r','\n','T','h','i','s',' ','i','s', ' ','l','i','n','e',' ','3'};
+    writer.write(charArray, 6, 28);
+    Assert.assertEquals("1\ts line 1\r\n2\tThis is line 2\r\n3\tTh",stringWriter.toString());
+  }
+  */
 }
