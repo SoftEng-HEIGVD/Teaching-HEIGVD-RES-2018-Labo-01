@@ -9,24 +9,43 @@ import java.io.Writer;
  * @author Olivier Liechti
  */
 public class UpperCaseFilterWriter extends FilterWriter {
-  
-  public UpperCaseFilterWriter(Writer wrappedWriter) {
-    super(wrappedWriter);
-  }
 
-  @Override
-  public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    public UpperCaseFilterWriter(Writer wrappedWriter) {
+        super(wrappedWriter);
+    }
 
-  @Override
-  public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    public String charTabToString(char[] cbuf) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < cbuf.length; ++i) {
+            str.append(cbuf[i]);
+        }
+        return str.toString();
+    }
 
-  @Override
-  public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    @Override
+    public void write(String str) throws IOException {
+        out.write(str.toUpperCase());
+    }
+
+    @Override
+    public void write(String str, int off, int len) throws IOException {
+        String interString = str.substring(off, off + len);
+        write(interString);
+    }
+
+    @Override
+    public void write(char[] cbuf, int off, int len) throws IOException {
+        write(charTabToString(cbuf), off, len);
+    }
+
+    public void write(char[] cbuf) throws IOException {
+        write(charTabToString(cbuf));
+    }
+
+    @Override
+    public void write(int c) throws IOException {
+        String str = "" + (char) c;
+        write(str);
+    }
 
 }
