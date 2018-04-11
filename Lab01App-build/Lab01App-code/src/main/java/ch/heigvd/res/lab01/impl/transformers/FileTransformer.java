@@ -43,6 +43,12 @@ public abstract class FileTransformer implements IFileVisitor {
    */
   public abstract Writer decorateWithFilters(Writer writer);
 
+  /**
+   * open a file apply decorators on the stream and write the result 
+   * on the a new file with same name + .out extension
+   * 
+   * @param file the file red and transformed
+   */
   @Override
   public void visit(File file) {
     if (!file.isFile()) {
@@ -52,13 +58,18 @@ public abstract class FileTransformer implements IFileVisitor {
       Reader reader = new InputStreamReader(new FileInputStream(file), "UTF-8");
       Writer writer = new OutputStreamWriter(new FileOutputStream(file.getPath()+ ".out"), "UTF-8"); // the bug fix by teacher
       writer = decorateWithFilters(writer);
-
+      
       /*
        * There is a missing piece here: you have an input reader and an ouput writer (notice how the 
        * writer has been decorated by the concrete subclass!). You need to write a loop to read the
        * characters and write them to the writer.
        */
-      
+      int data = reader.read();
+      while(data != -1){
+          writer.write((char) data);
+          data = reader.read();
+      }
+
       reader.close();
       writer.flush();
       writer.close();

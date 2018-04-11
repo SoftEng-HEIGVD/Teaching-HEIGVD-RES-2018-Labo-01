@@ -11,16 +11,21 @@ import java.io.Writer;
  */
 public class NoOpFileTransformer extends FileTransformer {
 
+   /**
+    * decorator with no transformation return simply the Writer
+    * 
+    * @param writer writer that we "decorate"
+    * @return the Writer in parameter
+    */
   @Override
   public Writer decorateWithFilters(Writer writer) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
     /*
      * The NoOpFileTransformer does not apply any transformation of the character stream
      * (no uppercase, no line number, etc.). So, we don't need to decorate the writer connected to
      * the output file at all. Just uncomment the following line and get rid of the UnsupportedOperationException and
      * you will be all set.
      */
-    //return writer;
+    return writer;
   }
 
 }

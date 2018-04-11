@@ -7,18 +7,28 @@ import ch.heigvd.res.lab01.interfaces.IFileExplorer;
 import ch.heigvd.res.lab01.interfaces.IFileVisitor;
 import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.io.FileUtils;
 
 /**
- *
+ * Entry of the program. 
+ * Step 1 : clear the output directory
+ * Step 2 : use the QuotesClient to fetch quotes; store each quote in a file
+ * Step 3 : use a file explorer to traverse the file system; print the name of each directory and file
+ * Step 4 : process the quote files, by applying 2 transformations to their content
+ * 
  * @author Olivier Liechti
  */
 public class Application implements IApplication {
@@ -32,7 +42,6 @@ public class Application implements IApplication {
   private static final Logger LOG = Logger.getLogger(Application.class.getName());
   
   public static void main(String[] args) {
-    
     /*
      * I prefer to have LOG output on a single line, it's easier to read. Being able
      * to change the formatting of console outputs is one of the reasons why it is
@@ -80,6 +89,12 @@ public class Application implements IApplication {
     }
   }
 
+  /**
+   * get the quotes from the client and store them in the good directory in a file
+   * 
+   * @param numberOfQuotes number of quotes that we download
+   * @throws IOException if there is a writting exception
+   */
   @Override
   public void fetchAndStoreQuotes(int numberOfQuotes) throws IOException {
     clearOutputDirectory();
@@ -92,6 +107,7 @@ public class Application implements IApplication {
        * one method provided by this class, which is responsible for storing the content of the
        * quote in a text file (and for generating the directories based on the tags).
        */
+      storeQuote(quote, "quote-" + String.valueOf(i) + ".utf8");
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
@@ -125,7 +141,27 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+     List<String> tags = quote.getTags();
+     String fileSeparator = File.separator;
+     
+     //build the path to quote
+     StringBuilder path = new StringBuilder(WORKSPACE_DIRECTORY + fileSeparator);
+     for (String tag : tags) {
+        path.append(fileSeparator + tag);
+     }
+     //create the directories if necessary
+     File dir = new File(path.toString());
+     dir.mkdirs();
+     
+     //create the file
+     path.append(fileSeparator + filename);
+     File file = new File(path.toString());
+     
+     //write the quote in the file
+     BufferedWriter writer = new BufferedWriter(new PrintWriter(file));
+     writer.write(quote.getQuote());
+     writer.flush();
+     writer.close();
   }
   
   /**
@@ -137,20 +173,35 @@ public class Application implements IApplication {
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
-        /*
-         * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-         * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-         * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-         */
+            /*
+            * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
+            * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
+            * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
+            */
+         try {
+            writer.write(file.getPath() + "\n");
+         } catch (IOException ex) {
+            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+         }
       }
     });
   }
   
+  /**
+   * return the email of the student who implemented this labo
+   * 
+   * @return the email of the student who implemented this labo
+   */
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+     return "jimmy.verdasca@heig-vd.ch";
   }
 
+  /**
+   * When this method is invoked, it traverses the file system under the
+   * WORKSPACE_DIRECTORY with the DFSFileExplorer. For each encountered file or directory, it
+   * apply the CompleteFileTransformer to the files encountered (lines number + uppercase)
+   */
   @Override
   public void processQuoteFiles() throws IOException {
     IFileExplorer explorer = new DFSFileExplorer();

@@ -24,5 +24,5 @@ public interface IFileExplorer {
    * @param vistor defines the operation to be performed on each file
    */
   public void explore(File rootDirectory, IFileVisitor vistor);
-  
+      
 }

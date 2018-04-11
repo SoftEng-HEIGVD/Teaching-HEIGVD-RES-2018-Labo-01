@@ -3,7 +3,7 @@ package ch.heigvd.res.lab01.impl;
 import java.util.logging.Logger;
 
 /**
- *
+ * utilitary class who allow to find the first line from a string 
  * @author Olivier Liechti
  */
 public class Utils {
@@ -20,7 +20,27 @@ public class Utils {
    * contain any line separator, then the first element is an empty string.
    */
   public static String[] getNextLine(String lines) {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+     int separatorSize = 1;
+     int index = lines.indexOf("\r");
+     int index2 = lines.indexOf("\n");
+     
+     //there is only one line left
+     if(index == -1 && index2 == -1) {
+        return new String[]{"", lines};
+     } // we found the \r\n line separator
+     else if (index != -1 && index2 != -1){
+        separatorSize = 2;
+        index = Math.min(index, index2);
+     } // we found \r or \n line separator
+     else {
+        index = Math.max(index, index2);
+     }
+     
+     // we build the result with the calculated first line separator type found
+     String[] result = new String[2];
+     result[0] = lines.substring(0, index + separatorSize);
+     result[1] = lines.substring(index + separatorSize);
+     return result;
   }
 
 }
