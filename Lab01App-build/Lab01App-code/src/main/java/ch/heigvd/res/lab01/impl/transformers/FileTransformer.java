@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  * a list of filters and decorates the output writer with them.
  * 
  * @author Olivier Liechti
+ * @author Olivier Nicole (Student)
  */
 public abstract class FileTransformer implements IFileVisitor {
 
@@ -54,16 +55,19 @@ public abstract class FileTransformer implements IFileVisitor {
       writer = decorateWithFilters(writer);
 
       /*
-       * There is a missing piece here: you have an input reader and an ouput writer (notice how the 
-       * writer has been decorated by the concrete subclass!). You need to write a loop to read the
-       * characters and write them to the writer.
+       * Updated by Olivier Nicole
+       * Read the character and write it into the writer
        */
+      int character;
+      while((character = reader.read())!= -1) {
+        writer.write(character);
+      }
       
       reader.close();
       writer.flush();
       writer.close();
     } catch (IOException ex) {
-      LOG.log(Level.SEVERE, null, ex);
+      LOG.log(Level.SEVERE, "Error with writer {0}", ex);
     }
   }
 
