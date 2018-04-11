@@ -1,5 +1,6 @@
 package ch.heigvd.res.lab01.impl.filters;
 
+import ch.heigvd.res.lab01.impl.Utils;
 import java.io.FilterWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -17,25 +18,78 @@ import java.util.logging.Logger;
  */
 public class FileNumberingFilterWriter extends FilterWriter {
 
-  private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
+    private static final Logger LOG = Logger.getLogger(FileNumberingFilterWriter.class.getName());
 
-  public FileNumberingFilterWriter(Writer out) {
-    super(out);
-  }
+    private int numLine = 0;
 
-  @Override
-  public void write(String str, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    private int previous = ' ';
 
-  @Override
-  public void write(char[] cbuf, int off, int len) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    public FileNumberingFilterWriter(Writer out) {
+        super(out);
+    }
 
-  @Override
-  public void write(int c) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
-  }
+    /**
+     * Write the string
+     *
+     * @param str String to be written
+     * @param off Offset from which to start writing characters
+     * @param len Number of characters to write
+     * @throws IOException
+     */
+    @Override
+    public void write(String str, int off, int len) throws IOException {
+        write(str.toCharArray(), off, len);
+    }
+
+    /**
+     * Write the char buffer
+     *
+     * @param cbuf The char buffer
+     * @param off Offset from which to start writing characters
+     * @param len Number of characters to write
+     * @throws IOException
+     */
+    @Override
+    public void write(char[] cbuf, int off, int len) throws IOException {
+        for (int i = off; i < cbuf.length && i < len + off; ++i) {
+            write(cbuf[i]);
+        }
+
+    }
+
+    /**
+     * write the char c
+     *
+     * @param c Integer define a char to write
+     * @throws IOException
+     */
+    @Override
+    public void write(int c) throws IOException {
+        String toWrite = "";
+
+        //If it's the first char we write then we write the line and the tab
+        if (numLine == 0) {
+            toWrite = Integer.toString(++numLine) + "\t";
+            super.write(toWrite, 0, toWrite.length());
+        }
+
+        //if the char is a \r only we write the line + the tab
+        if (previous == '\r' && c != '\n') {
+            toWrite = Integer.toString(++numLine) + "\t";
+            super.write(toWrite, 0, toWrite.length());
+        }
+        
+        //write the current char
+        super.write(c);
+
+        //if the char is \n or \r\n then we write the line + the tab
+        if (c == '\n') {
+            toWrite = Integer.toString(++numLine) + "\t";
+            super.write(toWrite, 0, toWrite.length());
+        }
+
+        previous = c;
+
+    }
 
 }

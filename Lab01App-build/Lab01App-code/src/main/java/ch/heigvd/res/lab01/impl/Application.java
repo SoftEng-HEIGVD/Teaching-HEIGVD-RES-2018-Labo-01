@@ -9,12 +9,15 @@ import ch.heigvd.res.lab01.quotes.QuoteClient;
 import ch.heigvd.res.lab01.quotes.Quote;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdk.jfr.events.FileWriteEvent;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -87,15 +90,17 @@ public class Application implements IApplication {
     for (int i = 0; i < numberOfQuotes; i++) {
       Quote quote = client.fetchQuote();
       /* There is a missing piece here!
-       * As you can see, this method handles the first part of the lab. It uses the web service
-       * client to fetch quotes. We have removed a single line from this method. It is a call to
-       * one method provided by this class, which is responsible for storing the content of the
-       * quote in a text file (and for generating the directories based on the tags).
+         As you can see, this method handles the first part of the lab. It uses the web service
+         client to fetch quotes. We have removed a single line from this method. It is a call to
+         one method provided by this class, which is responsible for storing the content of the
+         quote in a text file (and for generating the directories based on the tags).
        */
       LOG.info("Received a new joke with " + quote.getTags().size() + " tags.");
       for (String tag : quote.getTags()) {
         LOG.info("> " + tag);
       }
+      
+      storeQuote(quote,WORKSPACE_DIRECTORY);
     }
   }
   
@@ -125,7 +130,31 @@ public class Application implements IApplication {
    * @throws IOException 
    */
   void storeQuote(Quote quote, String filename) throws IOException {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+      
+      //List of tags
+      List<String> quoteTag = quote.getTags();
+      for(String tag : quoteTag){
+          filename += "/" +  tag ;
+      }
+      
+      try{
+          //Create all directory
+          new File(filename).mkdirs();
+          
+          filename += "/quote-" + quote.getValue().getId() + ".utf8";
+          
+          //Create the FileWriter
+          FileWriter fw = new FileWriter(filename);
+          
+          //Write the quote in the fileWriter
+          fw.write(quote.getQuote());
+          
+          fw.flush();
+          fw.close();
+      }catch(IOException e){
+          System.out.println(e.getMessage());
+      }
+      
   }
   
   /**
@@ -137,18 +166,25 @@ public class Application implements IApplication {
     explorer.explore(new File(WORKSPACE_DIRECTORY), new IFileVisitor() {
       @Override
       public void visit(File file) {
-        /*
-         * There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
-         * of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
-         * be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
-         */
+          try {
+              /*
+              There is a missing piece here. Notice how we use an anonymous class here. We provide the implementation
+              of the the IFileVisitor interface inline. You just have to add the body of the visit method, which should
+              be pretty easy (we want to write the filename, including the path, to the writer passed in argument).
+              */
+              writer.write(file.getPath() + "\n");
+          } catch (IOException ex) {
+              Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        
+        
       }
     });
   }
   
   @Override
   public String getAuthorEmail() {
-    throw new UnsupportedOperationException("The student has not implemented this method yet.");
+      return "francois.burgener@heig-vd.ch";
   }
 
   @Override
