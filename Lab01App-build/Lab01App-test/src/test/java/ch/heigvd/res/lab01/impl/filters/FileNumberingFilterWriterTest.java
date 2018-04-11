@@ -93,6 +93,7 @@ public class FileNumberingFilterWriterTest {
 
   @Test
   public void itShouldWorkOnMacOS9() throws IOException {
+    System.out.println(System.lineSeparator());
     String line = "This is line 1\rThis is line 2\rThis is line 3";
     String expected = "1\tThis is line 1\r2\tThis is line 2\r3\tThis is line 3";
     StringWriter stringWriter = new StringWriter();
